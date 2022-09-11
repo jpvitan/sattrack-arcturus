@@ -1,7 +1,7 @@
 /*
 
 sattrack-node
-RESTful API for retrieving useful satellite information
+RESTful API for retrieving useful satellite information.
 
 LICENSE: MIT License
 Created by Justine Paul Sanchez Vitan.
@@ -18,6 +18,7 @@ mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
 
 const app = express()
 
+app.use(express.static('./public'))
 app.use(express.json())
 app.use('/satellites', satellitesRouter)
 
