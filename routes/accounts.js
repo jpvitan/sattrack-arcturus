@@ -21,14 +21,22 @@ router.post('/signup', async (req, res) => {
         const password = req.body.password
         const name = req.body.name
 
+        const user = await Account.findOne({ email: email })
+        if (user) return res.status(409).json({ message: 'Account Exists' })
+
         const hashedPassword = await bcrypt.hash(password, 10)
 
         const account = new Account({ email: email, password: hashedPassword, name: name })
-        account.save()
+        account.save((err, result) => {
+            if (err) {
+                return res.status(500).json({ message: 'Internal Server Error' })
+            } else {
+                return res.status(201).json({ message: 'Account Created' })
+            }
+        })
     } catch {
         return res.status(500).json({ message: 'Internal Server Error' })
     }
-    return res.status(201).json({ message: 'Account Created' })
 })
 
 module.exports = router
