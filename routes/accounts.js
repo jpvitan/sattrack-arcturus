@@ -11,6 +11,7 @@ Copyright © 2022 Justine Paul Sanchez Vitan. All rights reserved.
 
 const express = require('express')
 const bcrypt = require('bcrypt')
+const passport = require('passport')
 const Account = require('../models/account')
 
 const router = express.Router()
@@ -38,5 +39,7 @@ router.post('/signup', async (req, res) => {
         return res.status(500).json({ message: 'Internal Server Error' })
     }
 })
+
+router.post('/signin', passport.authenticate('local'))
 
 module.exports = router
