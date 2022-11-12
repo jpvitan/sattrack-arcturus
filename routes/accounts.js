@@ -40,11 +40,14 @@ router.post('/signup', async (req, res) => {
     }
 })
 
-router.post('/signin', passport.authenticate('local'))
+router.post('/signin', passport.authenticate('local'), async (req, res) => {
+    return res.status(200).json({ message: 'Account Verified' })
+})
 
 router.post('/signout', async (req, res) => {
     req.logout((error) => {
-        console.log(error)
+        if (error) return res.status(500).json({ message: 'Internal Server Error' })
+        return res.status(200).json({ message: 'Account Signed Out' })
     })
 })
 
