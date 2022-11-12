@@ -19,8 +19,8 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, passwor
         const user = await Account.findOne({ email: email })
         if (user == null || !(await bcrypt.compare(password, user.password))) return done(null, false)
         return done(null, user)
-    } catch (e) {
-        return done(e)
+    } catch (error) {
+        return done(error)
     }
 }))
 passport.serializeUser(async (user, done) => {

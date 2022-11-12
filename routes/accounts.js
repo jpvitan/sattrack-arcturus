@@ -28,18 +28,24 @@ router.post('/signup', async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10)
 
         const account = new Account({ email: email, password: hashedPassword, name: name })
-        account.save((err, result) => {
-            if (err) {
+        account.save((error, result) => {
+            if (error) {
                 return res.status(500).json({ message: 'Internal Server Error' })
             } else {
                 return res.status(201).json({ message: 'Account Created' })
             }
         })
-    } catch {
+    } catch (error) {
         return res.status(500).json({ message: 'Internal Server Error' })
     }
 })
 
 router.post('/signin', passport.authenticate('local'))
+
+router.post('/signout', async (req, res) => {
+    req.logout((error) => {
+        console.log(error)
+    })
+})
 
 module.exports = router
