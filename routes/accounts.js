@@ -20,6 +20,7 @@ const router = express.Router()
 router.post('/signup', async (req, res) => {
     try {
         const email = req.body.email
+        const username = req.body.username
         const password = req.body.password
         const name = req.body.name
 
@@ -28,7 +29,7 @@ router.post('/signup', async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10)
 
-        const account = new Account({ email: email, password: hashedPassword, name: name })
+        const account = new Account({ email: email, username: username, password: hashedPassword, name: name })
         account.save((error, result) => {
             if (error) {
                 return res.status(500).json({ message: 'Internal Server Error' })
@@ -50,6 +51,10 @@ router.post('/signout', auth.checkAuthentication, async (req, res) => {
         if (error) return res.status(500).json({ message: 'Internal Server Error' })
         return res.status(200).json({ message: 'Account Signed Out' })
     })
+})
+
+router.get('/:username', auth.checkAuthentication, async (req, res) => {
+
 })
 
 module.exports = router

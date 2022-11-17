@@ -16,6 +16,10 @@ const accountSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    username: {
+        type: String,
+        required: true
+    },
     password: {
         type: String,
         required: true
@@ -23,6 +27,11 @@ const accountSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
+    },
+    type: {
+        type: String,
+        required: true,
+        default: 'user'
     }
 })
 
