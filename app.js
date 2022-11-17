@@ -17,6 +17,7 @@ const session = require('express-session')
 const passport = require('./config/passport')
 const accountsRouter = require('./routes/accounts')
 const satellitesRouter = require('./routes/satellites')
+const sessionRouter = require('./routes/session')
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
 
@@ -39,5 +40,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use('/accounts', accountsRouter)
 app.use('/satellites', satellitesRouter)
+app.use('/session', sessionRouter)
 
 app.listen(3001)
