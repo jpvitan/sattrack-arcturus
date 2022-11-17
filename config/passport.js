@@ -14,9 +14,9 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const Account = require('../models/account')
 
-passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
+passport.use(new LocalStrategy(async (username, password, done) => {
     try {
-        const user = await Account.findOne({ email: email })
+        const user = await Account.findOne({ username: username })
         if (user == null || !(await bcrypt.compare(password, user.password))) return done(null, false)
         return done(null, user)
     } catch (error) {
@@ -24,10 +24,10 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, passwor
     }
 }))
 passport.serializeUser(async (user, done) => {
-    done(null, user.email)
+    done(null, user.username)
 })
-passport.deserializeUser(async (email, done) => {
-    const user = await Account.findOne({ email: email })
+passport.deserializeUser(async (username, done) => {
+    const user = await Account.findOne({ username: username })
     done(null, user)
 })
 
