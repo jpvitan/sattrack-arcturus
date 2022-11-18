@@ -19,9 +19,7 @@ const getSatellite = async (req, res, next) => {
   let satellite
   try {
     satellite = await Satellite.findOne({ norad })
-    if (!satellite) {
-      return res.status(404).json({ message: 'Not Found' })
-    }
+    if (!satellite) return res.status(404).json({ message: 'Not Found' })
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' })
   }
@@ -32,15 +30,9 @@ const getSatellite = async (req, res, next) => {
 router.get('/', async (req, res) => {
   const { name, country, purpose } = req.query
   const query = {}
-  if (name) {
-    query.name = name
-  }
-  if (country) {
-    query.country = country
-  }
-  if (purpose) {
-    query.purpose = purpose
-  }
+  if (name) query.name = name
+  if (country) query.country = country
+  if (purpose) query.purpose = purpose
   try {
     const satellites = await Satellite.find(query)
     return res.status(200).json(satellites)

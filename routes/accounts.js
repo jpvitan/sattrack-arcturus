@@ -25,9 +25,7 @@ router.get('/', auth.checkAuthentication, async (req, res) => {
     field.email = 1
     field.name = 1
     field.type = 1
-    if (type) {
-      query.type = type
-    }
+    if (type) query.type = type
   }
 
   const accounts = await Account.find(query, field)
@@ -48,11 +46,8 @@ router.post('/', async (req, res) => {
 
     const account = new Account({ email, username, password: hashedPassword, name })
     account.save((error, result) => {
-      if (error) {
-        return res.status(500).json({ message: 'Internal Server Error' })
-      } else {
-        return res.status(201).json({ message: 'Account Created' })
-      }
+      if (error) return res.status(500).json({ message: 'Internal Server Error' })
+      else return res.status(201).json({ message: 'Account Created' })
     })
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' })
