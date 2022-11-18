@@ -16,14 +16,14 @@ const auth = require('./auth')
 const router = express.Router()
 
 router.post('/signin', passport.authenticate('local'), async (req, res) => {
-    return res.status(200).json({ message: 'Account Verified' })
+  return res.status(200).json({ message: 'Account Verified' })
 })
 
 router.post('/signout', auth.checkAuthentication, async (req, res) => {
-    req.logout((error) => {
-        if (error) return res.status(500).json({ message: 'Internal Server Error' })
-        return res.status(200).json({ message: 'Account Signed Out' })
-    })
+  req.logout((error) => {
+    if (error) return res.status(500).json({ message: 'Internal Server Error' })
+    return res.status(200).json({ message: 'Account Signed Out' })
+  })
 })
 
 module.exports = router

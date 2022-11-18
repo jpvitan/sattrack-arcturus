@@ -15,20 +15,20 @@ const LocalStrategy = require('passport-local').Strategy
 const Account = require('../models/account')
 
 passport.use(new LocalStrategy(async (username, password, done) => {
-    try {
-        const user = await Account.findOne({ username: username })
-        if (user == null || !(await bcrypt.compare(password, user.password))) return done(null, false)
-        return done(null, user)
-    } catch (error) {
-        return done(error)
-    }
+  try {
+    const user = await Account.findOne({ username })
+    if (user == null || !(await bcrypt.compare(password, user.password))) return done(null, false)
+    return done(null, user)
+  } catch (error) {
+    return done(error)
+  }
 }))
 passport.serializeUser(async (user, done) => {
-    done(null, user.username)
+  done(null, user.username)
 })
 passport.deserializeUser(async (username, done) => {
-    const user = await Account.findOne({ username: username })
-    done(null, user)
+  const user = await Account.findOne({ username })
+  done(null, user)
 })
 
 module.exports = passport

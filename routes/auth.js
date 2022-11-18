@@ -10,8 +10,8 @@ Copyright © 2022 Justine Paul Sanchez Vitan. All rights reserved.
 */
 
 module.exports.checkAuthentication = async (req, res, next) => {
-    if (req.isAuthenticated()) {
-        return next()
-    }
-    return res.status(401).json({ message: 'Not Authenticated' })
+  if (req.isAuthenticated()) {
+    return next()
+  }
+  return res.status(401).json({ message: 'Not Authenticated' })
 }
