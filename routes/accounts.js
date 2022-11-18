@@ -16,6 +16,24 @@ const Account = require('../models/account')
 
 const router = express.Router()
 
+router.get('/', auth.checkAuthentication, async (req, res) => {
+    const { type } = req.query
+    const query = {}
+
+    const field = { username: 1 }
+    if (req.user.type === 'admin') {
+        field.email = 1
+        field.name = 1
+        field.type = 1
+        if (type) {
+            query.type = type
+        }
+    }
+
+    const accounts = await Account.find(query, field)
+    return res.status(200).json(accounts)
+})
+
 router.post('/', async (req, res) => {
     try {
         const email = req.body.email
