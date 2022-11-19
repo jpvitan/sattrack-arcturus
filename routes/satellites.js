@@ -28,7 +28,7 @@ const getSatellite = async (req, res, next) => {
 }
 
 router.get('/', async (req, res) => {
-  const { name, country, purpose } = req.query
+  let { name, country, purpose, limit, skip } = req.query
 
   const filter = {}
   if (name) filter.name = name
@@ -38,6 +38,19 @@ router.get('/', async (req, res) => {
   const projection = {}
 
   const options = {}
+  if (limit) {
+    limit = parseInt(limit)
+    if (isNaN(limit) || !Number.isInteger(limit)) return res.status(400).json({ message: 'Invalid Value: [skip]' })
+  } else {
+    limit = 100
+  }
+  options.limit = limit
+
+  if (skip) {
+    skip = parseInt(skip)
+    if (isNaN(skip) || !Number.isInteger(skip)) return res.status(400).json({ message: 'Invalid Value: [skip]' })
+    options.skip = skip
+  }
 
   try {
     const satellites = await Satellite.find(filter, projection, options)
