@@ -40,7 +40,7 @@ router.get('/', async (req, res) => {
   const options = {}
   if (limit) {
     limit = parseInt(limit)
-    if (isNaN(limit) || !Number.isInteger(limit)) return res.status(400).json({ message: 'Invalid Value: [skip]' })
+    if (isNaN(limit) || !Number.isInteger(limit)) return res.status(400).json({ message: 'Invalid Value: [limit]' })
   } else {
     limit = 100
   }
