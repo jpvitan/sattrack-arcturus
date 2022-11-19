@@ -29,12 +29,18 @@ const getSatellite = async (req, res, next) => {
 
 router.get('/', async (req, res) => {
   const { name, country, purpose } = req.query
-  const query = {}
-  if (name) query.name = name
-  if (country) query.country = country
-  if (purpose) query.purpose = purpose
+
+  const filter = {}
+  if (name) filter.name = name
+  if (country) filter.country = country
+  if (purpose) filter.purpose = purpose
+
+  const projection = {}
+
+  const options = {}
+
   try {
-    const satellites = await Satellite.find(query)
+    const satellites = await Satellite.find(filter, projection, options)
     return res.status(200).json(satellites)
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' })

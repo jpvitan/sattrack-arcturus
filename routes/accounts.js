@@ -18,17 +18,21 @@ const router = express.Router()
 
 router.get('/', auth.checkAuthentication, async (req, res) => {
   const { type } = req.query
-  const query = {}
 
-  const field = { username: 1 }
+  const filter = {}
+
+  const projection = { username: 1 }
+
+  const options = {}
+
   if (req.user.type === 'admin') {
-    field.email = 1
-    field.name = 1
-    field.type = 1
-    if (type) query.type = type
+    if (type) filter.type = type
+    projection.email = 1
+    projection.name = 1
+    projection.type = 1
   }
 
-  const accounts = await Account.find(query, field)
+  const accounts = await Account.find(filter, projection, options)
   return res.status(200).json(accounts)
 })
 
