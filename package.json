@@ -1,12 +1,12 @@
 {
   "name": "sattrack-arcturus",
   "version": "0.1.0",
-  "description": "",
+  "description": "A RESTful API built with Node.js and Express that lets you retrieve useful satellite information by providing identifiers assigned by the North American Aerospace Defense Command.",
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js"
   },
-  "author": "",
+  "author": "Justine Paul Vitan",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.1.0",
