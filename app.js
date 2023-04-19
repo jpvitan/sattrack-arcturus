@@ -23,7 +23,6 @@ const passport = require('./config/passport')
 
 const accountsRouter = require('./routes/accounts')
 const satellitesRouter = require('./routes/satellites')
-const sessionRouter = require('./routes/session')
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
 
@@ -47,7 +46,6 @@ app.use(passport.session())
 
 app.use('/accounts', accountsRouter)
 app.use('/satellites', satellitesRouter)
-app.use('/session', sessionRouter)
 
 const PORT = process.env.PORT || 8080
 app.listen(PORT)

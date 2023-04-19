@@ -13,9 +13,9 @@ Developer's Website: https://jpvitan.com/
 
 */
 
-const bcrypt = require('bcrypt')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+const bcrypt = require('bcrypt')
 const Account = require('../models/account')
 
 passport.use(new LocalStrategy(async (username, password, done) => {
