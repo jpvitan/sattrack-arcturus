@@ -14,11 +14,13 @@ Developer's Website: https://jpvitan.com/
 */
 
 require('dotenv').config()
+
 const mongoose = require('mongoose')
 const express = require('express')
 const cors = require('cors')
 const session = require('express-session')
 const passport = require('./config/passport')
+
 const accountsRouter = require('./routes/accounts')
 const satellitesRouter = require('./routes/satellites')
 const sessionRouter = require('./routes/session')
@@ -42,8 +44,10 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
+
 app.use('/accounts', accountsRouter)
 app.use('/satellites', satellitesRouter)
 app.use('/session', sessionRouter)
 
-app.listen(3001)
+const PORT = process.env.PORT || 8080
+app.listen(PORT)
