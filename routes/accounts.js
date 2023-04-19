@@ -15,9 +15,9 @@ Developer's Website: https://jpvitan.com/
 
 const express = require('express')
 const passport = require('passport')
+const bcrypt = require('bcrypt')
 const auth = require('../middlewares/auth')
 const Account = require('../models/account')
-const bcrypt = require('bcrypt')
 
 const router = express.Router()
 
