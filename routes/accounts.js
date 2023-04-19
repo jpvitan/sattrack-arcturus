@@ -14,9 +14,9 @@ Developer's Website: https://jpvitan.com/
 */
 
 const express = require('express')
-const bcrypt = require('bcrypt')
-const auth = require('./auth')
+const auth = require('../middlewares/auth')
 const Account = require('../models/account')
+const bcrypt = require('bcrypt')
 
 const router = express.Router()
 
@@ -24,9 +24,7 @@ router.get('/', auth.checkAuthentication, async (req, res) => {
   const { type } = req.query
 
   const filter = {}
-
   const projection = { username: 1 }
-
   const options = {}
 
   if (req.user.type === 'admin') {

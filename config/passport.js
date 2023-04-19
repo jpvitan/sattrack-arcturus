@@ -13,10 +13,10 @@ Developer's Website: https://jpvitan.com/
 
 */
 
-const bcrypt = require('bcrypt')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const Account = require('../models/account')
+const bcrypt = require('bcrypt')
 
 passport.use(new LocalStrategy(async (username, password, done) => {
   try {
