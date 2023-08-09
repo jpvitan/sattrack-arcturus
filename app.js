@@ -43,6 +43,10 @@ app.use(cors({
 app.use(passport.initialize())
 app.use(passport.session())
 
+app.get('/', (req, res) => {
+  return res.render('pages/index')
+})
+
 app.use('/accounts', accountsRouter)
 app.use('/satellites', satellitesRouter)
 
