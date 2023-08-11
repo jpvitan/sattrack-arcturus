@@ -44,7 +44,10 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.get('/', (req, res) => {
-  return res.render('pages/index')
+  return res.render('pages/index', {
+    title: 'SatTrack-Arcturus',
+    description: 'A RESTful API built with Node.js and Express that lets you retrieve useful satellite information by providing identifiers assigned by the North American Aerospace Defense Command.'
+  })
 })
 
 app.use('/accounts', accountsRouter)
