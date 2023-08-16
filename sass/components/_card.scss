@@ -7,11 +7,11 @@
 }
 
 .card-feature {
-    border-radius: 0px;
+    border-radius: 0;
 }
 
 .card-list {
-    border-radius: 0px;
+    border-radius: 0;
 
     @media screen and (min-width: variables.$breakpoint-md) {
         border-radius: 25px;
@@ -43,7 +43,7 @@
 }
 
 .card-app {
-    border-radius: 0px;
+    border-radius: 0;
 
     a {
         font-size: 0.8rem;
