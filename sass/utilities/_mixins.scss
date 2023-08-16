@@ -1,0 +1,63 @@
+// Position
+@mixin position-fixed($left: null, $right: null, $top: null, $bottom: null, $center: false) {
+    position: fixed;
+    left: $left;
+    right: $right;
+    top: $top;
+    bottom: $bottom;
+
+    @if $center {
+        transform: translate(-50%, -50%);
+    }
+}
+
+@mixin position-relative($left: null, $right: null, $top: null, $bottom: null, $center: false) {
+    position: relative;
+    left: $left;
+    right: $right;
+    top: $top;
+    bottom: $bottom;
+
+    @if $center {
+        transform: translate(-50%, -50%);
+    }
+}
+
+// Text
+@mixin text-size-responsive($font-size, $breakpoint-font-size, $breakpoint) {
+    font-size: $font-size;
+
+    @media screen and (min-width: $breakpoint) {
+        font-size: $breakpoint-font-size;
+    }
+}
+
+// Icon
+@mixin icon-svg($size, $color) {
+    display: block;
+    width: $size;
+    height: $size;
+    color: $color;
+}
+
+// Shape
+@mixin shape-circle($size: null, $background-color: null) {
+    border-radius: 50%;
+    width: $size;
+    height: $size;
+    background-color: $background-color;
+}
+
+@mixin shape-square($size: null, $border-radius: 0, $background-color: null) {
+    width: $size;
+    height: $size;
+    border-radius: $border-radius;
+    background-color: $background-color;
+}
+
+// Background
+@mixin background-blur($background-color, $blur) {
+    background-color: $background-color;
+    backdrop-filter: blur($blur);
+    -webkit-backdrop-filter: blur($blur);
+}
