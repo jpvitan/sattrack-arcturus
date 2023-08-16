@@ -21,6 +21,8 @@
   "devDependencies": {
     "dotenv": "^16.3.1",
     "nodemon": "^3.0.1",
-    "standard": "^17.1.0"
+    "standard": "^17.1.0",
+    "stylelint": "^15.10.2",
+    "stylelint-config-standard-scss": "^10.0.0"
   }
 }
