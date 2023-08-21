@@ -1,0 +1,22 @@
+.background-blur {
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.background-image {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.background-image-space {
+    background-image: url("https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1692282379/sattrack-arcturus/backgrounds/space_g9jqtv.jpg");
+}
+
+.background-color-black {
+    background-color: #000;
+}
+
+.background-color-seashell {
+    background-color: #ecf0f1;
+}

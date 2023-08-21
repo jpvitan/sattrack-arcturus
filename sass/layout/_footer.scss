@@ -1,0 +1,24 @@
+@use "../utilities/mixins";
+
+footer {
+    .icon-container {
+        @include mixins.shape-square($size: 30px, $border-radius: 10px);
+
+        background-color: var(--navigation-icon-background-color);
+
+        svg {
+            @include mixins.icon-svg($size: 18px, $color: var(--navigation-icon-color));
+        }
+
+        &:hover {
+            svg {
+                @include mixins.icon-svg($size: 18px, $color: var(--navigation-icon-hover-color));
+            }
+        }
+    }
+
+    p {
+        font-size: 0.7rem;
+        margin-bottom: 0;
+    }
+}

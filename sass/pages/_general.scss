@@ -1,0 +1,54 @@
+@use "../utilities/mixins";
+@use "../utilities/variables";
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+button {
+    font-family: var(--font-family);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: var(--heading-font-weight);
+    color: var(--heading-font-color);
+}
+
+h1,
+h2 {
+    @include mixins.text-size-responsive($font-size: calc(1.375rem + 1.5vw), $breakpoint-font-size: 2.5rem, $breakpoint: variables.$breakpoint-xl);
+
+    margin-bottom: 1rem;
+}
+
+h3,
+h4 {
+    margin-bottom: 0.5rem;
+}
+
+h3 {
+    font-size: 1.4rem;
+}
+
+h4 {
+    font-size: 1.2rem;
+}
+
+p {
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+    color: var(--font-color);
+}
+
+a {
+    text-decoration: none;
+}
