@@ -19,6 +19,19 @@ const Account = require('../../models/account')
 
 const router = express.Router()
 
+const getAccount = async (req, res, next) => {
+  const { username } = req.params
+  let account
+  try {
+    account = await Account.findOne({ username })
+    if (!account) return res.status(404).json({ message: 'Not Found' })
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
+  res.account = account
+  next()
+}
+
 router.get('/', async (req, res) => {
   const { type } = req.query
 
@@ -57,6 +70,10 @@ router.post('/', async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' })
   }
+})
+
+router.get('/:username', getAccount, async (req, res) => {
+  return res.status(200).json(res.account)
 })
 
 module.exports = router
