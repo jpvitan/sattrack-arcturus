@@ -21,6 +21,8 @@ const cors = require('cors')
 const mongoose = require('./config/mongoose')
 const passport = require('./config/passport')
 
+const apiRouter = require('./routes/api')
+
 const app = express()
 
 app.set('view engine', 'ejs')
@@ -46,6 +48,8 @@ app.get('/', (req, res) => {
     description: 'A RESTful API built with Node.js and Express that lets you retrieve useful satellite information by providing identifiers assigned by the North American Aerospace Defense Command.'
   })
 })
+
+app.use('/api', apiRouter)
 
 const PORT = process.env.PORT || 8080
 app.listen(PORT)
