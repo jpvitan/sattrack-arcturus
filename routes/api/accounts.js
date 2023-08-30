@@ -57,16 +57,14 @@ router.post('/', async (req, res) => {
     const password = req.body.password
     const name = req.body.name
 
-    const user = await Account.findOne({ email })
-    if (user) return res.status(409).json({ message: 'Account Exists' })
+    const entry = await Account.findOne({ email })
+    if (entry) return res.status(409).json({ message: 'Account Exists' })
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
     const account = new Account({ email, username, password: hashedPassword, name })
-    account.save((error, result) => {
-      if (error) return res.status(500).json({ message: 'Internal Server Error' })
-      else return res.status(201).json({ message: 'Account Created' })
-    })
+    await account.save()
+    return res.status(201).json({ message: 'Account Created' })
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' })
   }
