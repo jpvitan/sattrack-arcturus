@@ -14,7 +14,7 @@ Developer's Website: https://jpvitan.com/
 */
 
 const express = require('express')
-const Satellite = require('../models/satellite')
+const Satellite = require('../../models/satellite')
 
 const router = express.Router()
 
@@ -59,6 +59,24 @@ router.get('/', async (req, res) => {
   try {
     const satellites = await Satellite.find(filter, projection, options)
     return res.status(200).json(satellites)
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
+})
+
+router.post('/', async (req, res) => {
+  try {
+    const name = req.body.name
+    const norad = req.body.norad
+    const country = req.body.country
+    const purpose = req.body.purpose
+
+    const entry = await Satellite.findOne({ norad })
+    if (entry) return res.status(409).json({ message: 'Satellite Exists' })
+
+    const satellite = new Satellite({ name, norad, country, purpose })
+    await satellite.save()
+    return res.status(201).json({ message: 'Satellite Created' })
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' })
   }

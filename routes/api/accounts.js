@@ -14,26 +14,37 @@ Developer's Website: https://jpvitan.com/
 */
 
 const express = require('express')
-const passport = require('passport')
 const bcrypt = require('bcrypt')
-const auth = require('../middlewares/auth')
-const Account = require('../models/account')
+const Account = require('../../models/account')
 
 const router = express.Router()
 
-router.get('/', auth.checkAuthentication, async (req, res) => {
+const getAccount = async (req, res, next) => {
+  const { username } = req.params
+  let account
+  try {
+    account = await Account.findOne({ username })
+    if (!account) return res.status(404).json({ message: 'Not Found' })
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
+  res.account = account
+  next()
+}
+
+router.get('/', async (req, res) => {
   const { type } = req.query
 
   const filter = {}
   const projection = { username: 1 }
   const options = {}
 
-  if (req.user.type === 'admin') {
-    if (type) filter.type = type
-    projection.email = 1
-    projection.name = 1
-    projection.type = 1
-  }
+  // if (req.user.type === 'admin') {
+  //   if (type) filter.type = type
+  //   projection.email = 1
+  //   projection.name = 1
+  //   projection.type = 1
+  // }
 
   const accounts = await Account.find(filter, projection, options)
   return res.status(200).json(accounts)
@@ -46,30 +57,21 @@ router.post('/', async (req, res) => {
     const password = req.body.password
     const name = req.body.name
 
-    const user = await Account.findOne({ email })
-    if (user) return res.status(409).json({ message: 'Account Exists' })
+    const entry = await Account.findOne({ email })
+    if (entry) return res.status(409).json({ message: 'Account Exists' })
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
     const account = new Account({ email, username, password: hashedPassword, name })
-    account.save((error, result) => {
-      if (error) return res.status(500).json({ message: 'Internal Server Error' })
-      else return res.status(201).json({ message: 'Account Created' })
-    })
+    await account.save()
+    return res.status(201).json({ message: 'Account Created' })
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' })
   }
 })
 
-router.post('/signin', passport.authenticate('local'), async (req, res) => {
-  return res.status(200).json({ message: 'Account Verified' })
-})
-
-router.post('/signout', auth.checkAuthentication, async (req, res) => {
-  req.logout((error) => {
-    if (error) return res.status(500).json({ message: 'Internal Server Error' })
-    return res.status(200).json({ message: 'Account Signed Out' })
-  })
+router.get('/:username', getAccount, async (req, res) => {
+  return res.status(200).json(res.account)
 })
 
 module.exports = router
