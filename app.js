@@ -22,6 +22,7 @@ const mongoose = require('./config/mongoose')
 const passport = require('./config/passport')
 
 const apiRouter = require('./routes/api')
+const sessionRouter = require('./routes/sessions')
 
 const app = express()
 
@@ -42,7 +43,7 @@ app.use(cors({
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   return res.render('pages/index', {
     title: 'SatTrack-Arcturus',
     description: 'A RESTful API built with Node.js and Express that lets you retrieve useful satellite information by providing identifiers assigned by the North American Aerospace Defense Command.'
@@ -50,6 +51,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api', apiRouter)
+app.use('/sessions', sessionRouter)
 
 const PORT = process.env.PORT || 8080
 app.listen(PORT)
