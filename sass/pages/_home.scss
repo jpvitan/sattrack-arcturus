@@ -1,13 +1,25 @@
 @use "../utilities/mixins";
 
 .home {
+    .account {
 
-    .sign-in,
-    .sign-up {
-        @include mixins.position-fixed($left: 0, $right: 0, $top: 0, $bottom: 0);
-        @include mixins.background-blur($background-color: var(--navigation-menu-background-color), $blur: var(--navigation-menu-background-blur));
+        .sign-in,
+        .sign-up {
+            @include mixins.position-fixed($left: 0, $right: 0, $top: 0, $bottom: 0);
+            @include mixins.background-blur($background-color: var(--navigation-menu-background-color), $blur: var(--navigation-menu-background-blur));
 
-        overflow-y: auto;
-        z-index: 1;
+            overflow-y: auto;
+            z-index: 1;
+        }
+    }
+}
+
+#account-sign-in-close-button,
+#account-sign-up-close-button {
+    display: block;
+    padding: 0;
+
+    svg {
+        @include mixins.icon-svg($size: 20px, $color: var(--navigation-icon-color));
     }
 }
