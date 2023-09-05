@@ -13,28 +13,28 @@ Developer's Website: https://jpvitan.com/
 
 */
 
-document.addEventListener("DOMContentLoaded", () => {
-    setupHome()
+document.addEventListener('DOMContentLoaded', () => {
+  setupHome()
 })
 
 const setupHome = () => {
-    const signIn = document.getElementById('account-sign-in')
-    const signUp = document.getElementById('account-sign-up')
-    const signInButton = document.getElementById('account-sign-in-button')
-    const signUpButton = document.getElementById('account-sign-up-button')
-    const signInCloseButton = document.getElementById('account-sign-in-close-button')
-    const signUpCloseButton = document.getElementById('account-sign-up-close-button')
+  const signIn = document.getElementById('account-sign-in')
+  const signUp = document.getElementById('account-sign-up')
+  const signInButton = document.getElementById('account-sign-in-button')
+  const signUpButton = document.getElementById('account-sign-up-button')
+  const signInCloseButton = document.getElementById('account-sign-in-close-button')
+  const signUpCloseButton = document.getElementById('account-sign-up-close-button')
 
-    signInButton.onclick = () => {
-        signIn.classList.remove('d-none')
-    }
-    signUpButton.onclick = () => {
-        signUp.classList.remove('d-none')
-    }
-    signInCloseButton.onclick = () => {
-        signIn.classList.add('d-none')
-    }
-    signUpCloseButton.onclick = () => {
-        signUp.classList.add('d-none')
-    }
+  signInButton.onclick = () => {
+    signIn.classList.remove('d-none')
+  }
+  signUpButton.onclick = () => {
+    signUp.classList.remove('d-none')
+  }
+  signInCloseButton.onclick = () => {
+    signIn.classList.add('d-none')
+  }
+  signUpCloseButton.onclick = () => {
+    signUp.classList.add('d-none')
+  }
 }
