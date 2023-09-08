@@ -35,11 +35,23 @@ const setupHome = () => {
   signInCloseButton.onclick = () => {
     signIn.classList.add('d-none')
   }
-  signInForm.onsubmit = (e) => {
+  signInForm.onsubmit = async (e) => {
     e.preventDefault()
 
     const username = signInUsernameForm.value
     const password = signInPasswordForm.value
+
+    try {
+      const response = await fetch(
+        '/sessions',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        }
+      )
+    } catch (error) {
+    }
   }
 
   signUpButton.onclick = () => {
