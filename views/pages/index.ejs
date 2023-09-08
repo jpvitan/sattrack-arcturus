@@ -56,6 +56,42 @@
                     <div class="content-xs col">
                         <p class="text-size-xl text-color-black fw-bold mb-1">Sign up</p>
                         <p class="text-size-sm">By signing up, you are consenting to abide by the <a href="">Terms of Service</a> and <a href="">Privacy Policy</a> of this application.</p>
+                        <form id="account-sign-up-form">
+                            <div class="mt-5">
+                                <p class="text-size-sm" id="account-sign-up-notice">Please ensure all fields are filled out before submitting.</p>
+                                <%- include("../partials/forms/field", { id: 'account-sign-up-name-form', type: 'text', placeholder: 'Name' }) %>
+                            </div>
+                            <div class="mt-3">
+                                <%- include("../partials/forms/field", { id: 'account-sign-up-email-form', type: 'email', placeholder: 'Email' }) %>
+                            </div>
+                            <div class="mt-3">
+                                <%- include("../partials/forms/field", { id: 'account-sign-up-username-form', type: 'text', placeholder: 'Username' }) %>
+                            </div>
+                            <div class="mt-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="text-size-sm">For security purposes, please ensure your password meets the criteria for a strong password. It should include a combination of upper and lower case letters, numbers, and special characters.</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <%- include("../partials/forms/field", { id: 'account-sign-up-password-form', type: 'password', placeholder: 'Password' }) %>
+                                    </div>
+                                    <div class="col">
+                                        <%- include("../partials/forms/field", { id: 'account-sign-up-confirm-password-form', type: 'password', placeholder: 'Confirm Password' }) %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <div class="row">
+                                    <div class="col my-auto">
+                                    </div>
+                                    <div class="col-auto my-auto">
+                                        <button class="button button-color-blue text-size-sm btn px-4 py-2">Sign up</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
