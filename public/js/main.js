@@ -42,6 +42,11 @@ const setupHome = () => {
     const username = signInUsernameForm.value
     const password = signInPasswordForm.value
 
+    if (username === '' || password === '') {
+      signInNotice.innerText = 'Please enter a username and password.'
+      return
+    }
+
     try {
       const response = await fetch(
         '/sessions',
