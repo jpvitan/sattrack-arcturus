@@ -5,8 +5,8 @@
         .sign-in,
         .sign-up {
             @include mixins.position-fixed($left: 0, $right: 0, $top: 0, $bottom: 0);
-            @include mixins.background-blur($background-color: var(--navigation-menu-background-color), $blur: var(--navigation-menu-background-blur));
 
+            background-color: #fff;
             overflow-y: auto;
             z-index: 1;
         }
