@@ -19,20 +19,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const setupHome = () => {
   const signIn = document.getElementById('account-sign-in')
-  const signUp = document.getElementById('account-sign-up')
   const signInButton = document.getElementById('account-sign-in-button')
-  const signUpButton = document.getElementById('account-sign-up-button')
   const signInCloseButton = document.getElementById('account-sign-in-close-button')
+  const signInForm = document.getElementById('account-sign-in-form')
+  const signInUsernameForm = document.getElementById('account-sign-in-username-form')
+  const signInPasswordForm = document.getElementById('account-sign-in-password-form')
+
+  const signUp = document.getElementById('account-sign-up')
+  const signUpButton = document.getElementById('account-sign-up-button')
   const signUpCloseButton = document.getElementById('account-sign-up-close-button')
 
   signInButton.onclick = () => {
     signIn.classList.remove('d-none')
   }
-  signUpButton.onclick = () => {
-    signUp.classList.remove('d-none')
-  }
   signInCloseButton.onclick = () => {
     signIn.classList.add('d-none')
+  }
+  signInForm.onsubmit = (e) => {
+    e.preventDefault()
+
+    const username = signInUsernameForm.value
+    const password = signInPasswordForm.value
+  }
+
+  signUpButton.onclick = () => {
+    signUp.classList.remove('d-none')
   }
   signUpCloseButton.onclick = () => {
     signUp.classList.add('d-none')
