@@ -21,6 +21,7 @@ const setupHome = () => {
   const signIn = document.getElementById('account-sign-in')
   const signInButton = document.getElementById('account-sign-in-button')
   const signInCloseButton = document.getElementById('account-sign-in-close-button')
+  const signInNotice = document.getElementById('account-sign-in-notice')
   const signInForm = document.getElementById('account-sign-in-form')
   const signInUsernameForm = document.getElementById('account-sign-in-username-form')
   const signInPasswordForm = document.getElementById('account-sign-in-password-form')
@@ -50,7 +51,15 @@ const setupHome = () => {
           body: JSON.stringify({ username, password })
         }
       )
+      if (response.ok) {
+
+      } else if (response.status === 401) {
+        signInNotice.innerText = 'The username and password you entered does not correspond to any existing account.'
+      } else {
+        signInNotice.innerText = 'The system encountered some unexpected errors. Please try again later.'
+      }
     } catch (error) {
+      signInNotice.innerText = 'The system encountered some unexpected errors. Please try again later.'
     }
   }
 
