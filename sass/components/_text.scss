@@ -1,3 +1,5 @@
+@use "../utilities/colors";
+
 .text-size-xs {
     font-size: 0.6rem;
 }
@@ -22,26 +24,26 @@
     font-size: 4rem;
 }
 
-.text-color-orange {
-    color: #fd9644;
-}
-
 .text-color-red {
-    color: #e74c3c;
+    color: colors.$red;
 }
 
 .text-color-blue {
-    color: #3498db;
+    color: colors.$blue;
 }
 
-.text-color-white {
-    color: #fff;
+.text-color-violet {
+    color: colors.$violet;
+}
+
+.text-color-orange {
+    color: colors.$orange;
 }
 
 .text-color-black {
-    color: #000;
+    color: colors.$black;
 }
 
-.text-color-amethyst {
-    color: #9b59b6;
+.text-color-white {
+    color: colors.$white;
 }
