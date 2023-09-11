@@ -66,9 +66,14 @@ const setupSignIn = () => {
 const setupSignUp = () => {
   const signUp = document.getElementById('sign-up')
   const signUpCloseButton = document.getElementById('sign-up-close-button')
+  const signUpNotice = document.getElementById('sign-up-notice')
+  const signUpForm = document.getElementById('sign-up-form')
 
   signUpCloseButton.onclick = () => {
     signUp.classList.add('d-none')
+  }
+  signUpForm.onsubmit = async (e) => {
+    e.preventDefault()
   }
 }
 
