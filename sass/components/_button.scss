@@ -1,9 +1,25 @@
-.button {
+.button-pill,
+.button-capsule,
+.button-plain {
     font-weight: 500;
+}
+
+.button-pill,
+.button-capsule {
     border-radius: 20px;
 }
 
-.button-outline-white {
+.button-pill-blue {
+    background-color: #3498db;
+    color: #fff;
+
+    &:hover {
+        background-color: #3498db;
+        color: #000;
+    }
+}
+
+.button-capsule-white {
     border: 1px solid #fff;
     color: #fff;
 
@@ -13,20 +29,10 @@
     }
 }
 
-.button-text-white {
+.button-plain-white {
     color: #fff;
 
     &:hover {
         color: #95a5a6;
-    }
-}
-
-.button-color-blue {
-    background-color: #3498db;
-    color: #fff;
-
-    &:hover {
-        background-color: #3498db;
-        color: #000;
     }
 }
