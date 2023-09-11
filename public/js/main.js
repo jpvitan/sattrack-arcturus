@@ -14,25 +14,19 @@ Developer's Website: https://jpvitan.com/
 */
 
 document.addEventListener('DOMContentLoaded', () => {
+  setupSignIn()
+  setupSignUp()
   setupHome()
 })
 
-const setupHome = () => {
+const setupSignIn = () => {
   const signIn = document.getElementById('sign-in')
-  const signInButton = document.getElementById('sign-in-button')
   const signInCloseButton = document.getElementById('sign-in-close-button')
   const signInNotice = document.getElementById('sign-in-notice')
   const signInForm = document.getElementById('sign-in-form')
   const signInUsernameForm = document.getElementById('sign-in-username-form')
   const signInPasswordForm = document.getElementById('sign-in-password-form')
 
-  const signUp = document.getElementById('sign-up')
-  const signUpButton = document.getElementById('sign-up-button')
-  const signUpCloseButton = document.getElementById('sign-up-close-button')
-
-  signInButton.onclick = () => {
-    signIn.classList.remove('d-none')
-  }
   signInCloseButton.onclick = () => {
     signIn.classList.add('d-none')
   }
@@ -67,11 +61,27 @@ const setupHome = () => {
       signInNotice.innerText = 'The system encountered some unexpected errors. Please try again later.'
     }
   }
+}
 
-  signUpButton.onclick = () => {
-    signUp.classList.remove('d-none')
-  }
+const setupSignUp = () => {
+  const signUp = document.getElementById('sign-up')
+  const signUpCloseButton = document.getElementById('sign-up-close-button')
+
   signUpCloseButton.onclick = () => {
     signUp.classList.add('d-none')
+  }
+}
+
+const setupHome = () => {
+  const signIn = document.getElementById('sign-in')
+  const signInButton = document.getElementById('sign-in-button')
+  const signUp = document.getElementById('sign-up')
+  const signUpButton = document.getElementById('sign-up-button')
+
+  signInButton.onclick = () => {
+    signIn.classList.remove('d-none')
+  }
+  signUpButton.onclick = () => {
+    signUp.classList.remove('d-none')
   }
 }
