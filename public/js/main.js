@@ -69,6 +69,15 @@ const setupSignUp = () => {
   const signUpNotice = document.getElementById('sign-up-notice')
   const signUpForm = document.getElementById('sign-up-form')
 
+  const field = [
+    { id: 'sign-up-name-form' },
+    { id: 'sign-up-email-form' },
+    { id: 'sign-up-username-form' },
+    { id: 'sign-up-password-form' },
+    { id: 'sign-up-repeat-form' },
+  ]
+  field.forEach(field => { field.reference = document.getElementById(field.id) })
+
   signUpCloseButton.onclick = () => {
     signUp.classList.add('d-none')
   }
