@@ -1,3 +1,14 @@
+@use "../utilities/mixins";
+
+.button-icon {
+    display: block;
+    padding: 0;
+
+    svg {
+        @include mixins.icon-svg($size: 20px, $color: var(--navigation-icon-color));
+    }
+}
+
 .button-pill,
 .button-capsule,
 .button-plain {
