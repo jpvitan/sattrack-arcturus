@@ -18,17 +18,17 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 const setupHome = () => {
-  const signIn = document.getElementById('account-sign-in')
-  const signInButton = document.getElementById('account-sign-in-button')
-  const signInCloseButton = document.getElementById('account-sign-in-close-button')
-  const signInNotice = document.getElementById('account-sign-in-notice')
-  const signInForm = document.getElementById('account-sign-in-form')
-  const signInUsernameForm = document.getElementById('account-sign-in-username-form')
-  const signInPasswordForm = document.getElementById('account-sign-in-password-form')
+  const signIn = document.getElementById('sign-in')
+  const signInButton = document.getElementById('sign-in-button')
+  const signInCloseButton = document.getElementById('sign-in-close-button')
+  const signInNotice = document.getElementById('sign-in-notice')
+  const signInForm = document.getElementById('sign-in-form')
+  const signInUsernameForm = document.getElementById('sign-in-username-form')
+  const signInPasswordForm = document.getElementById('sign-in-password-form')
 
-  const signUp = document.getElementById('account-sign-up')
-  const signUpButton = document.getElementById('account-sign-up-button')
-  const signUpCloseButton = document.getElementById('account-sign-up-close-button')
+  const signUp = document.getElementById('sign-up')
+  const signUpButton = document.getElementById('sign-up-button')
+  const signUpCloseButton = document.getElementById('sign-up-close-button')
 
   signInButton.onclick = () => {
     signIn.classList.remove('d-none')
