@@ -6,7 +6,10 @@
     padding: 0;
 
     svg {
-        @include mixins.icon-svg($size: 20px, $color: var(--navigation-icon-color));
+        display: block;
+        width: 20px;
+        height: 20px;
+        color: var(--navigation-icon-color);
     }
 }
 
