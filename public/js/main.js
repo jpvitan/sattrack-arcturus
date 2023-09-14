@@ -74,7 +74,7 @@ const setupSignUp = () => {
     { id: 'sign-up-email-form' },
     { id: 'sign-up-username-form' },
     { id: 'sign-up-password-form' },
-    { id: 'sign-up-repeat-form' },
+    { id: 'sign-up-repeat-form' }
   ]
   field.forEach(field => { field.reference = document.getElementById(field.id) })
 
@@ -83,6 +83,14 @@ const setupSignUp = () => {
   }
   signUpForm.onsubmit = async (e) => {
     e.preventDefault()
+
+    let empty = false
+    field.forEach(({ reference }) => { empty = reference.value === '' ? true : empty })
+
+    if (empty) {
+      signUpNotice.classList.add('text-color-red')
+      return
+    }
   }
 }
 
