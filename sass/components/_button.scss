@@ -9,7 +9,12 @@
         display: block;
         width: 20px;
         height: 20px;
-        color: var(--navigation-icon-color);
+    }
+}
+
+.button-icon-black {
+    svg {
+        color: colors.$black;
     }
 }
 
