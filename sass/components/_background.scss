@@ -1,3 +1,9 @@
+@use "../utilities/colors";
+
+.background-color-white {
+    background-color: colors.$white;
+}
+
 .background-image {
     background-repeat: no-repeat;
     background-size: cover;
