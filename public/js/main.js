@@ -36,8 +36,8 @@ const setupSignIn = () => {
     const username = signInUsernameForm.value
     const password = signInPasswordForm.value
 
-    if (username === '' || password === '') {
-      signInNotice.innerText = 'Please enter a username and password.'
+    if (!username || !password) {
+      signInNotice.innerText = 'Please enter a valid username and password.'
       return
     }
 
@@ -70,11 +70,11 @@ const setupSignUp = () => {
   const signUpForm = document.getElementById('sign-up-form')
 
   const field = [
-    { id: 'sign-up-name-form' },
-    { id: 'sign-up-email-form' },
-    { id: 'sign-up-username-form' },
-    { id: 'sign-up-password-form' },
-    { id: 'sign-up-repeat-form' }
+    { id: 'sign-up-name-form', key: 'name' },
+    { id: 'sign-up-email-form', key: 'email' },
+    { id: 'sign-up-username-form', key: 'username' },
+    { id: 'sign-up-password-form', key: 'password' },
+    { id: 'sign-up-repeat-form', key: 'repeat' }
   ]
   field.forEach(field => { field.reference = document.getElementById(field.id) })
 
@@ -84,11 +84,22 @@ const setupSignUp = () => {
   signUpForm.onsubmit = async (e) => {
     e.preventDefault()
 
+    const body = {}
     let empty = false
-    field.forEach(({ reference }) => { empty = reference.value === '' ? true : empty })
+
+    field.forEach(({ key, reference }) => {
+      body[key] = reference.value
+      empty = !body[key] ? true : empty
+    })
 
     if (empty) {
       signUpNotice.classList.add('text-color-red')
+      signUpNotice.innerHTML = 'You are required to fill out all fields!'
+      return
+    }
+    if (body.password !== body.repeat) {
+      signUpNotice.classList.add('text-color-red')
+      signUpNotice.innerHTML = 'Your passwords do not match. Please try again.'
       return
     }
   }
