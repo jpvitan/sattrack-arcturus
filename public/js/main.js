@@ -102,6 +102,19 @@ const setupSignUp = () => {
       signUpNotice.innerHTML = 'Your passwords do not match. Please try again.'
       return
     }
+
+    try {
+      const response = await fetch(
+        '/api/accounts',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        }
+      )
+    } catch (error) {
+
+    }
   }
 }
 
