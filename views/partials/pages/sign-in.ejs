@@ -14,10 +14,10 @@
                 <form id="sign-in-form">
                     <div class="mt-5">
                         <p class="text-size-sm text-color-red" id="sign-in-notice"></p>
-                        <%- include("../forms/field", { id: 'sign-in-username-form', type: 'text', placeholder: 'Username' }) %>
+                        <%- include("../forms/field", { attributes: { id: 'sign-in-username-form', type: 'text', placeholder: 'Username' } }) %>
                     </div>
                     <div class="mt-3">
-                        <%- include("../forms/field", { id: 'sign-in-password-form', type: 'password', placeholder: 'Password' }) %>
+                        <%- include("../forms/field", { attributes: { id: 'sign-in-password-form', type: 'password', placeholder: 'Password' } }) %>
                     </div>
                     <div class="mt-4">
                         <div class="row">
