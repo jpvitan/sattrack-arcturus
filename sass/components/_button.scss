@@ -1,0 +1,58 @@
+@use "../utilities/colors";
+@use "../utilities/mixins";
+
+.button-icon {
+    display: block;
+    padding: 0;
+
+    svg {
+        display: block;
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.button-icon-black {
+    svg {
+        color: colors.$black;
+    }
+}
+
+.button-pill,
+.button-capsule,
+.button-plain {
+    font-weight: 500;
+}
+
+.button-pill,
+.button-capsule {
+    border-radius: 20px;
+}
+
+.button-pill-blue {
+    background-color: colors.$blue;
+    color: colors.$white;
+
+    &:hover {
+        background-color: colors.$blue;
+        color: colors.$black;
+    }
+}
+
+.button-capsule-white {
+    border: 1px solid colors.$white;
+    color: colors.$white;
+
+    &:hover {
+        border: 1px solid colors.$gray;
+        color: colors.$gray;
+    }
+}
+
+.button-plain-white {
+    color: colors.$white;
+
+    &:hover {
+        color: colors.$gray
+    }
+}

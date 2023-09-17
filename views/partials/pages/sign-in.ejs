@@ -1,0 +1,43 @@
+<div class="sign-in screen background-color background-color-white d-none" id="sign-in">
+    <div class="container-fluid px-4 py-4">
+        <div class="row">
+            <div class="col-auto">
+                <button class="button-icon button-icon-black btn" id="sign-in-close-button">
+                    <%- include("../icons/close") %>
+                </button>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="content-xs col">
+                <p class="text-size-xl text-color-black fw-bold mb-1">Sign in</p>
+                <p class="text-size-sm">By signing in, you are consenting to abide by the <a href="">Terms of Service</a> and <a href="">Privacy Policy</a> of this application.</p>
+                <form id="sign-in-form">
+                    <div class="mt-5">
+                        <p class="text-size-sm text-color-red" id="sign-in-notice"></p>
+                        <%- include("../forms/field", { attributes: { id: 'sign-in-username-form', type: 'text', placeholder: 'Username', required: 'required' } }) %>
+                    </div>
+                    <div class="mt-3">
+                        <%- include("../forms/field", { attributes: { id: 'sign-in-password-form', type: 'password', placeholder: 'Password', required: 'required' } }) %>
+                    </div>
+                    <div class="mt-4">
+                        <div class="row">
+                            <div class="col my-auto">
+                                <p class="text-size-sm mb-0">Forgot password? Click <a href="">here</a> to reset.</p>
+                            </div>
+                            <div class="col-auto my-auto">
+                                <button class="button-pill button-pill-blue text-size-sm btn px-4 py-2">Sign in</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="content-xs col">
+                <p class="text-size-xs mb-0">SatTrack-Arcturus</p>
+                <p class="text-size-xs mb-0">Developed and Designed by Justine Paul Vitan.</p>
+                <p class="text-size-xs mb-0">Copyright © 2023 Justine Paul Vitan. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</div>

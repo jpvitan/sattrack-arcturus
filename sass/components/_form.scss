@@ -1,0 +1,17 @@
+.form-field {
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        background-color: #dfe6e9;
+        color: #000;
+        border: none;
+        border-radius: 10px;
+        padding-top: 0.8rem;
+        padding-bottom: 0.8rem;
+
+        &:focus {
+            color: #000;
+            box-shadow: none;
+        }
+    }
+}

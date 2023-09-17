@@ -24,4 +24,4 @@ yarn-error.log*
 
 .env
 
-/public/css/app.css
+/public/css/main.css
