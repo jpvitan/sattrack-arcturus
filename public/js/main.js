@@ -51,7 +51,8 @@ const setupSignIn = () => {
     if (output.success) {
       console.log('Success')
     } else {
-      console.log('Fail')
+      signInNotice.innerHTML = output.message
+      signInNotice.classList.add('text-color-red')
     }
   }
 }
@@ -83,7 +84,8 @@ const setupSignUp = () => {
     if (output.success) {
       console.log('Success')
     } else {
-      console.log('Fail')
+      signUpNotice.innerHTML = output.message
+      signUpNotice.classList.add('text-color-red')
     }
   }
 }
