@@ -14,11 +14,12 @@ Developer's Website: https://jpvitan.com/
 */
 
 export default class Session {
-  static async login (body) {
-    const output = {
-      response: null,
-      message: null,
-      success: true
+  static async login ({ username, password }) {
+    const output = { response: null, message: null, success: false }
+
+    if (!username || !password) {
+      output.message = 'Please enter a valid username and password.'
+      return output
     }
 
     try {
@@ -27,26 +28,24 @@ export default class Session {
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body
+          body: JSON.stringify({ username, password })
         }
       )
     } catch (error) {
       output.message = 'The system encountered some unexpected errors. Please try again later.'
-      output.success = false
       return output
     }
 
     switch (output.response.status) {
       case 200:
-        output.message = ''
+        output.message = 'The system has successfully logged you in.'
+        output.success = true
         break
       case 401:
         output.message = 'The username and password you entered does not correspond to any existing account.'
-        output.success = false
         break
       default:
         output.message = 'The system encountered some unexpected errors. Please try again later.'
-        output.success = false
     }
 
     return output
