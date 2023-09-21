@@ -41,7 +41,7 @@ export default class Account {
     }
 
     switch (output.response.status) {
-      case 200:
+      case 201:
         output.message = 'The system successfully created your account.'
         output.success = true
         break
