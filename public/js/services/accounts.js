@@ -14,7 +14,44 @@ Developer's Website: https://jpvitan.com/
 */
 
 export default class Account {
-    static async create () {
+  static async create ({ name, email, username, password, repeat }) {
+    const output = { response: null, message: null, success: false }
 
+    if (!name || !email || !username || !password || !repeat) {
+      output.message = 'Please enter valid values for all fields!'
+      return output
     }
+    if (password !== repeat) {
+      output.message = 'Your passwords do not match. Please try again.'
+      return output
+    }
+
+    try {
+      output.response = await fetch(
+        '/api/accounts',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, username, password })
+        }
+      )
+    } catch (error) {
+      output.message = 'The system encountered some unexpected errors. Please try again later.'
+      return output
+    }
+
+    switch (output.response.status) {
+      case 200:
+        output.message = 'The system successfully created your account.'
+        output.success = true
+        break
+      case 409:
+        output.message = 'The username that you have provided already exists.'
+        break
+      default:
+        output.message = 'The system encountered some unexpected errors. Please try again later.'
+    }
+
+    return output
+  }
 }
