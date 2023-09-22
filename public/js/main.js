@@ -40,6 +40,8 @@ const setupSignIn = () => {
   const signInUsernameForm = document.getElementById('sign-in-username-form')
   const signInPasswordForm = document.getElementById('sign-in-password-form')
 
+  if (!signIn) return
+
   signInCloseButton.onclick = () => { signIn.classList.add('d-none') }
   signInForm.onsubmit = async (e) => {
     e.preventDefault()
@@ -71,6 +73,8 @@ const setupSignUp = () => {
     { id: 'sign-up-repeat-form', key: 'repeat' }
   ]
   field.forEach(field => { field.reference = document.getElementById(field.id) })
+
+  if (!signUp) return
 
   signUpCloseButton.onclick = () => { signUp.classList.add('d-none') }
   signUpForm.onsubmit = async (e) => {
