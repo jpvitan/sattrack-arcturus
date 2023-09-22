@@ -57,7 +57,7 @@ router.post('/', async (req, res) => {
     const password = req.body.password
     const name = req.body.name
 
-    const entry = await Account.findOne({ email })
+    const entry = await Account.findOne({ username })
     if (entry) return res.status(409).json({ message: 'Account Exists' })
 
     const hashedPassword = await bcrypt.hash(password, 10)
