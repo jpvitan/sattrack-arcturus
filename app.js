@@ -49,6 +49,12 @@ app.get('/', async (req, res) => {
     description: 'A RESTful API built with Node.js and Express that lets you retrieve useful satellite information by providing identifiers assigned by the North American Aerospace Defense Command.'
   })
 })
+app.get('/dashboard', async (req, res) => {
+  return res.render('pages/dashboard', {
+    title: 'Dashboard | SatTrack-Arcturus',
+    description: 'A RESTful API built with Node.js and Express that lets you retrieve useful satellite information by providing identifiers assigned by the North American Aerospace Defense Command.'
+  })
+})
 
 app.use('/api', apiRouter)
 app.use('/sessions', sessionRouter)
