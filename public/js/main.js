@@ -23,10 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 const setupHome = () => {
+  const home = document.getElementById('home')
   const signIn = document.getElementById('sign-in')
   const signInButton = document.getElementById('sign-in-button')
   const signUp = document.getElementById('sign-up')
   const signUpButton = document.getElementById('sign-up-button')
+
+  if (!home) return
 
   signInButton.onclick = () => { signIn.classList.remove('d-none') }
   signUpButton.onclick = () => { signUp.classList.remove('d-none') }
