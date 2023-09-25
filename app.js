@@ -24,6 +24,8 @@ const passport = require('./config/passport')
 const apiRouter = require('./routes/api')
 const sessionRouter = require('./routes/sessions')
 
+const { verifyAuthentication } = require('./middlewares/auth')
+
 const app = express()
 
 app.set('view engine', 'ejs')
@@ -49,7 +51,7 @@ app.get('/', async (req, res) => {
     description: 'A RESTful API built with Node.js and Express that lets you retrieve useful satellite information by providing identifiers assigned by the North American Aerospace Defense Command.'
   })
 })
-app.get('/dashboard', async (req, res) => {
+app.get('/dashboard', verifyAuthentication, async (req, res) => {
   return res.render('pages/dashboard', {
     title: 'Dashboard | SatTrack-Arcturus',
     description: 'A RESTful API built with Node.js and Express that lets you retrieve useful satellite information by providing identifiers assigned by the North American Aerospace Defense Command.'
