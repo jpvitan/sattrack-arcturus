@@ -88,11 +88,20 @@ const setupSignUp = () => {
 
     const output = await Account.create(data)
 
-    if (output.success) {
-      console.log('Success')
-    } else {
+    if (!output.success) {
       signUpNotice.innerHTML = output.message
       signUpNotice.classList.add('text-color-red')
+      return
     }
+
+    const login = await Session.login({ username: data.username, password: data.password })
+
+    if (!login.success) {
+      signUpNotice.innerHTML = login.message
+      signUpNotice.classList.add('text-color-red')
+      return
+    }
+
+    window.location.assign('dashboard')
   }
 }
