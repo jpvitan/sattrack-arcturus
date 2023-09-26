@@ -53,12 +53,13 @@ const setupSignIn = () => {
     const password = signInPasswordForm.value
     const output = await Session.login({ username, password })
 
-    if (output.success) {
-      window.location.assign('dashboard')
-    } else {
+    if (!output.success) {
       signInNotice.innerHTML = output.message
       signInNotice.classList.add('text-color-red')
+      return
     }
+
+    window.location.assign('dashboard')
   }
 }
 
