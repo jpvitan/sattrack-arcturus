@@ -54,7 +54,7 @@ const setupSignIn = () => {
     const output = await Session.login({ username, password })
 
     if (output.success) {
-      console.log('Success')
+      window.location.assign('dashboard')
     } else {
       signInNotice.innerHTML = output.message
       signInNotice.classList.add('text-color-red')
