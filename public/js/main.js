@@ -18,6 +18,7 @@ import Session from './services/sessions.js'
 
 document.addEventListener('DOMContentLoaded', () => {
   setupHome()
+  setupDashboard()
   setupSignIn()
   setupSignUp()
 })
@@ -33,6 +34,12 @@ const setupHome = () => {
 
   signInButton.onclick = () => { signIn.classList.remove('d-none') }
   signUpButton.onclick = () => { signUp.classList.remove('d-none') }
+}
+
+const setupDashboard = () => {
+  const dashboard = document.getElementById('dashboard')
+
+  if (!dashboard) return
 }
 
 const setupSignIn = () => {
