@@ -1,0 +1,7 @@
+@use "../utilities/mixins";
+@use "../utilities/variables";
+
+.card-basic {
+    border-radius: 25px;
+    height: 100%;
+}
