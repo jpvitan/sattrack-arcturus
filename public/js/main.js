@@ -19,6 +19,9 @@ import Session from './services/sessions.js'
 document.addEventListener('DOMContentLoaded', () => {
   setupHome()
   setupDashboard()
+  setupAccount()
+  setupKeys()
+  setupSatellite()
   setupSignIn()
   setupSignUp()
 })
@@ -40,6 +43,24 @@ const setupDashboard = () => {
   const dashboard = document.getElementById('dashboard')
 
   if (!dashboard) return
+}
+
+const setupAccount = () => {
+  const account = document.getElementById('account')
+
+  if (!account) return
+}
+
+const setupKeys = () => {
+  const keys = document.getElementById('keys')
+
+  if (!keys) return
+}
+
+const setupSatellite = () => {
+  const satellite = document.getElementById('satellite')
+
+  if (!satellite) return
 }
 
 const setupSignIn = () => {
