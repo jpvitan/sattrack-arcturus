@@ -41,14 +41,21 @@ const setupHome = () => {
 
 const setupDashboard = () => {
   const dashboard = document.getElementById('dashboard')
+  const account = document.getElementById('account')
+  const accountButton = document.getElementById('account-button')
 
   if (!dashboard) return
+
+  accountButton.onclick = () => { account.classList.remove('d-none') }
 }
 
 const setupAccount = () => {
   const account = document.getElementById('account')
+  const accountCloseButton = document.getElementById('account-close-button')
 
   if (!account) return
+
+  accountCloseButton.onclick = () => { account.classList.add('d-none') }
 }
 
 const setupKeys = () => {
