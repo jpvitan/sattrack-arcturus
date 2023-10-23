@@ -1,5 +1,5 @@
 @use "../utilities/mixins";
 
 .screen {
-    @include mixins.page-regular;
+    @include mixins.page-regular($z-index: 1);
 }
