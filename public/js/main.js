@@ -45,11 +45,14 @@ const setupDashboard = () => {
   const accountButton = document.getElementById('account-button')
   const keys = document.getElementById('keys')
   const keysItem = document.getElementById('keys-item')
+  const satellite = document.getElementById('satellite')
+  const satelliteItem = document.getElementById('satellite-item')
 
   if (!dashboard) return
 
   accountButton.onclick = () => { account.classList.remove('d-none') }
   keysItem.onclick = () => { keys.classList.remove('d-none') }
+  satelliteItem.onclick = () => { satellite.classList.remove('d-none') }
 }
 
 const setupAccount = () => {
@@ -72,8 +75,11 @@ const setupKeys = () => {
 
 const setupSatellite = () => {
   const satellite = document.getElementById('satellite')
+  const satelliteCloseButton = document.getElementById('satellite-close-button')
 
   if (!satellite) return
+
+  satelliteCloseButton.onclick = () => { satellite.classList.add('d-none') }
 }
 
 const setupSignIn = () => {
