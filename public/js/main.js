@@ -18,6 +18,10 @@ import Session from './services/sessions.js'
 
 document.addEventListener('DOMContentLoaded', () => {
   setupHome()
+  setupDashboard()
+  setupAccount()
+  setupKeys()
+  setupSatellite()
   setupSignIn()
   setupSignUp()
 })
@@ -33,6 +37,49 @@ const setupHome = () => {
 
   signInButton.onclick = () => { signIn.classList.remove('d-none') }
   signUpButton.onclick = () => { signUp.classList.remove('d-none') }
+}
+
+const setupDashboard = () => {
+  const dashboard = document.getElementById('dashboard')
+  const account = document.getElementById('account')
+  const accountButton = document.getElementById('account-button')
+  const keys = document.getElementById('keys')
+  const keysItem = document.getElementById('keys-item')
+  const satellite = document.getElementById('satellite')
+  const satelliteItem = document.getElementById('satellite-item')
+
+  if (!dashboard) return
+
+  accountButton.onclick = () => { account.classList.remove('d-none') }
+  keysItem.onclick = () => { keys.classList.remove('d-none') }
+  satelliteItem.onclick = () => { satellite.classList.remove('d-none') }
+}
+
+const setupAccount = () => {
+  const account = document.getElementById('account')
+  const accountCloseButton = document.getElementById('account-close-button')
+
+  if (!account) return
+
+  accountCloseButton.onclick = () => { account.classList.add('d-none') }
+}
+
+const setupKeys = () => {
+  const keys = document.getElementById('keys')
+  const keysCloseButton = document.getElementById('keys-close-button')
+
+  if (!keys) return
+
+  keysCloseButton.onclick = () => { keys.classList.add('d-none') }
+}
+
+const setupSatellite = () => {
+  const satellite = document.getElementById('satellite')
+  const satelliteCloseButton = document.getElementById('satellite-close-button')
+
+  if (!satellite) return
+
+  satelliteCloseButton.onclick = () => { satellite.classList.add('d-none') }
 }
 
 const setupSignIn = () => {
@@ -53,12 +100,13 @@ const setupSignIn = () => {
     const password = signInPasswordForm.value
     const output = await Session.login({ username, password })
 
-    if (output.success) {
-      console.log('Success')
-    } else {
+    if (!output.success) {
       signInNotice.innerHTML = output.message
       signInNotice.classList.add('text-color-red')
+      return
     }
+
+    window.location.assign('dashboard')
   }
 }
 
@@ -88,11 +136,20 @@ const setupSignUp = () => {
 
     const output = await Account.create(data)
 
-    if (output.success) {
-      console.log('Success')
-    } else {
+    if (!output.success) {
       signUpNotice.innerHTML = output.message
       signUpNotice.classList.add('text-color-red')
+      return
     }
+
+    const login = await Session.login({ username: data.username, password: data.password })
+
+    if (!login.success) {
+      signUpNotice.innerHTML = login.message
+      signUpNotice.classList.add('text-color-red')
+      return
+    }
+
+    window.location.assign('dashboard')
   }
 }

@@ -39,6 +39,16 @@
     }
 }
 
+.button-pill-seashell {
+    background-color: colors.$seashell;
+    color: colors.$blue;
+
+    &:hover {
+        background-color: colors.$seashell;
+        color: colors.$black;
+    }
+}
+
 .button-capsule-white {
     border: 1px solid colors.$white;
     color: colors.$white;
@@ -46,6 +56,14 @@
     &:hover {
         border: 1px solid colors.$gray;
         color: colors.$gray;
+    }
+}
+
+.button-plain-blue {
+    color: colors.$blue;
+
+    &:hover {
+        color: colors.$black
     }
 }
 
