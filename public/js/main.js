@@ -63,6 +63,7 @@ const setupAccount = () => {
   const accountChangePasswordButton = document.getElementById('account-change-password-button')
   const accountDeleteAccountButton = document.getElementById('account-delete-account-button')
   const accountNameForm = document.getElementById('account-name-form')
+  const accountNotice = document.getElementById('account-notice')
   const accountUpdateButton = document.getElementById('account-update-button')
 
   if (!account) return
