@@ -58,10 +58,22 @@ const setupDashboard = () => {
 const setupAccount = () => {
   const account = document.getElementById('account')
   const accountCloseButton = document.getElementById('account-close-button')
+  const accountEmailForm = document.getElementById('account-email-form')
+  const accountUsernameForm = document.getElementById('account-username-form')
+  const accountChangePasswordButton = document.getElementById('account-change-password-button')
+  const accountDeleteAccountButton = document.getElementById('account-delete-account-button')
+  const accountNameForm = document.getElementById('account-name-form')
+  const accountUpdateButton = document.getElementById('account-update-button')
 
   if (!account) return
 
   accountCloseButton.onclick = () => { account.classList.add('d-none') }
+  accountChangePasswordButton.onclick = () => { }
+  accountDeleteAccountButton.onclick = () => { }
+  accountUpdateButton.onclick = async () => {
+    const email = accountEmailForm.value
+    const name = accountNameForm.value
+  }
 }
 
 const setupKeys = () => {
