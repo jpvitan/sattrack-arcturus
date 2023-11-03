@@ -74,4 +74,16 @@ router.get('/:username', getAccount, async (req, res) => {
   return res.status(200).json(res.account)
 })
 
+router.put('/:username', async (req, res) => {
+  try {
+    const { username } = req.params
+    const filter = { username }
+    const update = req.body
+    await Account.findOneAndUpdate(filter, update)
+    return res.status(200).json({ message: 'Account Updated' })
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
+})
+
 module.exports = router
