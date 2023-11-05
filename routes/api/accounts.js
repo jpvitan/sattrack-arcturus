@@ -36,27 +36,29 @@ router.get('/', async (req, res) => {
   const { type } = req.query
 
   const filter = {}
-  const projection = { username: 1 }
+  if (type) filter.type = type
+
+  const projection = {
+    username: 1,
+    email: 1,
+    name: 1,
+    type: 1
+  }
+
   const options = {}
 
-  // if (req.user.type === 'admin') {
-  //   if (type) filter.type = type
-  //   projection.email = 1
-  //   projection.name = 1
-  //   projection.type = 1
-  // }
-
-  const accounts = await Account.find(filter, projection, options)
-  return res.status(200).json(accounts)
+  try {
+    const accounts = await Account.find(filter, projection, options)
+    return res.status(200).json(accounts)
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
 })
 
 router.post('/', async (req, res) => {
-  try {
-    const email = req.body.email
-    const username = req.body.username
-    const password = req.body.password
-    const name = req.body.name
+  const { email, username, password, name } = req.body
 
+  try {
     const entry = await Account.findOne({ username })
     if (entry) return res.status(409).json({ message: 'Account Exists' })
 
@@ -75,10 +77,15 @@ router.get('/:username', getAccount, async (req, res) => {
 })
 
 router.patch('/:username', async (req, res) => {
+  const { username } = req.params
+
+  const filter = {
+    username
+  }
+
+  const update = req.body
+
   try {
-    const { username } = req.params
-    const filter = { username }
-    const update = req.body
     await Account.findOneAndUpdate(filter, update)
     return res.status(200).json({ message: 'Account Updated' })
   } catch (error) {
