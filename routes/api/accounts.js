@@ -74,7 +74,7 @@ router.get('/:username', getAccount, async (req, res) => {
   return res.status(200).json(res.account)
 })
 
-router.put('/:username', async (req, res) => {
+router.patch('/:username', async (req, res) => {
   try {
     const { username } = req.params
     const filter = { username }

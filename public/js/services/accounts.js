@@ -71,7 +71,7 @@ export default class Account {
       output.response = await fetch(
         `/api/accounts/${username}`,
         {
-          method: 'PUT',
+          method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(update)
         }
