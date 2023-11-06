@@ -58,13 +58,17 @@ const setupDashboard = () => {
 const setupAccount = () => {
   const account = document.getElementById('account')
   const accountCloseButton = document.getElementById('account-close-button')
-  const accountEmailForm = document.getElementById('account-email-form')
   const accountUsernameForm = document.getElementById('account-username-form')
   const accountChangePasswordButton = document.getElementById('account-change-password-button')
   const accountDeleteAccountButton = document.getElementById('account-delete-account-button')
-  const accountNameForm = document.getElementById('account-name-form')
   const accountNotice = document.getElementById('account-notice')
   const accountUpdateButton = document.getElementById('account-update-button')
+
+  const field = [
+    { id: 'account-email-form', key: 'email' },
+    { id: 'account-name-form', key: 'name' }
+  ]
+  field.forEach(field => { field.reference = document.getElementById(field.id) })
 
   if (!account) return
 
@@ -72,8 +76,19 @@ const setupAccount = () => {
   accountChangePasswordButton.onclick = () => { }
   accountDeleteAccountButton.onclick = () => { }
   accountUpdateButton.onclick = async () => {
-    const email = accountEmailForm.value
-    const name = accountNameForm.value
+    const username = accountUsernameForm.value
+    const update = {}
+    field.forEach(({ key, reference }) => { update[key] = reference.value })
+
+    const output = await Account.update({ username, update })
+
+    accountNotice.innerHTML = output.message
+    accountNotice.classList.remove('text-color-red')
+
+    if (!output.success) {
+      accountNotice.classList.add('text-color-red')
+      return
+    }
   }
 }
 
