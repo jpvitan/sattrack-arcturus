@@ -93,4 +93,19 @@ router.patch('/:username', async (req, res) => {
   }
 })
 
+router.delete('/:username', async (req, res) => {
+  const { username } = req.params
+
+  const filter = {
+    username
+  }
+
+  try {
+    await Account.findOneAndDelete(filter)
+    return res.status(200).json({ message: 'Account Deleted' })
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
+})
+
 module.exports = router
