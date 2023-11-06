@@ -92,4 +92,37 @@ export default class Account {
 
     return output
   }
+
+  static async delete ({ username }) {
+    const output = { response: null, message: null, success: false }
+
+    if (!username) {
+      output.message = 'Please enter a valid value for username!'
+      return output
+    }
+
+    try {
+      output.response = await fetch(
+        `/api/accounts/${username}`,
+        {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' }
+        }
+      )
+    } catch (error) {
+      output.message = 'The system encountered some unexpected errors. Please try again later.'
+      return output
+    }
+
+    switch (output.response.status) {
+      case 200:
+        output.message = 'The system successfully deleted your account.'
+        output.success = true
+        break
+      default:
+        output.message = 'The system encountered some unexpected errors. Please try again later.'
+    }
+
+    return output
+  }
 }
