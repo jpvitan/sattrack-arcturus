@@ -44,3 +44,30 @@ module.exports.verifyAdministrator = (options) => {
     return res.status(403).json({ message: options.message })
   }
 }
+
+module.exports.verifyPermissions = (options) => {
+  const defaults = {
+    type: 'json',
+    message: 'Authorization Error',
+    path: '/',
+    allowed: ['admin']
+  }
+
+  options = { ...defaults, ...options }
+
+  const functions = {
+    admin: (req) => {
+      return req.user.type === 'admin'
+    }
+  }
+
+  return async (req, res, next) => {
+    const success = false
+
+    allowed.forEach(allowed => { success = functions[allowed](req) ? true : success })
+
+    if (success) return next()
+    if (options.type === 'redirect') return res.redirect(options.path)
+    return res.status(403).json({ message: options.message })
+  }
+}

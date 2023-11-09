@@ -87,7 +87,6 @@ const setupAccount = () => {
 
     if (!output.success) {
       accountNotice.classList.add('text-color-red')
-      return
     }
   }
 }
