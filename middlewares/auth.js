@@ -42,6 +42,9 @@ module.exports.verifyPermissions = (options) => {
   const functions = {
     admin: (req) => {
       return req.user.type === 'admin'
+    },
+    user: (req) => {
+      return req.user.username === req.params.username
     }
   }
 
