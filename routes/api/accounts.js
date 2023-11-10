@@ -74,11 +74,11 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.get('/:username', verifyAuthentication(), verifyPermissions({ allowed: ['admin'] }), getAccount, async (req, res) => {
+router.get('/:username', verifyAuthentication(), verifyPermissions({ allowed: ['admin', 'user'] }), getAccount, async (req, res) => {
   return res.status(200).json(res.account)
 })
 
-router.patch('/:username', verifyAuthentication(), verifyPermissions({ allowed: ['admin'] }), async (req, res) => {
+router.patch('/:username', verifyAuthentication(), verifyPermissions({ allowed: ['admin', 'user'] }), async (req, res) => {
   const { username } = req.params
 
   const filter = {
@@ -95,7 +95,7 @@ router.patch('/:username', verifyAuthentication(), verifyPermissions({ allowed: 
   }
 })
 
-router.delete('/:username', verifyAuthentication(), verifyPermissions({ allowed: ['admin'] }), async (req, res) => {
+router.delete('/:username', verifyAuthentication(), verifyPermissions({ allowed: ['admin', 'user'] }), async (req, res) => {
   const { username } = req.params
 
   const filter = {
