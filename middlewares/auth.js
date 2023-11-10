@@ -50,7 +50,7 @@ module.exports.verifyPermissions = (options) => {
     type: 'json',
     message: 'Authorization Error',
     path: '/',
-    allowed: ['admin']
+    allowed: []
   }
 
   options = { ...defaults, ...options }
@@ -62,9 +62,9 @@ module.exports.verifyPermissions = (options) => {
   }
 
   return async (req, res, next) => {
-    const success = false
+    let success = false
 
-    allowed.forEach(allowed => { success = functions[allowed](req) ? true : success })
+    options.allowed.forEach(allowed => { success = functions[allowed](req) ? true : success })
 
     if (success) return next()
     if (options.type === 'redirect') return res.redirect(options.path)
