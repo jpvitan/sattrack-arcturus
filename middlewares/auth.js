@@ -29,22 +29,6 @@ module.exports.verifyAuthentication = (options) => {
   }
 }
 
-module.exports.verifyAdministrator = (options) => {
-  const defaults = {
-    type: 'json',
-    message: 'Authorization Error',
-    path: '/'
-  }
-
-  options = { ...defaults, ...options }
-
-  return async (req, res, next) => {
-    if (req.user.type === 'admin') return next()
-    if (options.type === 'redirect') return res.redirect(options.path)
-    return res.status(403).json({ message: options.message })
-  }
-}
-
 module.exports.verifyPermissions = (options) => {
   const defaults = {
     type: 'json',
