@@ -72,7 +72,7 @@ const setupAccount = () => {
 
   if (!account) return
 
-  accountCloseButton.onclick = () => { account.classList.add('d-none') }
+  accountCloseButton.onclick = () => { window.location.reload() }
   accountChangePasswordButton.onclick = () => { }
   accountDeleteAccountButton.onclick = () => { }
   accountUpdateButton.onclick = async () => {
