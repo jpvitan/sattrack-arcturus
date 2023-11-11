@@ -29,7 +29,7 @@ module.exports.verifyAuthentication = (options) => {
   }
 }
 
-module.exports.verifyPermissions = (options) => {
+module.exports.verifyAuthorization = (options) => {
   const defaults = {
     type: 'json',
     message: 'Authorization Error',

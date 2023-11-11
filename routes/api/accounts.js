@@ -19,7 +19,7 @@ const Account = require('../../models/account')
 
 const router = express.Router()
 
-const { verifyAuthentication, verifyPermissions } = require('../../middlewares/auth')
+const { verifyAuthentication, verifyAuthorization } = require('../../middlewares/auth')
 
 const getAccount = async (req, res, next) => {
   const { username } = req.params
@@ -34,7 +34,7 @@ const getAccount = async (req, res, next) => {
   next()
 }
 
-router.get('/', verifyAuthentication(), verifyPermissions({ allowed: ['admin'] }), async (req, res) => {
+router.get('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), async (req, res) => {
   const { type } = req.query
 
   const filter = {}
@@ -74,11 +74,11 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.get('/:username', verifyAuthentication(), verifyPermissions({ allowed: ['admin', 'user'] }), getAccount, async (req, res) => {
+router.get('/:username', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, async (req, res) => {
   return res.status(200).json(res.account)
 })
 
-router.patch('/:username', verifyAuthentication(), verifyPermissions({ allowed: ['admin', 'user'] }), async (req, res) => {
+router.patch('/:username', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), async (req, res) => {
   const { username } = req.params
 
   const filter = {
@@ -95,7 +95,7 @@ router.patch('/:username', verifyAuthentication(), verifyPermissions({ allowed: 
   }
 })
 
-router.delete('/:username', verifyAuthentication(), verifyPermissions({ allowed: ['admin', 'user'] }), async (req, res) => {
+router.delete('/:username', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), async (req, res) => {
   const { username } = req.params
 
   const filter = {
