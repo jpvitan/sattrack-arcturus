@@ -80,7 +80,7 @@ module.exports.verifyPassword = (options) => {
   return async (req, res, next) => {
     let success = false
 
-    options.exception.forEach(allowed => { exception = functions[allowed](req) ? true : success })
+    options.exception.forEach(exception => { success = functions[exception](req) ? true : success })
 
     if (!success) {
       success = await bcrypt.compare(req.body.password, req.user.password)
