@@ -19,7 +19,7 @@ const Account = require('../../models/account')
 
 const router = express.Router()
 
-const { verifyAuthentication, verifyAuthorization } = require('../../middlewares/auth')
+const { verifyAuthentication, verifyAuthorization, verifyPassword } = require('../../middlewares/auth')
 
 const getAccount = async (req, res, next) => {
   const { username } = req.params
@@ -95,7 +95,7 @@ router.patch('/:username', verifyAuthentication(), verifyAuthorization({ allowed
   }
 })
 
-router.delete('/:username', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), async (req, res) => {
+router.delete('/:username', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), verifyPassword({ exception: ['admin'] }), async (req, res) => {
   const { username } = req.params
 
   const filter = {
