@@ -93,7 +93,7 @@ export default class Account {
     return output
   }
 
-  static async delete ({ username }) {
+  static async delete ({ username, password }) {
     const output = { response: null, message: null, success: false }
 
     if (!username) {
@@ -106,7 +106,8 @@ export default class Account {
         `/api/accounts/${username}`,
         {
           method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' }
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password })
         }
       )
     } catch (error) {
