@@ -61,8 +61,12 @@ const setupAccount = () => {
   const accountUsernameForm = document.getElementById('account-username-form')
   const accountChangePasswordButton = document.getElementById('account-change-password-button')
   const accountDeleteAccountButton = document.getElementById('account-delete-account-button')
+  const accountDeleteAccountNotice = document.getElementById('account-delete-account-notice')
   const accountNotice = document.getElementById('account-notice')
   const accountUpdateButton = document.getElementById('account-update-button')
+
+  const deleteAccount = document.getElementById('delete-account')
+  const deleteAccountPasswordForm = document.getElementById('delete-account-password-form')
 
   const field = [
     { id: 'account-email-form', key: 'email' },
@@ -74,7 +78,13 @@ const setupAccount = () => {
 
   accountCloseButton.onclick = () => { window.location.reload() }
   accountChangePasswordButton.onclick = () => { }
-  accountDeleteAccountButton.onclick = () => { }
+  accountDeleteAccountButton.onclick = async () => {
+    if (deleteAccount.classList.contains('d-none')) {
+      deleteAccount.classList.remove('d-none')
+      accountDeleteAccountNotice.innerHTML = 'Please enter your password and click <strong class="text-color-red">Delete Account</strong> to proceed.'
+      return
+    }
+  }
   accountUpdateButton.onclick = async () => {
     const username = accountUsernameForm.value
     const update = {}
