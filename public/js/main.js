@@ -84,6 +84,20 @@ const setupAccount = () => {
       accountDeleteAccountNotice.innerHTML = 'Please enter your password and click <strong class="text-color-red">Delete Account</strong> to proceed.'
       return
     }
+
+    const username = accountUsernameForm.value
+    const password = deleteAccountPasswordForm.value
+
+    const output = await Account.delete({ username, password })
+
+    if (!output.success) {
+      accountDeleteAccountNotice.innerHTML = output.message
+      accountDeleteAccountNotice.classList.add('text-color-red')
+      accountDeleteAccountNotice.classList.remove('text-color-black')
+      return
+    }
+
+    window.location.assign('/')
   }
   accountUpdateButton.onclick = async () => {
     const username = accountUsernameForm.value
