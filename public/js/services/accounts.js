@@ -100,6 +100,10 @@ export default class Account {
       output.message = 'Please enter a valid value for username!'
       return output
     }
+    if (!password) {
+      output.message = 'Please enter a valid value for password!'
+      return output
+    }
 
     try {
       output.response = await fetch(
@@ -119,6 +123,9 @@ export default class Account {
       case 200:
         output.message = 'The system successfully deleted your account.'
         output.success = true
+        break
+      case 403:
+        output.message = 'Your password is invalid. Please try again.'
         break
       default:
         output.message = 'The system encountered some unexpected errors. Please try again later.'
