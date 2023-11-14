@@ -78,7 +78,7 @@ router.get('/:username', verifyAuthentication(), verifyAuthorization({ allowed: 
   return res.status(200).json(res.account)
 })
 
-router.patch('/:username', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), verifyPassword({ exception: ['admin'] }), async (req, res) => {
+router.patch('/:username', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), verifyPassword({ exception: ['admin', 'noPassword'] }), async (req, res) => {
   const { username } = req.params
 
   const filter = {

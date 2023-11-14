@@ -74,6 +74,9 @@ module.exports.verifyPassword = (options) => {
   const functions = {
     admin: (req) => {
       return req.user.type === 'admin'
+    },
+    noPassword: (req) => {
+      return !('password' in req.body)
     }
   }
 
