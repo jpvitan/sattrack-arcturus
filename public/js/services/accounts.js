@@ -86,6 +86,9 @@ export default class Account {
         output.message = 'The system successfully updated your account.'
         output.success = true
         break
+      case 403:
+        output.message = 'Your password is invalid, or you are not authorized to do this action. Please try again.'
+        break
       default:
         output.message = 'The system encountered some unexpected errors. Please try again later.'
     }
@@ -125,7 +128,7 @@ export default class Account {
         output.success = true
         break
       case 403:
-        output.message = 'Your password is invalid. Please try again.'
+        output.message = 'Your password is invalid, or you are not authorized to do this action. Please try again.'
         break
       default:
         output.message = 'The system encountered some unexpected errors. Please try again later.'
