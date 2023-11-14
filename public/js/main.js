@@ -89,8 +89,19 @@ const setupAccount = () => {
       return
     }
 
-    const oldPassword = changePasswordOldPasswordForm.value
-    const newPassword = changePasswordNewPasswordForm.value
+    const username = accountUsernameForm.value
+    const password = changePasswordOldPasswordForm.value
+    const raw = changePasswordNewPasswordForm.value
+    const update = { password, raw }
+
+    const output = await Account.update({ username, update })
+
+    accountChangePasswordNotice.innerHTML = output.message
+
+    if (!output.success) {
+      accountChangePasswordNotice.classList.add('text-color-red')
+      accountChangePasswordNotice.classList.remove('text-color-black')
+    }
   }
   accountDeleteAccountButton.onclick = async () => {
     if (deleteAccount.classList.contains('d-none')) {

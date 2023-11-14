@@ -78,16 +78,17 @@ router.get('/:username', verifyAuthentication(), verifyAuthorization({ allowed: 
   return res.status(200).json(res.account)
 })
 
-router.patch('/:username', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), async (req, res) => {
+router.patch('/:username', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), verifyPassword({ exception: ['admin'] }), async (req, res) => {
   const { username } = req.params
 
   const filter = {
     username
   }
 
-  const update = req.body
+  const { password, raw, ...update } = req.body
 
   try {
+    if (password && raw) update.password = await bcrypt.hash(raw, 10)
     await Account.findOneAndUpdate(filter, update)
     return res.status(200).json({ message: 'Account Updated' })
   } catch (error) {
