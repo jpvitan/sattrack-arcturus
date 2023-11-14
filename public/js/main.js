@@ -59,11 +59,16 @@ const setupAccount = () => {
   const account = document.getElementById('account')
   const accountCloseButton = document.getElementById('account-close-button')
   const accountUsernameForm = document.getElementById('account-username-form')
+  const accountChangePasswordNotice = document.getElementById('account-change-password-notice')
   const accountChangePasswordButton = document.getElementById('account-change-password-button')
-  const accountDeleteAccountButton = document.getElementById('account-delete-account-button')
   const accountDeleteAccountNotice = document.getElementById('account-delete-account-notice')
+  const accountDeleteAccountButton = document.getElementById('account-delete-account-button')
   const accountNotice = document.getElementById('account-notice')
   const accountUpdateButton = document.getElementById('account-update-button')
+
+  const changePassword = document.getElementById('change-password')
+  const changePasswordOldPasswordForm = document.getElementById('change-password-old-password-form')
+  const changePasswordNewPasswordForm = document.getElementById('change-password-new-password-form')
 
   const deleteAccount = document.getElementById('delete-account')
   const deleteAccountPasswordForm = document.getElementById('delete-account-password-form')
@@ -77,7 +82,16 @@ const setupAccount = () => {
   if (!account) return
 
   accountCloseButton.onclick = () => { window.location.reload() }
-  accountChangePasswordButton.onclick = () => { }
+  accountChangePasswordButton.onclick = async () => {
+    if (changePassword.classList.contains('d-none')) {
+      changePassword.classList.remove('d-none')
+      accountChangePasswordNotice.innerHTML = 'Please enter your password (old and new) and click <strong class="text-color-blue">Change Password</strong> to proceed.'
+      return
+    }
+
+    const oldPassword = changePasswordOldPasswordForm.value
+    const newPassword = changePasswordNewPasswordForm.value
+  }
   accountDeleteAccountButton.onclick = async () => {
     if (deleteAccount.classList.contains('d-none')) {
       deleteAccount.classList.remove('d-none')

@@ -26,7 +26,15 @@
                     </div>
                     <div class="py-3">
                         <p class="text-size-sm mb-1">Change Password</p>
-                        <p class="text-size-sm text-color-black">Use this option if you want to change your password. Regularly changing your password keeps your account secure from potential threats.</p>
+                        <p class="text-size-sm text-color-black" id="account-change-password-notice">Use this option if you want to change your password. Regularly changing your password keeps your account secure from potential threats.</p>
+                        <div class="mb-2 d-none" id="change-password">
+                            <div class="mb-2">
+                                <%- include("../../forms/field", { attributes: { id: 'change-password-old-password-form', type: 'password', placeholder: 'Old Password', required: 'required' } }) %>
+                            </div>
+                            <div class="mb-0">
+                                <%- include("../../forms/field", { attributes: { id: 'change-password-new-password-form', type: 'password', placeholder: 'New Password', required: 'required' } }) %>
+                            </div>
+                        </div>
                         <button class="button-plain button-plain-blue text-size-xs btn px-0" id="account-change-password-button">Change Password</button>
                     </div>
                     <div class="py-3">
