@@ -97,6 +97,8 @@ const setupAccount = () => {
     const output = await Account.update({ username, update })
 
     accountChangePasswordNotice.innerHTML = output.message
+    accountChangePasswordNotice.classList.add('text-color-black')
+    accountChangePasswordNotice.classList.remove('text-color-red')
 
     if (!output.success) {
       accountChangePasswordNotice.classList.add('text-color-red')
