@@ -59,6 +59,14 @@
     }
 }
 
+.button-plain-red {
+    color: colors.$red;
+
+    &:hover {
+        color: colors.$red
+    }
+}
+
 .button-plain-blue {
     color: colors.$blue;
 

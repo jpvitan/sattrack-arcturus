@@ -65,12 +65,9 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  try {
-    const name = req.body.name
-    const norad = req.body.norad
-    const country = req.body.country
-    const purpose = req.body.purpose
+  const { name, norad, country, purpose } = req.body
 
+  try {
     const entry = await Satellite.findOne({ norad })
     if (entry) return res.status(409).json({ message: 'Satellite Exists' })
 

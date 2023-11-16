@@ -54,4 +54,86 @@ export default class Account {
 
     return output
   }
+
+  static async update ({ username, update }) {
+    const output = { response: null, message: null, success: false }
+
+    if (!username) {
+      output.message = 'Please enter a valid value for username!'
+      return output
+    }
+    if (!update) {
+      output.message = 'Please specify which field to update.'
+      return output
+    }
+
+    try {
+      output.response = await fetch(
+        `/api/accounts/${username}`,
+        {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(update)
+        }
+      )
+    } catch (error) {
+      output.message = 'The system encountered some unexpected errors. Please try again later.'
+      return output
+    }
+
+    switch (output.response.status) {
+      case 200:
+        output.message = 'The system successfully updated your account.'
+        output.success = true
+        break
+      case 403:
+        output.message = 'Your password is invalid, or you are not authorized to do this action. Please try again.'
+        break
+      default:
+        output.message = 'The system encountered some unexpected errors. Please try again later.'
+    }
+
+    return output
+  }
+
+  static async delete ({ username, password }) {
+    const output = { response: null, message: null, success: false }
+
+    if (!username) {
+      output.message = 'Please enter a valid value for username!'
+      return output
+    }
+    if (!password) {
+      output.message = 'Please enter a valid value for password!'
+      return output
+    }
+
+    try {
+      output.response = await fetch(
+        `/api/accounts/${username}`,
+        {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password })
+        }
+      )
+    } catch (error) {
+      output.message = 'The system encountered some unexpected errors. Please try again later.'
+      return output
+    }
+
+    switch (output.response.status) {
+      case 200:
+        output.message = 'The system successfully deleted your account.'
+        output.success = true
+        break
+      case 403:
+        output.message = 'Your password is invalid, or you are not authorized to do this action. Please try again.'
+        break
+      default:
+        output.message = 'The system encountered some unexpected errors. Please try again later.'
+    }
+
+    return output
+  }
 }

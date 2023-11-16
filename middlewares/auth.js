@@ -13,6 +13,8 @@ Developer's Website: https://jpvitan.com/
 
 */
 
+const bcrypt = require('bcrypt')
+
 module.exports.verifyAuthentication = (options) => {
   const defaults = {
     type: 'json',
@@ -29,17 +31,65 @@ module.exports.verifyAuthentication = (options) => {
   }
 }
 
-module.exports.verifyAdministrator = (options) => {
+module.exports.verifyAuthorization = (options) => {
   const defaults = {
     type: 'json',
     message: 'Authorization Error',
-    path: '/'
+    path: '/',
+    allowed: []
   }
 
   options = { ...defaults, ...options }
 
+  const functions = {
+    admin: (req) => {
+      return req.user.type === 'admin'
+    },
+    user: (req) => {
+      return req.user.username === req.params.username
+    }
+  }
+
   return async (req, res, next) => {
-    if (req.user.type === 'admin') return next()
+    let success = false
+
+    options.allowed.forEach(allowed => { success = functions[allowed](req) ? true : success })
+
+    if (success) return next()
+    if (options.type === 'redirect') return res.redirect(options.path)
+    return res.status(403).json({ message: options.message })
+  }
+}
+
+module.exports.verifyPassword = (options) => {
+  const defaults = {
+    type: 'json',
+    message: 'Invalid Password',
+    path: '/',
+    exception: []
+  }
+
+  options = { ...defaults, ...options }
+
+  const functions = {
+    admin: (req) => {
+      return req.user.type === 'admin'
+    },
+    noPassword: (req) => {
+      return !('password' in req.body)
+    }
+  }
+
+  return async (req, res, next) => {
+    let success = false
+
+    options.exception.forEach(exception => { success = functions[exception](req) ? true : success })
+
+    if (!success) {
+      success = await bcrypt.compare(req.body.password, req.user.password)
+    }
+
+    if (success) return next()
     if (options.type === 'redirect') return res.redirect(options.path)
     return res.status(403).json({ message: options.message })
   }

@@ -58,10 +58,88 @@ const setupDashboard = () => {
 const setupAccount = () => {
   const account = document.getElementById('account')
   const accountCloseButton = document.getElementById('account-close-button')
+  const accountUsernameForm = document.getElementById('account-username-form')
+  const accountChangePasswordNotice = document.getElementById('account-change-password-notice')
+  const accountChangePasswordButton = document.getElementById('account-change-password-button')
+  const accountDeleteAccountNotice = document.getElementById('account-delete-account-notice')
+  const accountDeleteAccountButton = document.getElementById('account-delete-account-button')
+  const accountNotice = document.getElementById('account-notice')
+  const accountUpdateButton = document.getElementById('account-update-button')
+
+  const changePassword = document.getElementById('change-password')
+  const changePasswordOldPasswordForm = document.getElementById('change-password-old-password-form')
+  const changePasswordNewPasswordForm = document.getElementById('change-password-new-password-form')
+
+  const deleteAccount = document.getElementById('delete-account')
+  const deleteAccountPasswordForm = document.getElementById('delete-account-password-form')
+
+  const field = [
+    { id: 'account-email-form', key: 'email' },
+    { id: 'account-name-form', key: 'name' }
+  ]
+  field.forEach(field => { field.reference = document.getElementById(field.id) })
 
   if (!account) return
 
-  accountCloseButton.onclick = () => { account.classList.add('d-none') }
+  accountCloseButton.onclick = () => { window.location.reload() }
+  accountChangePasswordButton.onclick = async () => {
+    if (changePassword.classList.contains('d-none')) {
+      changePassword.classList.remove('d-none')
+      accountChangePasswordNotice.innerHTML = 'Please enter your password (old and new) and click <strong class="text-color-blue">Change Password</strong> to proceed.'
+      return
+    }
+
+    const username = accountUsernameForm.value
+    const password = changePasswordOldPasswordForm.value
+    const raw = changePasswordNewPasswordForm.value
+    const update = { password, raw }
+
+    const output = await Account.update({ username, update })
+
+    accountChangePasswordNotice.innerHTML = output.message
+    accountChangePasswordNotice.classList.add('text-color-black')
+    accountChangePasswordNotice.classList.remove('text-color-red')
+
+    if (!output.success) {
+      accountChangePasswordNotice.classList.add('text-color-red')
+      accountChangePasswordNotice.classList.remove('text-color-black')
+    }
+  }
+  accountDeleteAccountButton.onclick = async () => {
+    if (deleteAccount.classList.contains('d-none')) {
+      deleteAccount.classList.remove('d-none')
+      accountDeleteAccountNotice.innerHTML = 'Please enter your password and click <strong class="text-color-red">Delete Account</strong> to proceed.'
+      return
+    }
+
+    const username = accountUsernameForm.value
+    const password = deleteAccountPasswordForm.value
+
+    const output = await Account.delete({ username, password })
+
+    if (!output.success) {
+      accountDeleteAccountNotice.innerHTML = output.message
+      accountDeleteAccountNotice.classList.add('text-color-red')
+      accountDeleteAccountNotice.classList.remove('text-color-black')
+      return
+    }
+
+    window.location.assign('/')
+  }
+  accountUpdateButton.onclick = async () => {
+    const username = accountUsernameForm.value
+    const update = {}
+    field.forEach(({ key, reference }) => { update[key] = reference.value })
+
+    const output = await Account.update({ username, update })
+
+    accountNotice.innerHTML = output.message
+    accountNotice.classList.remove('text-color-red')
+
+    if (!output.success) {
+      accountNotice.classList.add('text-color-red')
+    }
+  }
 }
 
 const setupKeys = () => {

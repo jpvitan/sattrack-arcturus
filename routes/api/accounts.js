@@ -19,6 +19,8 @@ const Account = require('../../models/account')
 
 const router = express.Router()
 
+const { verifyAuthentication, verifyAuthorization, verifyPassword } = require('../../middlewares/auth')
+
 const getAccount = async (req, res, next) => {
   const { username } = req.params
   let account
@@ -32,31 +34,33 @@ const getAccount = async (req, res, next) => {
   next()
 }
 
-router.get('/', async (req, res) => {
+router.get('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), async (req, res) => {
   const { type } = req.query
 
   const filter = {}
-  const projection = { username: 1 }
+  if (type) filter.type = type
+
+  const projection = {
+    username: 1,
+    email: 1,
+    name: 1,
+    type: 1
+  }
+
   const options = {}
 
-  // if (req.user.type === 'admin') {
-  //   if (type) filter.type = type
-  //   projection.email = 1
-  //   projection.name = 1
-  //   projection.type = 1
-  // }
-
-  const accounts = await Account.find(filter, projection, options)
-  return res.status(200).json(accounts)
+  try {
+    const accounts = await Account.find(filter, projection, options)
+    return res.status(200).json(accounts)
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
 })
 
 router.post('/', async (req, res) => {
-  try {
-    const email = req.body.email
-    const username = req.body.username
-    const password = req.body.password
-    const name = req.body.name
+  const { email, username, password, name } = req.body
 
+  try {
     const entry = await Account.findOne({ username })
     if (entry) return res.status(409).json({ message: 'Account Exists' })
 
@@ -70,8 +74,41 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.get('/:username', getAccount, async (req, res) => {
+router.get('/:username', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, async (req, res) => {
   return res.status(200).json(res.account)
+})
+
+router.patch('/:username', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), verifyPassword({ exception: ['admin', 'noPassword'] }), async (req, res) => {
+  const { username } = req.params
+
+  const filter = {
+    username
+  }
+
+  const { password, raw, ...update } = req.body
+
+  try {
+    if (password && raw) update.password = await bcrypt.hash(raw, 10)
+    await Account.findOneAndUpdate(filter, update)
+    return res.status(200).json({ message: 'Account Updated' })
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
+})
+
+router.delete('/:username', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), verifyPassword({ exception: ['admin'] }), async (req, res) => {
+  const { username } = req.params
+
+  const filter = {
+    username
+  }
+
+  try {
+    await Account.findOneAndDelete(filter)
+    return res.status(200).json({ message: 'Account Deleted' })
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
 })
 
 module.exports = router

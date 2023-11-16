@@ -9,7 +9,60 @@
         </div>
         <div class="row justify-content-center mt-5">
             <div class="content-xs col">
-
+                <p class="text-size-lg text-color-black fw-bold mb-1">Account</p>
+                <p class="text-size-sm">This page allows you to manage your user account by viewing, updating, or deleting it.</p>
+                <div class="py-4">
+                    <p class="text-size-md text-color-black fw-bold mb-1">Contact Information</p>
+                    <div class="py-2">
+                        <p class="text-size-sm mb-1">Email</p>
+                        <%- include("../../forms/field", { attributes: { id: 'account-email-form', type: 'email', value: user.email, required: 'required' } }) %>
+                    </div>
+                </div>
+                <div class="py-4">
+                    <p class="text-size-md text-color-black fw-bold mb-1">Account Security</p>
+                    <div class="py-2">
+                        <p class="text-size-sm mb-1">Username</p>
+                        <%- include("../../forms/field", { attributes: { id: 'account-username-form', type: 'text', value: user.username, required: 'required', disabled: 'disabled' } }) %>
+                    </div>
+                    <div class="py-3">
+                        <p class="text-size-sm mb-1">Change Password</p>
+                        <p class="text-size-sm text-color-black" id="account-change-password-notice">Use this option if you want to change your password. Regularly changing your password keeps your account secure from potential threats.</p>
+                        <div class="mb-2 d-none" id="change-password">
+                            <div class="mb-2">
+                                <%- include("../../forms/field", { attributes: { id: 'change-password-old-password-form', type: 'password', placeholder: 'Old Password', required: 'required' } }) %>
+                            </div>
+                            <div class="mb-0">
+                                <%- include("../../forms/field", { attributes: { id: 'change-password-new-password-form', type: 'password', placeholder: 'New Password', required: 'required' } }) %>
+                            </div>
+                        </div>
+                        <button class="button-plain button-plain-blue text-size-xs btn px-0" id="account-change-password-button">Change Password</button>
+                    </div>
+                    <div class="py-3">
+                        <p class="text-size-sm mb-1">Delete Account</p>
+                        <p class="text-size-sm text-color-black" id="account-delete-account-notice">This option permanently deletes your account. Once you delete your account, you won't be able to restore it.</p>
+                        <div class="mb-2 d-none" id="delete-account">
+                            <%- include("../../forms/field", { attributes: { id: 'delete-account-password-form', type: 'password', placeholder: 'Password', required: 'required' } }) %>
+                        </div>
+                        <button class="button-plain button-plain-red text-size-xs btn px-0" id="account-delete-account-button">Delete Account</button>
+                    </div>
+                </div>
+                <div class="py-4">
+                    <p class="text-size-md text-color-black fw-bold mb-1">Personal Information</p>
+                    <div class="py-2">
+                        <p class="text-size-sm mb-1">Name</p>
+                        <%- include("../../forms/field", { attributes: { id: 'account-name-form', type: 'text', value: user.name, required: 'required' } }) %>
+                    </div>
+                </div>
+                <div class="py-4">
+                    <div class="row g-0">
+                        <div class="col my-auto">
+                            <p class="text-size-sm mb-0" id="account-notice"></p>
+                        </div>
+                        <div class="col-auto my-auto">
+                            <button class="button-pill button-pill-blue text-size-sm btn px-4 py-2" id="account-update-button">Update</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
