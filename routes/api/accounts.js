@@ -111,4 +111,12 @@ router.delete('/:username', verifyAuthentication(), verifyAuthorization({ allowe
   }
 })
 
+router.post('/:username/keys', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, async (req, res) => {
+  try {
+    return res.status(201).json({ message: 'Key Created' })
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
+})
+
 module.exports = router
