@@ -10,7 +10,18 @@
         <div class="row justify-content-center mt-5">
             <div class="content-xs col">
                 <p class="text-size-lg text-color-black fw-bold mb-1">Keys</p>
-                <p class="text-size-sm">This page allows you to manage your user account by viewing, updating, or deleting it.</p>
+                <p class="text-size-sm">Effortlessly manage and secure your keys with our intuitive platform. Customize permissions, monitor usage, and ensure streamlined control in just a few clicks.</p>
+                <div class="py-4">
+                    <p class="text-size-md text-color-black fw-bold mb-1">Key Management</p>
+                    <div class="py-3">
+                        <p class="text-size-sm mb-1">Generate Key</p>
+                        <p class="text-size-sm text-color-black" id="keys-generate-key-notice">Use this option if you want to generate a key. It is advisable to employ distinct keys for each application to enhance security.</p>
+                        <div class="mb-2 d-none" id="generate-key">
+                            <%- include("../../forms/field", { attributes: { id: 'generate-key-name-form', type: 'text', placeholder: 'Name', required: 'required' } }) %>
+                        </div>
+                        <button class="button-plain button-plain-blue text-size-xs btn px-0" id="keys-generate-key-button">Generate Key</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
