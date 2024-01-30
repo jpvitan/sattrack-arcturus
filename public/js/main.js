@@ -145,10 +145,24 @@ const setupAccount = () => {
 const setupKeys = () => {
   const keys = document.getElementById('keys')
   const keysCloseButton = document.getElementById('keys-close-button')
+  const keysGenerateKeyNotice = document.getElementById('keys-generate-key-notice')
+  const keysGenerateKeyButton = document.getElementById('keys-generate-key-button')
+
+  const generateKey = document.getElementById('generate-key')
+  const generateKeyNameForm = document.getElementById('generate-key-name-form')
 
   if (!keys) return
 
   keysCloseButton.onclick = () => { keys.classList.add('d-none') }
+  keysGenerateKeyButton.onclick = async () => {
+    if (generateKey.classList.contains('d-none')) {
+      generateKey.classList.remove('d-none')
+      keysGenerateKeyNotice.innerHTML = 'Please enter a name for your key and click <strong class="text-color-blue">Generate Key</strong> to proceed.'
+      return
+    }
+
+    const name = generateKeyNameForm.value
+  }
 }
 
 const setupSatellite = () => {
