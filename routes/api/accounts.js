@@ -13,6 +13,7 @@ Developer's Website: https://jpvitan.com/
 
 */
 
+const crypto = require('crypto')
 const express = require('express')
 const bcrypt = require('bcrypt')
 const Account = require('../../models/account')
@@ -112,8 +113,17 @@ router.delete('/:username', verifyAuthentication(), verifyAuthorization({ allowe
 })
 
 router.post('/:username/keys', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, async (req, res) => {
+  const { name } = req.body
+
+  const key = crypto.randomUUID()
+
   try {
-    return res.status(201).json({ message: 'Key Created' })
+    const hashedKey = await bcrypt.hash(key, 10)
+
+    res.account.keys.push({ name, key: hashedKey })
+    res.account.save()
+
+    return res.status(201).json({ message: 'Key Created', key })
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' })
   }
