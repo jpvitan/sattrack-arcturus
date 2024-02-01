@@ -14,6 +14,7 @@ Developer's Website: https://jpvitan.com/
 */
 
 import Account from './services/accounts.js'
+import Keys from './services/keys.js'
 import Session from './services/sessions.js'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -145,6 +146,7 @@ const setupAccount = () => {
 const setupKeys = () => {
   const keys = document.getElementById('keys')
   const keysCloseButton = document.getElementById('keys-close-button')
+  const keysHiddenUsernameForm = document.getElementById('keys-hidden-username-form')
   const keysGenerateKeyNotice = document.getElementById('keys-generate-key-notice')
   const keysGenerateKeyButton = document.getElementById('keys-generate-key-button')
 
@@ -161,7 +163,19 @@ const setupKeys = () => {
       return
     }
 
+    const username = keysHiddenUsernameForm.value
     const name = generateKeyNameForm.value
+
+    const output = await Keys.create({ name, username })
+
+    keysGenerateKeyNotice.innerHTML = output.message
+    keysGenerateKeyNotice.classList.add('text-color-black')
+    keysGenerateKeyNotice.classList.remove('text-color-red')
+
+    if (!output.success) {
+      keysGenerateKeyNotice.classList.add('text-color-red')
+      keysGenerateKeyNotice.classList.remove('text-color-black')
+    }
   }
 }
 
