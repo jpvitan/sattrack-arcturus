@@ -149,6 +149,7 @@ const setupKeys = () => {
   const keysHiddenUsernameForm = document.getElementById('keys-hidden-username-form')
   const keysGenerateKeyNotice = document.getElementById('keys-generate-key-notice')
   const keysGenerateKeyButton = document.getElementById('keys-generate-key-button')
+  const keysCopyKeyButton = document.getElementById('keys-copy-key-button')
 
   const generateKey = document.getElementById('generate-key')
   const generateKeyNameForm = document.getElementById('generate-key-name-form')
@@ -168,11 +169,18 @@ const setupKeys = () => {
 
     const output = await Keys.create({ name, username })
 
-    keysGenerateKeyNotice.innerHTML = output.message
-    keysGenerateKeyNotice.classList.add('text-color-black')
-    keysGenerateKeyNotice.classList.remove('text-color-red')
+    if (output.success) {
+      const data = await output.response.json()
 
-    if (!output.success) {
+      keysGenerateKeyNotice.innerHTML = `To ensure the safety of your data, please <strong class="text-color-red">copy and securely store your key immediately</strong>. It won't be retrievable in the future as it will be hashed for enhanced security.`
+      keysGenerateKeyNotice.classList.add('text-color-black')
+      keysGenerateKeyNotice.classList.remove('text-color-red')
+      generateKeyNameForm.value = data.key
+      generateKeyNameForm.disabled = true
+      keysGenerateKeyButton.classList.add('d-none')
+      keysCopyKeyButton.classList.remove('d-none')
+    } else {
+      keysGenerateKeyNotice.innerHTML = output.message
       keysGenerateKeyNotice.classList.add('text-color-red')
       keysGenerateKeyNotice.classList.remove('text-color-black')
     }
