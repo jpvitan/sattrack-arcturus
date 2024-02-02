@@ -112,6 +112,10 @@ router.delete('/:username', verifyAuthentication(), verifyAuthorization({ allowe
   }
 })
 
+router.get('/:username/keys', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, async (req, res) => {
+  return res.status(200).json(res.account.keys)
+})
+
 router.post('/:username/keys', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, async (req, res) => {
   const { name } = req.body
 
