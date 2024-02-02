@@ -14,7 +14,7 @@ Developer's Website: https://jpvitan.com/
 */
 
 export default class Key {
-  static async create({ name, username }) {
+  static async create ({ name, username }) {
     const output = { response: null, message: null, success: false }
 
     if (!name || !username) {
@@ -39,6 +39,39 @@ export default class Key {
     switch (output.response.status) {
       case 201:
         output.message = 'The system successfully created your key.'
+        output.success = true
+        break
+      default:
+        output.message = 'The system encountered some unexpected errors. Please try again later.'
+    }
+
+    return output
+  }
+
+  static async read ({ username }) {
+    const output = { response: null, message: null, success: false }
+
+    if (!username) {
+      output.message = 'Please enter valid values for all fields!'
+      return output
+    }
+
+    try {
+      output.response = await fetch(
+        `/api/accounts/${username}/keys`,
+        {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' }
+        }
+      )
+    } catch (error) {
+      output.message = 'The system encountered some unexpected errors. Please try again later.'
+      return output
+    }
+
+    switch (output.response.status) {
+      case 200:
+        output.message = 'The system successfully retrieved your keys.'
         output.success = true
         break
       default:
