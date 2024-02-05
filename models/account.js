@@ -46,6 +46,11 @@ const accountSchema = new mongoose.Schema({
       type: String,
       required: true
     },
+    status: {
+      type: String,
+      required: true,
+      default: 'Active'
+    },
     hits: {
       type: Number,
       required: true,
