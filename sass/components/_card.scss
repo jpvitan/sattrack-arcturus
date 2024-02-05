@@ -1,7 +1,21 @@
+@use "../utilities/colors";
 @use "../utilities/mixins";
 @use "../utilities/variables";
 
 .card-basic {
     border-radius: 25px;
     height: 100%;
+}
+
+.card-side {
+    border-radius: 0;
+    border-left-width: 5px;
+    border-left-style: solid;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+}
+
+.card-side-red {
+    border-left-color: colors.$red;
 }
