@@ -14,6 +14,7 @@ Developer's Website: https://jpvitan.com/
 */
 
 const crypto = require('crypto')
+const mongoose = require('mongoose')
 const express = require('express')
 const bcrypt = require('bcrypt')
 const Account = require('../../models/account')
@@ -32,6 +33,19 @@ const getAccount = async (req, res, next) => {
     return res.status(500).json({ message: 'Internal Server Error' })
   }
   res.account = account
+  next()
+}
+
+const getKey = async (req, res, next) => {
+  const { id } = req.params
+  let key
+  try {
+    key = res.account.keys.find(key => key._id.equals(new mongoose.Types.ObjectId(id)))
+    if (!key) return res.status(404).json({ message: 'Not Found' })
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
+  res.key = key
   next()
 }
 
