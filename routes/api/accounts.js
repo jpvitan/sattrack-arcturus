@@ -147,4 +147,8 @@ router.post('/:username/keys', verifyAuthentication(), verifyAuthorization({ all
   }
 })
 
+router.get('/:username/keys/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, getKey, async (req, res) => {
+  return res.status(200).json(res.key)
+})
+
 module.exports = router
