@@ -151,4 +151,15 @@ router.get('/:username/keys/:id', verifyAuthentication(), verifyAuthorization({ 
   return res.status(200).json(res.key)
 })
 
+router.delete('/:username/keys/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, getKey, async (req, res) => {
+  try {
+    res.account.keys.pull(res.key._id)
+    res.account.save()
+
+    return res.status(200).json({ message: 'Key Deleted' })
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
+})
+
 module.exports = router
