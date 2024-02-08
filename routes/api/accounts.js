@@ -13,15 +13,16 @@ Developer's Website: https://jpvitan.com/
 
 */
 
-const crypto = require('crypto')
 const express = require('express')
 const bcrypt = require('bcrypt')
 const Account = require('../../models/account')
 
+const keysRouter = require('./accounts/keys')
+
 const router = express.Router()
 
 const { verifyAuthentication, verifyAuthorization, verifyPassword } = require('../../middlewares/auth')
-const { getAccount, getKey } = require('../../middlewares/accounts')
+const { getAccount } = require('../../middlewares/accounts')
 
 router.get('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), async (req, res) => {
   const { type } = req.query
@@ -100,40 +101,6 @@ router.delete('/:username', verifyAuthentication(), verifyAuthorization({ allowe
   }
 })
 
-router.get('/:username/keys', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, async (req, res) => {
-  return res.status(200).json(res.account.keys)
-})
-
-router.post('/:username/keys', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, async (req, res) => {
-  const { name } = req.body
-
-  const key = crypto.randomUUID()
-
-  try {
-    const hashedKey = await bcrypt.hash(key, 10)
-
-    res.account.keys.push({ name, key: hashedKey })
-    res.account.save()
-
-    return res.status(201).json({ message: 'Key Created', key })
-  } catch (error) {
-    return res.status(500).json({ message: 'Internal Server Error' })
-  }
-})
-
-router.get('/:username/keys/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, getKey, async (req, res) => {
-  return res.status(200).json(res.key)
-})
-
-router.delete('/:username/keys/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, getKey, async (req, res) => {
-  try {
-    res.account.keys.pull(res.key._id)
-    res.account.save()
-
-    return res.status(200).json({ message: 'Key Deleted' })
-  } catch (error) {
-    return res.status(500).json({ message: 'Internal Server Error' })
-  }
-})
+router.use('/:username/keys', keysRouter)
 
 module.exports = router
