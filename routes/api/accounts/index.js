@@ -15,14 +15,14 @@ Developer's Website: https://jpvitan.com/
 
 const express = require('express')
 const bcrypt = require('bcrypt')
-const Account = require('../../models/account')
+const Account = require('../../../models/account')
 
-const keysRouter = require('./accounts/keys')
+const keysRouter = require('./keys')
 
 const router = express.Router()
 
-const { verifyAuthentication, verifyAuthorization, verifyPassword } = require('../../middlewares/auth')
-const { getAccount } = require('../../middlewares/accounts')
+const { verifyAuthentication, verifyAuthorization, verifyPassword } = require('../../../middlewares/auth')
+const { getAccount } = require('../../../middlewares/accounts')
 
 router.get('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), async (req, res) => {
   const { type } = req.query
