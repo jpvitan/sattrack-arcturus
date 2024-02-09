@@ -150,6 +150,7 @@ const setupKeys = () => {
   const keysGenerateKeyNotice = document.getElementById('keys-generate-key-notice')
   const keysGenerateKeyButton = document.getElementById('keys-generate-key-button')
   const keysCopyKeyButton = document.getElementById('keys-copy-key-button')
+  const keysDeleteKeyButton = Array.from(document.getElementsByClassName('keys-delete-key-button'))
 
   const generateKey = document.getElementById('generate-key')
   const generateKeyNameForm = document.getElementById('generate-key-name-form')
@@ -186,6 +187,11 @@ const setupKeys = () => {
     }
   }
   keysCopyKeyButton.onclick = () => { navigator.clipboard.writeText(generateKeyNameForm.value) }
+  keysDeleteKeyButton.forEach((button) => {
+    button.onclick = async () => {
+      console.log(button.dataset.id)
+    }
+  })
 }
 
 const setupSatellite = () => {
