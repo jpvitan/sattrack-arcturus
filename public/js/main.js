@@ -42,23 +42,46 @@ const setupHome = () => {
 
 const setupDashboard = () => {
   const dashboard = document.getElementById('dashboard')
-  const account = document.getElementById('account')
-  const accountButton = document.getElementById('account-button')
-  const keys = document.getElementById('keys')
-  const keysItem = document.getElementById('keys-item')
-  const satellite = document.getElementById('satellite')
-  const satelliteItem = document.getElementById('satellite-item')
+
+  const page = {
+    account: {
+      screen: document.getElementById('account'),
+      button: document.getElementById('account-button'),
+      close: document.getElementById('account-close-button')
+    },
+    keys: {
+      screen: document.getElementById('keys'),
+      button: document.getElementById('keys-item'),
+      close: document.getElementById('keys-close-button')
+    },
+    satellite: {
+      screen: document.getElementById('satellite'),
+      button: document.getElementById('satellite-item'),
+      close: document.getElementById('satellite-close-button')
+    }
+  }
 
   if (!dashboard) return
 
-  accountButton.onclick = () => { account.classList.remove('d-none') }
-  keysItem.onclick = () => { keys.classList.remove('d-none') }
-  satelliteItem.onclick = () => { satellite.classList.remove('d-none') }
+  Object.entries(page).forEach(([key, { screen, button, close }]) => {
+    button.onclick = () => {
+      window.sessionStorage.setItem('page', key)
+      screen.classList.remove('d-none')
+    }
+    close.onclick = () => {
+      window.sessionStorage.removeItem('page')
+      screen.classList.add('d-none')
+    }
+  })
+
+  if (window.sessionStorage.getItem('page')) {
+    const { screen } = page[window.sessionStorage.getItem('page')]
+    screen.classList.remove('d-none')
+  }
 }
 
 const setupAccount = () => {
   const account = document.getElementById('account')
-  const accountCloseButton = document.getElementById('account-close-button')
   const accountUsernameForm = document.getElementById('account-username-form')
   const accountChangePasswordNotice = document.getElementById('account-change-password-notice')
   const accountChangePasswordButton = document.getElementById('account-change-password-button')
@@ -82,7 +105,6 @@ const setupAccount = () => {
 
   if (!account) return
 
-  accountCloseButton.onclick = () => { window.location.reload() }
   accountChangePasswordButton.onclick = async () => {
     if (changePassword.classList.contains('d-none')) {
       changePassword.classList.remove('d-none')
@@ -145,7 +167,6 @@ const setupAccount = () => {
 
 const setupKeys = () => {
   const keys = document.getElementById('keys')
-  const keysCloseButton = document.getElementById('keys-close-button')
   const keysHiddenUsernameForm = document.getElementById('keys-hidden-username-form')
   const keysGenerateKeyNotice = document.getElementById('keys-generate-key-notice')
   const keysGenerateKeyButton = document.getElementById('keys-generate-key-button')
@@ -157,7 +178,6 @@ const setupKeys = () => {
 
   if (!keys) return
 
-  keysCloseButton.onclick = () => { keys.classList.add('d-none') }
   keysGenerateKeyButton.onclick = async () => {
     if (generateKey.classList.contains('d-none')) {
       generateKey.classList.remove('d-none')
@@ -196,11 +216,8 @@ const setupKeys = () => {
 
 const setupSatellite = () => {
   const satellite = document.getElementById('satellite')
-  const satelliteCloseButton = document.getElementById('satellite-close-button')
 
   if (!satellite) return
-
-  satelliteCloseButton.onclick = () => { satellite.classList.add('d-none') }
 }
 
 const setupSignIn = () => {
