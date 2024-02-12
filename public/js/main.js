@@ -216,6 +216,11 @@ const setupKeys = () => {
       const output = await Keys.delete({ username, id })
 
       if (output.success) {
+        await swal({
+          title: 'Success',
+          text: output.message,
+          icon: 'success'
+        })
         window.location.reload()
       }
     }
