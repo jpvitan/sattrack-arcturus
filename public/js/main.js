@@ -210,7 +210,14 @@ const setupKeys = () => {
   keysCopyKeyButton.onclick = () => { navigator.clipboard.writeText(generateKeyNameForm.value) }
   keysDeleteKeyButton.forEach((button) => {
     button.onclick = async () => {
-      console.log(button.dataset.id)
+      const username = keysHiddenUsernameForm.value
+      const id = button.dataset.id
+
+      const output = await Keys.delete({ username, id })
+
+      if (output.success) {
+        window.location.reload()
+      }
     }
   })
 }
