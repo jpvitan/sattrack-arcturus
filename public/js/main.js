@@ -156,10 +156,11 @@ const setupAccount = () => {
 
     const output = await Account.update({ username, update })
 
-    accountNotice.innerHTML = output.message
-    accountNotice.classList.remove('text-color-red')
-
-    if (!output.success) {
+    if (output.success) {
+      window.location.reload()
+    }
+    else {
+      accountNotice.innerHTML = output.message
       accountNotice.classList.add('text-color-red')
     }
   }
