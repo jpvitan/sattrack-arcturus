@@ -165,6 +165,12 @@ const setupAccount = () => {
       window.location.reload()
     }
     else {
+      await swal({
+        title: 'Error',
+        text: output.message,
+        icon: 'error'
+      })
+
       accountNotice.innerHTML = output.message
       accountNotice.classList.add('text-color-red')
     }
