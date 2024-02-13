@@ -119,11 +119,22 @@ const setupAccount = () => {
 
     const output = await Account.update({ username, update })
 
-    accountChangePasswordNotice.innerHTML = output.message
-    accountChangePasswordNotice.classList.add('text-color-black')
-    accountChangePasswordNotice.classList.remove('text-color-red')
+    if (output.success) {
+      await swal({
+        title: 'Success',
+        text: output.message,
+        icon: 'success'
+      })
 
-    if (!output.success) {
+      window.location.reload()
+    } else {
+      await swal({
+        title: 'Error',
+        text: output.message,
+        icon: 'error'
+      })
+
+      accountChangePasswordNotice.innerHTML = output.message
       accountChangePasswordNotice.classList.add('text-color-red')
       accountChangePasswordNotice.classList.remove('text-color-black')
     }
@@ -162,6 +173,7 @@ const setupAccount = () => {
         text: output.message,
         icon: 'success'
       })
+
       window.location.reload()
     }
     else {
