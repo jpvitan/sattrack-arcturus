@@ -151,14 +151,25 @@ const setupAccount = () => {
 
     const output = await Account.delete({ username, password })
 
-    if (!output.success) {
+    if (output.success) {
+      await swal({
+        title: 'Success',
+        text: output.message,
+        icon: 'success'
+      })
+
+      window.location.assign('/')
+    } else {
+      await swal({
+        title: 'Error',
+        text: output.message,
+        icon: 'error'
+      })
+
       accountDeleteAccountNotice.innerHTML = output.message
       accountDeleteAccountNotice.classList.add('text-color-red')
       accountDeleteAccountNotice.classList.remove('text-color-black')
-      return
     }
-
-    window.location.assign('/')
   }
   accountUpdateButton.onclick = async () => {
     const username = accountUsernameForm.value
