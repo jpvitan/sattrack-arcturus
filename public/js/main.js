@@ -255,7 +255,14 @@ const setupKeys = () => {
           text: output.message,
           icon: 'success'
         })
+
         window.location.reload()
+      } else {
+        await swal({
+          title: 'Error',
+          text: output.message,
+          icon: 'error'
+        })
       }
     }
   })
