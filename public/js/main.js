@@ -186,8 +186,7 @@ const setupAccount = () => {
       })
 
       window.location.reload()
-    }
-    else {
+    } else {
       await swal({
         title: 'Error',
         text: output.message,
