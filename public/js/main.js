@@ -157,6 +157,11 @@ const setupAccount = () => {
     const output = await Account.update({ username, update })
 
     if (output.success) {
+      await swal({
+        title: 'Success',
+        text: output.message,
+        icon: 'success'
+      })
       window.location.reload()
     }
     else {
