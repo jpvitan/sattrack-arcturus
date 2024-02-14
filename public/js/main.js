@@ -227,7 +227,7 @@ const setupKeys = () => {
     if (output.success) {
       const data = await output.response.json()
 
-      keysGenerateKeyNotice.innerHTML = 'To ensure the safety of your data, please <strong class="text-color-red">copy and securely store your key immediately</strong>. It won\'t be retrievable in the future as it will be hashed for enhanced security.'
+      keysGenerateKeyNotice.innerHTML = 'To ensure the safety of your data, please <strong class="text-color-red">copy and securely store your key immediately</strong>. It won\'t be retrievable in the future as it will be hashed for enhanced security. Your key will be available under <strong>Manage Keys</strong> after manually reloading this page.'
       keysGenerateKeyNotice.classList.add('text-color-black')
       keysGenerateKeyNotice.classList.remove('text-color-red')
       generateKeyNameForm.value = data.key
