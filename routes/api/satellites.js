@@ -18,6 +18,8 @@ const Satellite = require('../../models/satellite')
 
 const router = express.Router()
 
+const { verifyKey } = require('../../middlewares/auth')
+
 const getSatellite = async (req, res, next) => {
   const { norad } = req.params
   let satellite
@@ -31,7 +33,7 @@ const getSatellite = async (req, res, next) => {
   next()
 }
 
-router.get('/', async (req, res) => {
+router.get('/', verifyKey(), async (req, res) => {
   let { name, country, purpose, limit, skip } = req.query
 
   const filter = {}
@@ -79,7 +81,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.get('/:norad', getSatellite, async (req, res) => {
+router.get('/:norad', verifyKey(), getSatellite, async (req, res) => {
   return res.status(200).json(res.satellite)
 })
 
