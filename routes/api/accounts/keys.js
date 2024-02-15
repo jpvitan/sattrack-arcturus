@@ -37,7 +37,7 @@ router.post('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'
     res.account.keys.push({ name, key: hashedKey })
     res.account.save()
 
-    return res.status(201).json({ message: 'Key Created', key })
+    return res.status(201).json({ message: 'Key Created', key: res.account._id + '-' + key })
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' })
   }
