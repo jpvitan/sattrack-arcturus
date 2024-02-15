@@ -14,6 +14,7 @@ Developer's Website: https://jpvitan.com/
 */
 
 const bcrypt = require('bcrypt')
+const Account = require('../models/account')
 
 module.exports.verifyAuthentication = (options) => {
   const defaults = {
@@ -87,6 +88,34 @@ module.exports.verifyPassword = (options) => {
 
     if (!success) {
       success = await bcrypt.compare(req.body.password, req.user.password)
+    }
+
+    if (success) return next()
+    if (options.type === 'redirect') return res.redirect(options.path)
+    return res.status(403).json({ message: options.message })
+  }
+}
+
+module.exports.verifyKey = (options) => {
+  const defaults = {
+    type: 'json',
+    message: 'Invalid Key',
+    path: '/'
+  }
+
+  options = { ...defaults, ...options }
+
+  return async (req, res, next) => {
+    const success = false
+    let key = req.headers['x-key']
+
+    if (!success) {
+      try {
+        key = key.substring(25)
+        const id = key.substring(0, 24)
+      } catch (error) {
+        return res.status(500).json({ message: 'Internal Server Error' })
+      }
     }
 
     if (success) return next()
