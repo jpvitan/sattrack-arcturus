@@ -111,8 +111,8 @@ module.exports.verifyKey = (options) => {
 
     if (!success) {
       try {
-        key = key.substring(25)
         const id = key.substring(0, 24)
+        key = key.substring(25)
       } catch (error) {
         return res.status(500).json({ message: 'Internal Server Error' })
       }
