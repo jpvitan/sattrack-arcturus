@@ -106,13 +106,16 @@ module.exports.verifyKey = (options) => {
   options = { ...defaults, ...options }
 
   return async (req, res, next) => {
-    const success = false
+    let success = false
     let key = req.headers['x-key']
 
     if (!success) {
       try {
         const id = key.substring(0, 24)
         key = key.substring(25)
+
+        const account = await Account.findById(id)
+        const keys = account.keys
       } catch (error) {
         return res.status(500).json({ message: 'Internal Server Error' })
       }
