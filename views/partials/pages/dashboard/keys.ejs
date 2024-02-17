@@ -31,7 +31,14 @@
                             <div class="row g-0">
                                 <div class="col-auto my-auto">
                                     <p class="text-size-sm text-color-black fw-bold mb-0"><%- key.name -%></p>
-                                    <p class="text-size-sm mb-0"><%- key.status -%></p>
+                                    <div class="row g-0">
+                                        <div class="col-auto my-auto">
+                                            <div class="<%- (key.status === 'Active') ? 'background-color-green' : 'background-color-red' -%> me-1" style="width: 6px; height: 6px; border-radius: 50%;"></div>
+                                        </div>
+                                        <div class="col-auto my-auto">
+                                            <p class="text-size-sm mb-0"><%- key.status -%></p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col"></div>
                                 <div class="col-auto my-auto">
