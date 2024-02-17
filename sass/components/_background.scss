@@ -1,5 +1,13 @@
 @use "../utilities/colors";
 
+.background-color-red {
+    background-color: colors.$red;
+}
+
+.background-color-green {
+    background-color: colors.$green;
+}
+
 .background-color-white {
     background-color: colors.$white;
 }
