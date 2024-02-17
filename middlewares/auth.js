@@ -100,7 +100,8 @@ module.exports.verifyKey = (options) => {
   const defaults = {
     type: 'json',
     message: 'Invalid Key',
-    path: '/'
+    path: '/',
+    hit: false
   }
 
   options = { ...defaults, ...options }
@@ -115,11 +116,16 @@ module.exports.verifyKey = (options) => {
         key = key.substring(25)
 
         const account = await Account.findById(id)
-        const keys = account.keys
 
-        for (let i = 0; i < keys.length; i++) {
-          if (await bcrypt.compare(key, keys[i].key)) {
+        for (let i = 0; i < account.keys.length; i++) {
+          if (await bcrypt.compare(key, account.keys[i].key)) {
             success = true
+
+            if (options.hit) {
+              account.keys[i].hits += 1
+              await account.save()
+            }
+
             break
           }
         }
