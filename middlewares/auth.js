@@ -117,8 +117,8 @@ module.exports.verifyKey = (options) => {
         const account = await Account.findById(id)
         const keys = account.keys
 
-        for (const { key: hashedKey } of keys) {
-          if (await bcrypt.compare(key, hashedKey)) {
+        for (let i = 0; i < keys.length; i++) {
+          if (await bcrypt.compare(key, keys[i].key)) {
             success = true
             break
           }
