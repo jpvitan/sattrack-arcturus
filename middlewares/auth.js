@@ -116,6 +116,13 @@ module.exports.verifyKey = (options) => {
 
         const account = await Account.findById(id)
         const keys = account.keys
+
+        for (const [, { key: hashedKey }] of Object.entries(keys)) {
+          if (await bcrypt.compare(key, hashedKey)) {
+            success = true
+            break
+          }
+        }
       } catch (error) {
         return res.status(500).json({ message: 'Internal Server Error' })
       }
