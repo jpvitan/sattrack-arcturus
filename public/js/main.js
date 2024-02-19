@@ -14,6 +14,7 @@ Developer's Website: https://jpvitan.com/
 */
 
 import Account from './services/accounts.js'
+import Keys from './services/keys.js'
 import Session from './services/sessions.js'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -41,23 +42,46 @@ const setupHome = () => {
 
 const setupDashboard = () => {
   const dashboard = document.getElementById('dashboard')
-  const account = document.getElementById('account')
-  const accountButton = document.getElementById('account-button')
-  const keys = document.getElementById('keys')
-  const keysItem = document.getElementById('keys-item')
-  const satellite = document.getElementById('satellite')
-  const satelliteItem = document.getElementById('satellite-item')
+
+  const page = {
+    account: {
+      screen: document.getElementById('account'),
+      button: document.getElementById('account-button'),
+      close: document.getElementById('account-close-button')
+    },
+    keys: {
+      screen: document.getElementById('keys'),
+      button: document.getElementById('keys-item'),
+      close: document.getElementById('keys-close-button')
+    },
+    satellite: {
+      screen: document.getElementById('satellite'),
+      button: document.getElementById('satellite-item'),
+      close: document.getElementById('satellite-close-button')
+    }
+  }
 
   if (!dashboard) return
 
-  accountButton.onclick = () => { account.classList.remove('d-none') }
-  keysItem.onclick = () => { keys.classList.remove('d-none') }
-  satelliteItem.onclick = () => { satellite.classList.remove('d-none') }
+  Object.entries(page).forEach(([key, { screen, button, close }]) => {
+    button.onclick = () => {
+      window.sessionStorage.setItem('page', key)
+      screen.classList.remove('d-none')
+    }
+    close.onclick = () => {
+      window.sessionStorage.removeItem('page')
+      screen.classList.add('d-none')
+    }
+  })
+
+  if (window.sessionStorage.getItem('page')) {
+    const { screen } = page[window.sessionStorage.getItem('page')]
+    screen.classList.remove('d-none')
+  }
 }
 
 const setupAccount = () => {
   const account = document.getElementById('account')
-  const accountCloseButton = document.getElementById('account-close-button')
   const accountUsernameForm = document.getElementById('account-username-form')
   const accountChangePasswordNotice = document.getElementById('account-change-password-notice')
   const accountChangePasswordButton = document.getElementById('account-change-password-button')
@@ -81,7 +105,6 @@ const setupAccount = () => {
 
   if (!account) return
 
-  accountCloseButton.onclick = () => { window.location.reload() }
   accountChangePasswordButton.onclick = async () => {
     if (changePassword.classList.contains('d-none')) {
       changePassword.classList.remove('d-none')
@@ -96,11 +119,22 @@ const setupAccount = () => {
 
     const output = await Account.update({ username, update })
 
-    accountChangePasswordNotice.innerHTML = output.message
-    accountChangePasswordNotice.classList.add('text-color-black')
-    accountChangePasswordNotice.classList.remove('text-color-red')
+    if (output.success) {
+      await swal({
+        title: 'Success',
+        text: output.message,
+        icon: 'success'
+      })
 
-    if (!output.success) {
+      window.location.reload()
+    } else {
+      await swal({
+        title: 'Error',
+        text: output.message,
+        icon: 'error'
+      })
+
+      accountChangePasswordNotice.innerHTML = output.message
       accountChangePasswordNotice.classList.add('text-color-red')
       accountChangePasswordNotice.classList.remove('text-color-black')
     }
@@ -117,14 +151,25 @@ const setupAccount = () => {
 
     const output = await Account.delete({ username, password })
 
-    if (!output.success) {
+    if (output.success) {
+      await swal({
+        title: 'Success',
+        text: output.message,
+        icon: 'success'
+      })
+
+      window.location.assign('/')
+    } else {
+      await swal({
+        title: 'Error',
+        text: output.message,
+        icon: 'error'
+      })
+
       accountDeleteAccountNotice.innerHTML = output.message
       accountDeleteAccountNotice.classList.add('text-color-red')
       accountDeleteAccountNotice.classList.remove('text-color-black')
-      return
     }
-
-    window.location.assign('/')
   }
   accountUpdateButton.onclick = async () => {
     const username = accountUsernameForm.value
@@ -133,10 +178,22 @@ const setupAccount = () => {
 
     const output = await Account.update({ username, update })
 
-    accountNotice.innerHTML = output.message
-    accountNotice.classList.remove('text-color-red')
+    if (output.success) {
+      await swal({
+        title: 'Success',
+        text: output.message,
+        icon: 'success'
+      })
 
-    if (!output.success) {
+      window.location.reload()
+    } else {
+      await swal({
+        title: 'Error',
+        text: output.message,
+        icon: 'error'
+      })
+
+      accountNotice.innerHTML = output.message
       accountNotice.classList.add('text-color-red')
     }
   }
@@ -144,20 +201,76 @@ const setupAccount = () => {
 
 const setupKeys = () => {
   const keys = document.getElementById('keys')
-  const keysCloseButton = document.getElementById('keys-close-button')
+  const keysHiddenUsernameForm = document.getElementById('keys-hidden-username-form')
+  const keysGenerateKeyNotice = document.getElementById('keys-generate-key-notice')
+  const keysGenerateKeyButton = document.getElementById('keys-generate-key-button')
+  const keysCopyKeyButton = document.getElementById('keys-copy-key-button')
+  const keysDeleteKeyButton = Array.from(document.getElementsByClassName('keys-delete-key-button'))
+
+  const generateKey = document.getElementById('generate-key')
+  const generateKeyNameForm = document.getElementById('generate-key-name-form')
 
   if (!keys) return
 
-  keysCloseButton.onclick = () => { keys.classList.add('d-none') }
+  keysGenerateKeyButton.onclick = async () => {
+    if (generateKey.classList.contains('d-none')) {
+      generateKey.classList.remove('d-none')
+      keysGenerateKeyNotice.innerHTML = 'Please enter a name for your key and click <strong class="text-color-blue">Generate Key</strong> to proceed.'
+      return
+    }
+
+    const username = keysHiddenUsernameForm.value
+    const name = generateKeyNameForm.value
+
+    const output = await Keys.create({ name, username })
+
+    if (output.success) {
+      const data = await output.response.json()
+
+      keysGenerateKeyNotice.innerHTML = 'To ensure the safety of your data, please <strong class="text-color-red">copy and securely store your key immediately</strong>. It won\'t be retrievable in the future as it will be hashed for enhanced security. Your key will be available under <strong>Manage Keys</strong> after manually reloading this page.'
+      keysGenerateKeyNotice.classList.add('text-color-black')
+      keysGenerateKeyNotice.classList.remove('text-color-red')
+      generateKeyNameForm.value = data.key
+      generateKeyNameForm.disabled = true
+      keysGenerateKeyButton.classList.add('d-none')
+      keysCopyKeyButton.classList.remove('d-none')
+    } else {
+      keysGenerateKeyNotice.innerHTML = output.message
+      keysGenerateKeyNotice.classList.add('text-color-red')
+      keysGenerateKeyNotice.classList.remove('text-color-black')
+    }
+  }
+  keysCopyKeyButton.onclick = () => { navigator.clipboard.writeText(generateKeyNameForm.value) }
+  keysDeleteKeyButton.forEach((button) => {
+    button.onclick = async () => {
+      const username = keysHiddenUsernameForm.value
+      const id = button.dataset.id
+
+      const output = await Keys.delete({ username, id })
+
+      if (output.success) {
+        await swal({
+          title: 'Success',
+          text: output.message,
+          icon: 'success'
+        })
+
+        window.location.reload()
+      } else {
+        await swal({
+          title: 'Error',
+          text: output.message,
+          icon: 'error'
+        })
+      }
+    }
+  })
 }
 
 const setupSatellite = () => {
   const satellite = document.getElementById('satellite')
-  const satelliteCloseButton = document.getElementById('satellite-close-button')
 
   if (!satellite) return
-
-  satelliteCloseButton.onclick = () => { satellite.classList.add('d-none') }
 }
 
 const setupSignIn = () => {

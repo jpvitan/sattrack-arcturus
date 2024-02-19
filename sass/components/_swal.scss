@@ -1,0 +1,11 @@
+@use "../utilities/colors";
+
+.swal-title,
+.swal-text,
+.swal-button {
+    font-family: var(--font-family);
+}
+
+.swal-button {
+    background-color: colors.$blue;
+}

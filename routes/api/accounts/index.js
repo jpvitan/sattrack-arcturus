@@ -15,24 +15,14 @@ Developer's Website: https://jpvitan.com/
 
 const express = require('express')
 const bcrypt = require('bcrypt')
-const Account = require('../../models/account')
+const Account = require('../../../models/account')
+
+const keysRouter = require('./keys')
 
 const router = express.Router()
 
-const { verifyAuthentication, verifyAuthorization, verifyPassword } = require('../../middlewares/auth')
-
-const getAccount = async (req, res, next) => {
-  const { username } = req.params
-  let account
-  try {
-    account = await Account.findOne({ username })
-    if (!account) return res.status(404).json({ message: 'Not Found' })
-  } catch (error) {
-    return res.status(500).json({ message: 'Internal Server Error' })
-  }
-  res.account = account
-  next()
-}
+const { verifyAuthentication, verifyAuthorization, verifyPassword } = require('../../../middlewares/auth')
+const { getAccount } = require('../../../middlewares/accounts')
 
 router.get('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), async (req, res) => {
   const { type } = req.query
@@ -78,18 +68,12 @@ router.get('/:username', verifyAuthentication(), verifyAuthorization({ allowed: 
   return res.status(200).json(res.account)
 })
 
-router.patch('/:username', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), verifyPassword({ exception: ['admin', 'noPassword'] }), async (req, res) => {
-  const { username } = req.params
-
-  const filter = {
-    username
-  }
-
+router.patch('/:username', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), verifyPassword({ exception: ['admin', 'noPassword'] }), getAccount, async (req, res) => {
   const { password, raw, ...update } = req.body
 
   try {
     if (password && raw) update.password = await bcrypt.hash(raw, 10)
-    await Account.findOneAndUpdate(filter, update)
+    await res.account.updateOne(update)
     return res.status(200).json({ message: 'Account Updated' })
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' })
@@ -110,5 +94,7 @@ router.delete('/:username', verifyAuthentication(), verifyAuthorization({ allowe
     return res.status(500).json({ message: 'Internal Server Error' })
   }
 })
+
+router.use('/:username/keys', keysRouter)
 
 module.exports = router

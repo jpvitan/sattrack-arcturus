@@ -36,7 +36,27 @@ const accountSchema = new mongoose.Schema({
     type: String,
     required: true,
     default: 'user'
-  }
+  },
+  keys: [{
+    key: {
+      type: String,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    status: {
+      type: String,
+      required: true,
+      default: 'Active'
+    },
+    hits: {
+      type: Number,
+      required: true,
+      default: 0
+    }
+  }]
 })
 
 module.exports = mongoose.model('Account', accountSchema)
