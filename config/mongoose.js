@@ -15,6 +15,6 @@ Developer's Website: https://jpvitan.com/
 
 const mongoose = require('mongoose')
 
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
+mongoose.connect(process.env.DATABASE_URL)
 
 module.exports = mongoose
