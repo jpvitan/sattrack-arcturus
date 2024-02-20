@@ -37,6 +37,11 @@ const accountSchema = new mongoose.Schema({
     required: true,
     default: 'user'
   },
+  limit: {
+    type: Number,
+    required: true,
+    default: 1000
+  },
   keys: [{
     key: {
       type: String,
