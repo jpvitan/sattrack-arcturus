@@ -79,6 +79,35 @@ const setupDashboard = () => {
     const { screen } = page[window.sessionStorage.getItem('page')]
     screen.classList.remove('d-none')
   }
+
+  new Chart(usageChart, {
+    type: 'line',
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        x: {
+          display: false
+        },
+        y: {
+          border: {
+            display: false
+          },
+          grid: {
+            display: false
+          },
+          ticks: {
+            font: {
+              weight: 'bold'
+            }
+          }
+        }
+      }
+    }
+  })
 }
 
 const setupAccount = () => {
