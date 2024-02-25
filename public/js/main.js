@@ -42,6 +42,7 @@ const setupHome = () => {
 
 const setupDashboard = () => {
   const dashboard = document.getElementById('dashboard')
+  const usageChart = document.getElementById('usage-chart')
 
   const page = {
     account: {
