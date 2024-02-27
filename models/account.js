@@ -37,7 +37,7 @@ const accountSchema = new mongoose.Schema({
     required: true,
     default: 'user'
   },
-  limit: {
+  credits: {
     type: Number,
     required: true,
     default: 1000
