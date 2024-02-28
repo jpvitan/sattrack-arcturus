@@ -33,7 +33,7 @@ const getSatellite = async (req, res, next) => {
   next()
 }
 
-router.get('/', verifyKey({ hit: true }), async (req, res) => {
+router.get('/', verifyKey({ transact: true, cost: 1 }), async (req, res) => {
   let { name, country, purpose, limit, skip } = req.query
 
   const filter = {}
