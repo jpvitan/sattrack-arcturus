@@ -101,7 +101,8 @@ module.exports.verifyKey = (options) => {
     type: 'json',
     message: 'Invalid Key',
     path: '/',
-    hit: false
+    transact: false,
+    cost: 0
   }
 
   options = { ...defaults, ...options }
@@ -119,13 +120,17 @@ module.exports.verifyKey = (options) => {
 
         for (let i = 0; i < account.keys.length; i++) {
           if (await bcrypt.compare(key, account.keys[i].key)) {
-            success = true
+            if (options.transact && account.credits < options.cost) {
+              options.message = 'Insufficient Credits'
+            } else {
+              success = true
 
-            if (options.hit) {
-              account.keys[i].hits += 1
-              await account.save()
+              if (options.transact) {
+                account.credits -= options.cost
+                account.keys[i].hits += options.cost
+                await account.save()
+              }
             }
-
             break
           }
         }
