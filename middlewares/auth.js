@@ -126,8 +126,20 @@ module.exports.verifyKey = (options) => {
               success = true
 
               if (options.transact) {
+                const date = new Date()
+                const year = date.getUTCFullYear()
+                const month = date.getUTCMonth() + 1
+                const index = account.usage.findIndex((usage) => usage.year === year && usage.month === month)
+
+                if (index === -1) {
+                  account.usage.push({ year, month, hits: options.cost })
+                } else {
+                  account.usage[index].hits += options.cost
+                }
+
                 account.credits -= options.cost
                 account.keys[i].hits += options.cost
+
                 await account.save()
               }
             }
@@ -135,7 +147,7 @@ module.exports.verifyKey = (options) => {
           }
         }
       } catch (error) {
-        return res.status(500).json({ message: 'Internal Server Error' })
+        return res.status(500).json({ message: 'Internal Server Error', error: error.message })
       }
     }
 
