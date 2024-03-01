@@ -103,6 +103,7 @@ const setupDashboard = () => {
             display: false
           },
           ticks: {
+            precision: 0,
             font: {
               weight: 'bold'
             }
