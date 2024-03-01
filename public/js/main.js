@@ -42,6 +42,7 @@ const setupHome = () => {
 
 const setupDashboard = () => {
   const dashboard = document.getElementById('dashboard')
+  const dashboardData = document.getElementById('dashboard-data')
   const usageChart = document.getElementById('usage-chart')
 
   const page = {
@@ -80,6 +81,8 @@ const setupDashboard = () => {
     screen.classList.remove('d-none')
   }
 
+  const usage = JSON.parse(dashboardData.dataset.usage)
+
   new Chart(usageChart, {
     type: 'line',
     options: {
@@ -106,6 +109,14 @@ const setupDashboard = () => {
           }
         }
       }
+    },
+    data: {
+      labels: usage.map(({ month }) => month),
+      datasets: [
+        {
+          data: usage.map(({ hits }) => hits)
+        }
+      ]
     }
   })
 }
