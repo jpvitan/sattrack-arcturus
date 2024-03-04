@@ -84,7 +84,7 @@ const setupDashboard = () => {
   const usage = JSON.parse(dashboardData.dataset.usage)
 
   new Chart(usageChart, {
-    type: 'line',
+    type: 'bar',
     options: {
       plugins: {
         legend: {
@@ -93,7 +93,18 @@ const setupDashboard = () => {
       },
       scales: {
         x: {
-          display: false
+          border: {
+            display: false
+          },
+          grid: {
+            display: false
+          },
+          ticks: {
+            precision: 0,
+            font: {
+              weight: 'bold'
+            }
+          }
         },
         y: {
           border: {
