@@ -86,6 +86,7 @@ const setupDashboard = () => {
   new Chart(usageChart, {
     type: 'bar',
     options: {
+      backgroundColor: 'rgba(0, 0, 0, 0.1)',
       plugins: {
         legend: {
           display: false
