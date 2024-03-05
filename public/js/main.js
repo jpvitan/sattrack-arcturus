@@ -86,7 +86,7 @@ const setupDashboard = () => {
   new Chart(usageChart, {
     type: 'bar',
     options: {
-      backgroundColor: 'rgba(0, 0, 0, 0.1)',
+      backgroundColor: 'rgba(253, 121, 168, 1.0)',
       plugins: {
         legend: {
           display: false
@@ -124,10 +124,10 @@ const setupDashboard = () => {
       }
     },
     data: {
-      labels: usage.map(({ month }) => month),
+      labels: usage.map(({ month }) => month).concat(['Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']),
       datasets: [
         {
-          data: usage.map(({ hits }) => hits)
+          data: usage.map(({ hits }) => hits).concat([0, 0, 0, 0, 0, 0, 0, 0])
         }
       ]
     }
