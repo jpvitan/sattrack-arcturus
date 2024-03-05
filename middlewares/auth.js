@@ -132,7 +132,11 @@ module.exports.verifyKey = (options) => {
                 const index = account.usage.findIndex((usage) => usage.year === year && usage.month === month)
 
                 if (index === -1) {
-                  account.usage.push({ year, month, hits: options.cost })
+                  for (let i = 1; i <= 12; i++) {
+                    const usage = { year, month: i, hits: 0 }
+                    if (i == month) usage.hits += options.cost
+                    account.usage.push(usage)
+                  }
                 } else {
                   account.usage[index].hits += options.cost
                 }
