@@ -43,7 +43,6 @@ const setupHome = () => {
 const setupDashboard = () => {
   const dashboard = document.getElementById('dashboard')
   const dashboardData = document.getElementById('dashboard-data')
-  const usageChart = document.getElementById('usage-chart')
 
   const page = {
     account: {
@@ -81,57 +80,7 @@ const setupDashboard = () => {
     screen.classList.remove('d-none')
   }
 
-  const usage = JSON.parse(dashboardData.dataset.usage)
-
-  new Chart(usageChart, {
-    type: 'bar',
-    options: {
-      backgroundColor: 'rgba(253, 121, 168, 1.0)',
-      plugins: {
-        legend: {
-          display: false
-        }
-      },
-      scales: {
-        x: {
-          border: {
-            display: false
-          },
-          grid: {
-            display: false
-          },
-          ticks: {
-            precision: 0,
-            font: {
-              weight: 'bold'
-            }
-          }
-        },
-        y: {
-          border: {
-            display: false
-          },
-          grid: {
-            display: false
-          },
-          ticks: {
-            precision: 0,
-            font: {
-              weight: 'bold'
-            }
-          }
-        }
-      }
-    },
-    data: {
-      labels: usage.map(({ month }) => month).concat(['Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']),
-      datasets: [
-        {
-          data: usage.map(({ hits }) => hits).concat([0, 0, 0, 0, 0, 0, 0, 0])
-        }
-      ]
-    }
-  })
+  setupUsageChart({ usage: JSON.parse(dashboardData.dataset.usage) })
 }
 
 const setupAccount = () => {
@@ -397,4 +346,60 @@ const setupSignUp = () => {
 
     window.location.assign('dashboard')
   }
+}
+
+const setupUsageChart = ({ usage }) => {
+  const usageChart = document.getElementById('usage-chart')
+
+  if (!usageChart) return
+
+  new Chart(usageChart, {
+    type: 'bar',
+    options: {
+      backgroundColor: 'rgba(253, 121, 168, 1.0)',
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        x: {
+          border: {
+            display: false
+          },
+          grid: {
+            display: false
+          },
+          ticks: {
+            precision: 0,
+            font: {
+              weight: 'bold'
+            }
+          }
+        },
+        y: {
+          border: {
+            display: false
+          },
+          grid: {
+            display: false
+          },
+          ticks: {
+            precision: 0,
+            font: {
+              weight: 'bold'
+            }
+          }
+        }
+      }
+    },
+    data: {
+      labels: usage.map(({ month }) => month).concat(['Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']),
+      datasets: [
+        {
+          data: usage.map(({ hits }) => hits).concat([0, 0, 0, 0, 0, 0, 0, 0])
+        }
+      ]
+    }
+  })
 }
