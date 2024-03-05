@@ -368,7 +368,7 @@ const setupUsageChart = ({ usage }) => {
             display: false
           },
           grid: {
-            display: false
+            display: true
           },
           ticks: {
             precision: 0,
@@ -378,11 +378,13 @@ const setupUsageChart = ({ usage }) => {
           }
         },
         y: {
+          suggestedMin: 0,
+          suggestedMax: 10,
           border: {
             display: false
           },
           grid: {
-            display: false
+            display: true
           },
           ticks: {
             precision: 0,
