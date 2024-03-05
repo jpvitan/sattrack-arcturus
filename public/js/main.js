@@ -394,10 +394,10 @@ const setupUsageChart = ({ usage }) => {
       }
     },
     data: {
-      labels: usage.map(({ month }) => month).concat(['Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']),
+      labels: usage.map(({ month }) => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][month - 1]),
       datasets: [
         {
-          data: usage.map(({ hits }) => hits).concat([0, 0, 0, 0, 0, 0, 0, 0])
+          data: usage.map(({ hits }) => hits)
         }
       ]
     }
