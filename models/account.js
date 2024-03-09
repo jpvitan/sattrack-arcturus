@@ -37,6 +37,26 @@ const accountSchema = new mongoose.Schema({
     required: true,
     default: 'user'
   },
+  credits: {
+    type: Number,
+    required: true,
+    default: 1000
+  },
+  usage: [{
+    year: {
+      type: Number,
+      required: true
+    },
+    month: {
+      type: Number,
+      required: true
+    },
+    hits: {
+      type: Number,
+      required: true,
+      default: 0
+    }
+  }],
   keys: [{
     key: {
       type: String,

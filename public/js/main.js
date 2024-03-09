@@ -42,6 +42,7 @@ const setupHome = () => {
 
 const setupDashboard = () => {
   const dashboard = document.getElementById('dashboard')
+  const dashboardData = document.getElementById('dashboard-data')
 
   const page = {
     account: {
@@ -78,6 +79,8 @@ const setupDashboard = () => {
     const { screen } = page[window.sessionStorage.getItem('page')]
     screen.classList.remove('d-none')
   }
+
+  setupUsageChart({ usage: JSON.parse(dashboardData.dataset.usage) })
 }
 
 const setupAccount = () => {
@@ -343,4 +346,62 @@ const setupSignUp = () => {
 
     window.location.assign('dashboard')
   }
+}
+
+const setupUsageChart = ({ usage }) => {
+  const usageChart = document.getElementById('usage-chart')
+
+  if (!usageChart) return
+
+  new Chart(usageChart, {
+    type: 'bar',
+    options: {
+      backgroundColor: 'rgba(253, 121, 168, 1.0)',
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        x: {
+          border: {
+            display: false
+          },
+          grid: {
+            display: true
+          },
+          ticks: {
+            precision: 0,
+            font: {
+              weight: 'bold'
+            }
+          }
+        },
+        y: {
+          suggestedMin: 0,
+          suggestedMax: 10,
+          border: {
+            display: false
+          },
+          grid: {
+            display: true
+          },
+          ticks: {
+            precision: 0,
+            font: {
+              weight: 'bold'
+            }
+          }
+        }
+      }
+    },
+    data: {
+      labels: usage.map(({ month }) => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][month - 1]),
+      datasets: [
+        {
+          data: usage.map(({ hits }) => hits)
+        }
+      ]
+    }
+  })
 }
