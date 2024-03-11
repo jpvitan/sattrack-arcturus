@@ -49,16 +49,6 @@ const setupDashboard = () => {
       screen: document.getElementById('account'),
       button: document.getElementById('account-button'),
       close: document.getElementById('account-close-button')
-    },
-    keys: {
-      screen: document.getElementById('keys'),
-      button: document.getElementById('keys-item'),
-      close: document.getElementById('keys-close-button')
-    },
-    satellite: {
-      screen: document.getElementById('satellite'),
-      button: document.getElementById('satellite-item'),
-      close: document.getElementById('satellite-close-button')
     }
   }
 
