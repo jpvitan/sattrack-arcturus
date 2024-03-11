@@ -42,6 +42,11 @@ const accountSchema = new mongoose.Schema({
     required: true,
     default: 1000
   },
+  capacity: {
+    type: Number,
+    required: true,
+    default: 5
+  },
   usage: [{
     year: {
       type: Number,
