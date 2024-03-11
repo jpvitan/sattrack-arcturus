@@ -75,7 +75,10 @@ const setupDashboard = () => {
     screen.classList.remove('d-none')
   }
 
-  setupUsageChart({ usage: JSON.parse(dashboardData.dataset.usage) })
+  const { capacity, usage } = dashboardData.dataset
+
+  setupCapacityProgressBar({ capacity })
+  setupUsageChart({ usage: JSON.parse(usage) })
 }
 
 const setupAccount = () => {
@@ -341,6 +344,14 @@ const setupSignUp = () => {
 
     window.location.assign('dashboard')
   }
+}
+
+const setupCapacityProgressBar = ({ capacity }) => {
+  const capacityProgressBar = document.getElementById('capacity-progress-bar')
+
+  if (!capacityProgressBar) return
+
+  capacityProgressBar.style.width = capacity + "%"
 }
 
 const setupUsageChart = ({ usage }) => {
