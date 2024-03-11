@@ -351,7 +351,7 @@ const setupCapacityProgressBar = ({ capacity }) => {
 
   if (!capacityProgressBar) return
 
-  capacityProgressBar.style.width = capacity + "%"
+  capacityProgressBar.style.width = capacity + '%'
 }
 
 const setupUsageChart = ({ usage }) => {
