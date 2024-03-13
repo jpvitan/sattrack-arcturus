@@ -134,7 +134,7 @@ module.exports.verifyKey = (options) => {
                 if (index === -1) {
                   for (let i = 1; i <= 12; i++) {
                     const usage = { year, month: i, hits: 0 }
-                    if (i == month) usage.hits += options.cost
+                    if (i === month) usage.hits += options.cost
                     account.usage.push(usage)
                   }
                 } else {
