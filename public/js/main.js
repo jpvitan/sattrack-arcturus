@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupDashboard()
   setupAccount()
   setupKeys()
-  setupSatellite()
   setupSignIn()
   setupSignUp()
 })
@@ -266,12 +265,6 @@ const setupKeys = () => {
       }
     }
   })
-}
-
-const setupSatellite = () => {
-  const satellite = document.getElementById('satellite')
-
-  if (!satellite) return
 }
 
 const setupSignIn = () => {
