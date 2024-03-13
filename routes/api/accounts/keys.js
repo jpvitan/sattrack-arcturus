@@ -29,9 +29,10 @@ router.get('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin',
 router.post('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, async (req, res) => {
   const { name } = req.body
 
-  const key = crypto.randomUUID()
-
   try {
+    if (res.account.keys.length + 1 > res.account.capacity) return res.status(403).json({ message: 'Key Capacity Full' })
+
+    const key = crypto.randomUUID()
     const hashedKey = await bcrypt.hash(key, 10)
 
     res.account.keys.push({ name, key: hashedKey })
