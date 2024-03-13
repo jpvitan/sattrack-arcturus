@@ -359,7 +359,7 @@ const setupUsageChart = ({ usage }) => {
 
   if (!usageChart) return
 
-  new Chart(usageChart, {
+  const chart = new Chart(usageChart, {
     type: 'bar',
     options: {
       backgroundColor: 'rgba(253, 121, 168, 1.0)',
