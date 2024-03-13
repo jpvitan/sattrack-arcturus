@@ -41,6 +41,9 @@ export default class Key {
         output.message = 'The system successfully created your key.'
         output.success = true
         break
+      case 403:
+        output.message = 'The system cannot generate another key because your capacity is full. Please take a moment to assess your current key usage and consider deactivating any unnecessary keys to make room for new ones.'
+        break
       default:
         output.message = 'The system encountered some unexpected errors. Please try again later.'
     }
