@@ -29,6 +29,16 @@
     border-radius: 20px;
 }
 
+.button-pill-green {
+    background-color: colors.$green;
+    color: colors.$white;
+
+    &:hover {
+        background-color: colors.$green;
+        color: colors.$black;
+    }
+}
+
 .button-pill-blue {
     background-color: colors.$blue;
     color: colors.$white;
