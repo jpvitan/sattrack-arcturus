@@ -27,22 +27,27 @@
                         <p class="text-size-sm mb-1">Manage Keys</p>
                         <p class="text-size-sm text-color-black" id="keys-generate-key-notice">This section allows you to monitor, delete, and seamlessly manage your keys.</p>
                         <% user.keys.forEach((key) => { %>
-                        <div class="card-side card-side-blue card shadow px-3 py-3 mb-4">
+                        <div class="background-color background-color-seashell card-basic card shadow border-0 px-4 py-4 mb-4">
                             <div class="row g-0">
                                 <div class="col-auto my-auto">
                                     <p class="text-size-sm text-color-black fw-bold mb-0"><%- key.name -%></p>
                                     <div class="row g-0">
                                         <div class="col-auto my-auto">
-                                            <div class="<%- (key.status === 'Active') ? 'background-color-green' : 'background-color-red' -%> me-1" style="width: 6px; height: 6px; border-radius: 50%;"></div>
+                                            <div class="<%- (key.status === 'Active') ? 'background-color-green' : 'background-color-red' -%> me-1" style="width: 5px; height: 5px; border-radius: 50%;"></div>
                                         </div>
                                         <div class="col-auto my-auto">
-                                            <p class="text-size-sm mb-0"><%- key.status -%></p>
+                                            <p class="text-size-xs mb-0"><%- key.status -%></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col"></div>
                                 <div class="col-auto my-auto">
-                                    <img class="keys-delete-key-button cursor-pointer" alt="Delete" src="https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1707138159/sattrack-arcturus/icons/trash_coal5s.png" width="20" height="20" data-id="<%- key.id -%>">
+                                    <button class="keys-delete-key-button button-pill button-pill-red text-size-xs btn" data-id="<%- key.id -%>">Delete Key</button>
+                                </div>
+                            </div>
+                            <div class="row g-0 mt-4">
+                                <div class="col">
+                                    <p class="text-size-xs mb-0">We want to remind you of your responsibility in safeguarding your API keys. If you observe any suspicious behavior, please take immediate action by deleting or deactivating your key.</p>
                                 </div>
                             </div>
                         </div>
