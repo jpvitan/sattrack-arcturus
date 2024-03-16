@@ -59,6 +59,16 @@
     }
 }
 
+.button-pill-orange {
+    background-color: colors.$orange;
+    color: colors.$white;
+
+    &:hover {
+        background-color: colors.$orange;
+        color: colors.$black;
+    }
+}
+
 .button-pill-seashell {
     background-color: colors.$seashell;
     color: colors.$blue;
