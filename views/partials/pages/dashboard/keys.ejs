@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="col"></div>
                                 <div class="col-auto my-auto">
-                                    <button class="keys-status-key-button button-pill button-pill-orange text-size-xs btn me-1" data-id="<%- key.id -%>">Deactivate Key</button>
+                                    <button class="keys-status-key-button button-pill <%- (key.status === 'Active') ? 'button-pill-orange' : 'button-pill-green' -%> text-size-xs btn me-1" data-id="<%- key.id -%>"><%- (key.status === 'Active') ? 'Deactivate' : 'Activate' -%> Key</button>
                                 </div>
                                 <div class="col-auto my-auto">
                                     <button class="keys-delete-key-button button-pill button-pill-red text-size-xs btn" data-id="<%- key.id -%>">Delete Key</button>
