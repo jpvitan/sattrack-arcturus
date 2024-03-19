@@ -205,6 +205,7 @@ const setupKeys = () => {
   const keysGenerateKeyNotice = document.getElementById('keys-generate-key-notice')
   const keysGenerateKeyButton = document.getElementById('keys-generate-key-button')
   const keysCopyKeyButton = document.getElementById('keys-copy-key-button')
+  const keysStatusKeyButton = Array.from(document.getElementsByClassName('keys-status-key-button'))
   const keysDeleteKeyButton = Array.from(document.getElementsByClassName('keys-delete-key-button'))
 
   const generateKey = document.getElementById('generate-key')
@@ -241,6 +242,12 @@ const setupKeys = () => {
     }
   }
   keysCopyKeyButton.onclick = () => { navigator.clipboard.writeText(generateKeyNameForm.value) }
+  keysStatusKeyButton.forEach((button) => {
+    button.onclick = async () => {
+      const username = keysHiddenUsernameForm.value
+      const id = button.dataset.id
+    }
+  })
   keysDeleteKeyButton.forEach((button) => {
     button.onclick = async () => {
       const username = keysHiddenUsernameForm.value
