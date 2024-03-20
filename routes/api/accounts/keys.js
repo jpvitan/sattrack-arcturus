@@ -48,6 +48,10 @@ router.get('/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['admi
   return res.status(200).json(res.key)
 })
 
+router.patch('/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, getKey, async (req, res) => {
+
+})
+
 router.delete('/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, getKey, async (req, res) => {
   try {
     res.account.keys.pull(res.key._id)
