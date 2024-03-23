@@ -31,13 +31,14 @@ module.exports.getAccount = async (req, res, next) => {
 
 module.exports.getKey = async (req, res, next) => {
   const { id } = req.params
-  let key
+  let index
   try {
-    key = res.account.keys.find(key => key._id.equals(new mongoose.Types.ObjectId(id)))
-    if (!key) return res.status(404).json({ message: 'Not Found' })
+    index = res.account.keys.findIndex(key => key._id.equals(new mongoose.Types.ObjectId(id)))
+    if (index === -1) return res.status(404).json({ message: 'Not Found' })
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' })
   }
-  res.key = key
+  res.key = res.account.keys[index].toObject()
+  res.key.index = index
   next()
 }
