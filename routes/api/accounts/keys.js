@@ -49,7 +49,16 @@ router.get('/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['admi
 })
 
 router.patch('/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, getKey, async (req, res) => {
+  const { ...update } = req.body
 
+  try {
+    res.account.keys.set(res.key.index, { ...res.key, ...update })
+    res.account.save()
+
+    return res.status(200).json({ message: 'Key Updated' })
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
 })
 
 router.delete('/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, getKey, async (req, res) => {
