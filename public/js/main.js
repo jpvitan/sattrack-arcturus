@@ -246,6 +246,25 @@ const setupKeys = () => {
     button.onclick = async () => {
       const username = keysHiddenUsernameForm.value
       const id = button.dataset.id
+      const status = button.dataset.status
+
+      const output = await Keys.update({ username, id, update: { status: (status === 'Deactivated') ? 'Active' : 'Deactivated' } })
+
+      if (output.success) {
+        await swal({
+          title: 'Success',
+          text: output.message,
+          icon: 'success'
+        })
+
+        window.location.reload()
+      } else {
+        await swal({
+          title: 'Error',
+          text: output.message,
+          icon: 'error'
+        })
+      }
     }
   })
   keysDeleteKeyButton.forEach((button) => {
