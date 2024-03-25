@@ -36,7 +36,7 @@ router.post('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'
     const hashedKey = await bcrypt.hash(key, 10)
 
     res.account.keys.push({ name, key: hashedKey })
-    res.account.save()
+    await res.account.save()
 
     return res.status(201).json({ message: 'Key Created', key: res.account._id + '-' + key })
   } catch (error) {
@@ -53,7 +53,7 @@ router.patch('/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['ad
 
   try {
     res.account.keys.set(res.key.index, { ...res.key, ...update })
-    res.account.save()
+    await res.account.save()
 
     return res.status(200).json({ message: 'Key Updated' })
   } catch (error) {
@@ -64,7 +64,7 @@ router.patch('/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['ad
 router.delete('/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, getKey, async (req, res) => {
   try {
     res.account.keys.pull(res.key._id)
-    res.account.save()
+    await res.account.save()
 
     return res.status(200).json({ message: 'Key Deleted' })
   } catch (error) {
