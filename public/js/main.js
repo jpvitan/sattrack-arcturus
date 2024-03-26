@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupDashboard()
   setupAccount()
   setupKeys()
-  setupSatellite()
   setupSignIn()
   setupSignUp()
 })
@@ -52,13 +51,8 @@ const setupDashboard = () => {
     },
     keys: {
       screen: document.getElementById('keys'),
-      button: document.getElementById('keys-item'),
+      button: document.getElementById('keys-button'),
       close: document.getElementById('keys-close-button')
-    },
-    satellite: {
-      screen: document.getElementById('satellite'),
-      button: document.getElementById('satellite-item'),
-      close: document.getElementById('satellite-close-button')
     }
   }
 
@@ -80,7 +74,10 @@ const setupDashboard = () => {
     screen.classList.remove('d-none')
   }
 
-  setupUsageChart({ usage: JSON.parse(dashboardData.dataset.usage) })
+  const { capacity, usage } = dashboardData.dataset
+
+  setupCapacityProgressBar({ capacity })
+  setupUsageChart({ usage: JSON.parse(usage) })
 }
 
 const setupAccount = () => {
@@ -208,6 +205,7 @@ const setupKeys = () => {
   const keysGenerateKeyNotice = document.getElementById('keys-generate-key-notice')
   const keysGenerateKeyButton = document.getElementById('keys-generate-key-button')
   const keysCopyKeyButton = document.getElementById('keys-copy-key-button')
+  const keysStatusKeyButton = Array.from(document.getElementsByClassName('keys-status-key-button'))
   const keysDeleteKeyButton = Array.from(document.getElementsByClassName('keys-delete-key-button'))
 
   const generateKey = document.getElementById('generate-key')
@@ -244,6 +242,31 @@ const setupKeys = () => {
     }
   }
   keysCopyKeyButton.onclick = () => { navigator.clipboard.writeText(generateKeyNameForm.value) }
+  keysStatusKeyButton.forEach((button) => {
+    button.onclick = async () => {
+      const username = keysHiddenUsernameForm.value
+      const id = button.dataset.id
+      const status = button.dataset.status
+
+      const output = await Keys.update({ username, id, update: { status: (status === 'Deactivated') ? 'Active' : 'Deactivated' } })
+
+      if (output.success) {
+        await swal({
+          title: 'Success',
+          text: output.message,
+          icon: 'success'
+        })
+
+        window.location.reload()
+      } else {
+        await swal({
+          title: 'Error',
+          text: output.message,
+          icon: 'error'
+        })
+      }
+    }
+  })
   keysDeleteKeyButton.forEach((button) => {
     button.onclick = async () => {
       const username = keysHiddenUsernameForm.value
@@ -268,12 +291,6 @@ const setupKeys = () => {
       }
     }
   })
-}
-
-const setupSatellite = () => {
-  const satellite = document.getElementById('satellite')
-
-  if (!satellite) return
 }
 
 const setupSignIn = () => {
@@ -348,12 +365,20 @@ const setupSignUp = () => {
   }
 }
 
+const setupCapacityProgressBar = ({ capacity }) => {
+  const capacityProgressBar = document.getElementById('capacity-progress-bar')
+
+  if (!capacityProgressBar) return
+
+  capacityProgressBar.style.width = capacity + '%'
+}
+
 const setupUsageChart = ({ usage }) => {
   const usageChart = document.getElementById('usage-chart')
 
   if (!usageChart) return
 
-  new Chart(usageChart, {
+  const chart = new Chart(usageChart, {
     type: 'bar',
     options: {
       backgroundColor: 'rgba(253, 121, 168, 1.0)',

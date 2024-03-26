@@ -29,13 +29,14 @@ router.get('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin',
 router.post('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, async (req, res) => {
   const { name } = req.body
 
-  const key = crypto.randomUUID()
-
   try {
+    if (res.account.keys.length + 1 > res.account.capacity) return res.status(403).json({ message: 'Key Capacity Full' })
+
+    const key = crypto.randomUUID()
     const hashedKey = await bcrypt.hash(key, 10)
 
     res.account.keys.push({ name, key: hashedKey })
-    res.account.save()
+    await res.account.save()
 
     return res.status(201).json({ message: 'Key Created', key: res.account._id + '-' + key })
   } catch (error) {
@@ -47,10 +48,23 @@ router.get('/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['admi
   return res.status(200).json(res.key)
 })
 
+router.patch('/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, getKey, async (req, res) => {
+  const { ...update } = req.body
+
+  try {
+    res.account.keys.set(res.key.index, { ...res.key, ...update })
+    await res.account.save()
+
+    return res.status(200).json({ message: 'Key Updated' })
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
+})
+
 router.delete('/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, getKey, async (req, res) => {
   try {
     res.account.keys.pull(res.key._id)
-    res.account.save()
+    await res.account.save()
 
     return res.status(200).json({ message: 'Key Deleted' })
   } catch (error) {

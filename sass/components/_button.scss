@@ -29,12 +29,42 @@
     border-radius: 20px;
 }
 
+.button-pill-red {
+    background-color: colors.$red;
+    color: colors.$white;
+
+    &:hover {
+        background-color: colors.$red;
+        color: colors.$black;
+    }
+}
+
+.button-pill-green {
+    background-color: colors.$green;
+    color: colors.$white;
+
+    &:hover {
+        background-color: colors.$green;
+        color: colors.$black;
+    }
+}
+
 .button-pill-blue {
     background-color: colors.$blue;
     color: colors.$white;
 
     &:hover {
         background-color: colors.$blue;
+        color: colors.$black;
+    }
+}
+
+.button-pill-orange {
+    background-color: colors.$orange;
+    color: colors.$white;
+
+    &:hover {
+        background-color: colors.$orange;
         color: colors.$black;
     }
 }
