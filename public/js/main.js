@@ -189,9 +189,6 @@ const setupAccount = () => {
         text: output.message,
         icon: 'error'
       })
-
-      accountNotice.innerHTML = output.message
-      accountNotice.classList.add('text-color-red')
     }
   }
   accountUpdateButton.onclick = async () => {
