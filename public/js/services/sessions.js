@@ -50,4 +50,32 @@ export default class Session {
 
     return output
   }
+
+  static async logout () {
+    const output = { response: null, message: null, success: false }
+
+    try {
+      output.response = await fetch(
+        '/sessions',
+        {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' }
+        }
+      )
+    } catch (error) {
+      output.message = 'The system encountered some unexpected errors. Please try again later.'
+      return output
+    }
+
+    switch (output.response.status) {
+      case 200:
+        output.message = 'The system has successfully logged you out.'
+        output.success = true
+        break
+      default:
+        output.message = 'The system encountered some unexpected errors. Please try again later.'
+    }
+
+    return output
+  }
 }
