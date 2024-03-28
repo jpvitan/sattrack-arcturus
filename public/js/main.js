@@ -87,6 +87,7 @@ const setupAccount = () => {
   const accountChangePasswordButton = document.getElementById('account-change-password-button')
   const accountDeleteAccountNotice = document.getElementById('account-delete-account-notice')
   const accountDeleteAccountButton = document.getElementById('account-delete-account-button')
+  const accountSignOutButton = document.getElementById('account-sign-out-button')
   const accountNotice = document.getElementById('account-notice')
   const accountUpdateButton = document.getElementById('account-update-button')
 
@@ -169,6 +170,28 @@ const setupAccount = () => {
       accountDeleteAccountNotice.innerHTML = output.message
       accountDeleteAccountNotice.classList.add('text-color-red')
       accountDeleteAccountNotice.classList.remove('text-color-black')
+    }
+  }
+  accountSignOutButton.onclick = async () => {
+    const output = await Session.logout()
+
+    if (output.success) {
+      await swal({
+        title: 'Success',
+        text: output.message,
+        icon: 'success'
+      })
+
+      window.location.assign('/')
+    } else {
+      await swal({
+        title: 'Error',
+        text: output.message,
+        icon: 'error'
+      })
+
+      accountNotice.innerHTML = output.message
+      accountNotice.classList.add('text-color-red')
     }
   }
   accountUpdateButton.onclick = async () => {
