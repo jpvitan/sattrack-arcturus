@@ -24,6 +24,13 @@
                         <button class="button-plain button-plain-blue text-size-xs btn px-0 d-none" id="keys-copy-key-button">Copy Key</button>
                     </div>
                     <div class="py-3">
+                        <p class="text-size-sm mb-1">Key Capacity</p>
+                        <p class="text-size-sm text-color-black">It's important to note that there's a limit on the number of keys you can generate to maintain peak performance for all users.</p>
+                        <div class="progress" style="height: 5px;">
+                            <div class="background-color background-color-green progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="capacity-progress-bar"></div>
+                        </div>
+                    </div>
+                    <div class="py-3">
                         <p class="text-size-sm mb-1">Manage Keys</p>
                         <p class="text-size-sm text-color-black" id="keys-generate-key-notice">This section allows you to monitor, delete, and seamlessly manage your keys.</p>
                         <% user.keys.forEach((key) => { %>
