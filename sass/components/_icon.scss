@@ -1,0 +1,10 @@
+@use "../utilities/colors";
+@use "../utilities/mixins";
+
+.icon-container-sm {
+    @include mixins.shape-square($size: 30px, $border-radius: 10px);
+}
+
+.icon-container-md {
+    @include mixins.shape-square($size: 60px, $border-radius: 15px);
+}
