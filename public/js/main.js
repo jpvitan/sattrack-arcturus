@@ -53,6 +53,11 @@ const setupDashboard = () => {
       screen: document.getElementById('keys'),
       button: document.getElementById('keys-button'),
       close: document.getElementById('keys-close-button')
+    },
+    credits: {
+      screen: document.getElementById('credits'),
+      button: document.getElementById('credits-button'),
+      close: document.getElementById('credits-close-button')
     }
   }
 
