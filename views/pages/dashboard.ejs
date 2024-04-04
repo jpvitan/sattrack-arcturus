@@ -8,6 +8,7 @@
 <body id="dashboard" class="dashboard theme-light">
     <%- include("../partials/pages/dashboard/account") %>
     <%- include("../partials/pages/dashboard/keys") %>
+    <%- include("../partials/pages/dashboard/credits") %>
     <main>
         <div id="dashboard-data" data-capacity="<%= user.keys.length / user.capacity * 100 %>" data-usage="<%= JSON.stringify(user.usage.slice(-12)) %>"></div>
         <section>
