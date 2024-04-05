@@ -58,6 +58,11 @@ const setupDashboard = () => {
       screen: document.getElementById('credits'),
       button: document.getElementById('credits-button'),
       close: document.getElementById('credits-close-button')
+    },
+    updates: {
+      screen: document.getElementById('updates'),
+      button: document.getElementById('updates-button'),
+      close: document.getElementById('updates-close-button')
     }
   }
 
