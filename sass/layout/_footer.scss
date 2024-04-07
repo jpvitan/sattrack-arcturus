@@ -2,8 +2,6 @@
 
 footer {
     .icon-container {
-        @include mixins.shape-square($size: 30px, $border-radius: 10px);
-
         background-color: var(--navigation-icon-background-color);
 
         svg {

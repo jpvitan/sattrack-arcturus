@@ -1,0 +1,31 @@
+<div class="credits screen background-color background-color-white d-none" id="credits">
+    <div class="container-fluid px-4 py-4">
+        <div class="row">
+            <div class="col-auto">
+                <button class="button-icon button-icon-black btn" id="credits-close-button">
+                    <%- include("../../icons/close") %>
+                </button>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="content-xs col">
+                <p class="text-size-lg text-color-black fw-bold mb-1">Credits</p>
+                <p class="text-size-sm">Each API request deducts a specific amount of credits, dependent on the computational complexity involved.</p>
+                <%- include("../../forms/field", { attributes: { id: 'credits-hidden-username-form', type: 'hidden', value: user.username } }) %>
+                <div class="py-4">
+                    <p class="text-size-md text-color-black fw-bold mb-1">Credit Management</p>
+                    <div class="py-3">
+                        <p class="text-size-sm mb-1">Balance</p>
+                        <p class="text-size-sm text-color-black">Your current balance is <strong class="text-color-violet"><%= user.credits %></strong>. Please manage your balance diligently for smooth access to our services.</p>
+                        <button class="button-plain button-plain-blue text-size-xs btn px-0" id="credits-purchase-credits-button">Purchase Credits</button>
+                    </div>
+                    <div class="py-3">
+                        <p class="text-size-sm mb-1">Usage</p>
+                        <p class="text-size-sm text-color-black">You can easily track your monthly credit usage through the provided chart. It offers a clear breakdown of your usage over time for your convenience.</p>
+                        <canvas id="usage-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
