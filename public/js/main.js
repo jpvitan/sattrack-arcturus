@@ -24,6 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
   setupKeys()
   setupSignIn()
   setupSignUp()
+  setupFiller()
+})
+
+window.addEventListener('resize', () => {
+  setupFiller()
 })
 
 const setupHome = () => {
@@ -459,4 +464,15 @@ const setupUsageChart = ({ usage }) => {
       ]
     }
   })
+}
+
+const setupFiller = () => {
+  const filler = document.getElementById('filler')
+  const footer = document.getElementById('footer')
+
+  if (!filler) return
+
+  const space = window.innerHeight - filler.offsetTop - footer.offsetHeight
+
+  filler.style.height = `${space}px`
 }
