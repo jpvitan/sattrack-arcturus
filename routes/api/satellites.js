@@ -19,19 +19,7 @@ const Satellite = require('../../models/satellite')
 const router = express.Router()
 
 const { verifyKey } = require('../../middlewares/auth')
-
-const getSatellite = async (req, res, next) => {
-  const { norad } = req.params
-  let satellite
-  try {
-    satellite = await Satellite.findOne({ norad })
-    if (!satellite) return res.status(404).json({ message: 'Not Found' })
-  } catch (error) {
-    return res.status(500).json({ message: 'Internal Server Error' })
-  }
-  res.satellite = satellite
-  next()
-}
+const { getSatellite } = require('../../middlewares/satellites')
 
 router.get('/', verifyKey({ transact: true, cost: 1 }), async (req, res) => {
   let { name, country, purpose, limit, skip } = req.query
