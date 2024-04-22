@@ -12,3 +12,18 @@ License Information: https://github.com/jpvitan/sattrack-arcturus/blob/master/LI
 Developer's Website: https://jpvitan.com/
 
 */
+
+const Satellite = require('../models/satellite')
+
+module.exports.getSatellite = async (req, res, next) => {
+  const { norad } = req.params
+  let satellite
+  try {
+    satellite = await Satellite.findOne({ norad })
+    if (!satellite) return res.status(404).json({ message: 'Not Found' })
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
+  res.satellite = satellite
+  next()
+}
