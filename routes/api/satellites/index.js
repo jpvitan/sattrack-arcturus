@@ -14,12 +14,12 @@ Developer's Website: https://jpvitan.com/
 */
 
 const express = require('express')
-const Satellite = require('../../models/satellite')
+const Satellite = require('../../../models/satellite')
 
 const router = express.Router()
 
-const { verifyKey } = require('../../middlewares/auth')
-const { getSatellite } = require('../../middlewares/satellites')
+const { verifyKey } = require('../../../middlewares/auth')
+const { getSatellite } = require('../../../middlewares/satellites')
 
 router.get('/', verifyKey({ transact: true, cost: 1 }), async (req, res) => {
   let { name, country, purpose, limit, skip } = req.query
