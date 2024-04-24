@@ -16,6 +16,8 @@ Developer's Website: https://jpvitan.com/
 const express = require('express')
 const Satellite = require('../../../models/satellite')
 
+const orbitRouter = require('./orbit')
+
 const router = express.Router()
 
 const { verifyKey } = require('../../../middlewares/auth')
@@ -72,5 +74,7 @@ router.post('/', async (req, res) => {
 router.get('/:norad', verifyKey(), getSatellite, async (req, res) => {
   return res.status(200).json(res.satellite)
 })
+
+router.use('/:norad/orbit', orbitRouter)
 
 module.exports = router
