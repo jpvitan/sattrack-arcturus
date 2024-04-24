@@ -12,3 +12,16 @@ License Information: https://github.com/jpvitan/sattrack-arcturus/blob/master/LI
 Developer's Website: https://jpvitan.com/
 
 */
+
+const express = require('express')
+
+const router = express.Router()
+
+const { verifyKey } = require('../../../middlewares/auth')
+const { getSatellite } = require('../../../middlewares/satellites')
+
+router.get('/', async (req, res) => {
+
+})
+
+module.exports = router
