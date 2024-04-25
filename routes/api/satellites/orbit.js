@@ -14,6 +14,7 @@ Developer's Website: https://jpvitan.com/
 */
 
 const express = require('express')
+const satellite = require('satellite.js')
 
 const router = express.Router()
 
