@@ -71,7 +71,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.get('/:norad', verifyKey(), getSatellite, async (req, res) => {
+router.get('/:norad', verifyKey({ transact: true, cost: 1 }), getSatellite, async (req, res) => {
   return res.status(200).json(res.satellite)
 })
 
