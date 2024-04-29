@@ -86,6 +86,21 @@ router.patch('/:norad', verifyAuthentication(), verifyAuthorization({ allowed: [
   }
 })
 
+router.delete('/:norad', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), async (req, res) => {
+  const { norad } = req.params
+
+  const filter = {
+    norad
+  }
+
+  try {
+    await Satellite.findOneAndDelete(filter)
+    return res.status(200).json({ message: 'Account Deleted' })
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
+})
+
 router.use('/:norad/orbit', orbitRouter)
 
 module.exports = router
