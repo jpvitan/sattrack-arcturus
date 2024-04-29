@@ -31,7 +31,8 @@ const satelliteSchema = new mongoose.Schema({
   purpose: {
     type: String,
     required: true
-  }
+  },
+  tle: [String]
 })
 
 module.exports = mongoose.model('Satellite', satelliteSchema)
