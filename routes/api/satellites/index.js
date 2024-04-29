@@ -80,7 +80,7 @@ router.patch('/:norad', verifyAuthentication(), verifyAuthorization({ allowed: [
 
   try {
     await res.satellite.updateOne(update)
-    return res.status(200).json({ message: 'Account Updated' })
+    return res.status(200).json({ message: 'Satellite Updated' })
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' })
   }
@@ -95,7 +95,7 @@ router.delete('/:norad', verifyAuthentication(), verifyAuthorization({ allowed: 
 
   try {
     await Satellite.findOneAndDelete(filter)
-    return res.status(200).json({ message: 'Account Deleted' })
+    return res.status(200).json({ message: 'Satellite Deleted' })
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' })
   }
