@@ -75,6 +75,17 @@ router.get('/:norad', verifyKey({ transact: true, cost: 1 }), getSatellite, asyn
   return res.status(200).json(res.satellite)
 })
 
+router.patch('/:norad', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), getSatellite, async (req, res) => {
+  const { ...update } = req.body
+
+  try {
+    await res.satellite.updateOne(update)
+    return res.status(200).json({ message: 'Account Updated' })
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
+})
+
 router.use('/:norad/orbit', orbitRouter)
 
 module.exports = router
