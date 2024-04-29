@@ -20,7 +20,7 @@ const orbitRouter = require('./orbit')
 
 const router = express.Router()
 
-const { verifyKey } = require('../../../middlewares/auth')
+const { verifyAuthentication, verifyAuthorization, verifyKey } = require('../../../middlewares/auth')
 const { getSatellite } = require('../../../middlewares/satellites')
 
 router.get('/', verifyKey({ transact: true, cost: 1 }), async (req, res) => {
@@ -56,7 +56,7 @@ router.get('/', verifyKey({ transact: true, cost: 1 }), async (req, res) => {
   }
 })
 
-router.post('/', async (req, res) => {
+router.post('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), async (req, res) => {
   const { name, norad, country, purpose } = req.body
 
   try {
