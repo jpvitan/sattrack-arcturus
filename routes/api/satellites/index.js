@@ -16,6 +16,7 @@ Developer's Website: https://jpvitan.com/
 const express = require('express')
 const Satellite = require('../../../models/satellite')
 
+const tleRouter = require('./tle')
 const orbitRouter = require('./orbit')
 
 const router = express.Router()
@@ -101,6 +102,7 @@ router.delete('/:norad', verifyAuthentication(), verifyAuthorization({ allowed: 
   }
 })
 
+router.use('/:norad/tle', tleRouter)
 router.use('/:norad/orbit', orbitRouter)
 
 module.exports = router
