@@ -15,7 +15,7 @@ Developer's Website: https://jpvitan.com/
 
 const express = require('express')
 
-const router = express.Router()
+const router = express.Router({ mergeParams: true })
 
 const { verifyAuthentication, verifyAuthorization, verifyKey } = require('../../../middlewares/auth')
 const { getSatellite } = require('../../../middlewares/satellites')
