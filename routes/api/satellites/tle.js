@@ -25,7 +25,14 @@ router.get('/', verifyKey({ transact: true, cost: 1 }), getSatellite, async (req
 })
 
 router.post('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), getSatellite, async (req, res) => {
+  const { tle } = req.body
 
+  try {
+    await res.satellite.updateOne({ tle })
+    return res.status(200).json({ message: 'Two-Line Element Set Created' })
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
 })
 
 module.exports = router
