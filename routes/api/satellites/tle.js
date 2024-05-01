@@ -17,4 +17,15 @@ const express = require('express')
 
 const router = express.Router()
 
+const { verifyAuthentication, verifyAuthorization, verifyKey } = require('../../../middlewares/auth')
+const { getSatellite } = require('../../../middlewares/satellites')
+
+router.get('/', verifyKey({ transact: true, cost: 1 }), getSatellite, async (req, res) => {
+  return res.status(200).json(res.satellite.tle)
+})
+
+router.post('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), getSatellite, async (req, res) => {
+
+})
+
 module.exports = router
