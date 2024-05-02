@@ -18,10 +18,10 @@ const express = require('express')
 const router = express.Router({ mergeParams: true })
 
 const { verifyAuthentication, verifyAuthorization, verifyKey } = require('../../../middlewares/auth')
-const { getSatellite } = require('../../../middlewares/satellites')
+const { getSatellite, getTLE } = require('../../../middlewares/satellites')
 
-router.get('/', verifyKey({ transact: true, cost: 1 }), getSatellite, async (req, res) => {
-  return res.status(200).json(res.satellite.tle)
+router.get('/', verifyKey({ transact: true, cost: 1 }), getSatellite, getTLE, async (req, res) => {
+  return res.status(200).json(res.tle)
 })
 
 router.post('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), getSatellite, async (req, res) => {
@@ -35,7 +35,7 @@ router.post('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'
   }
 })
 
-router.delete('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), getSatellite, async (req, res) => {
+router.delete('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), getSatellite, getTLE, async (req, res) => {
   try {
     await res.satellite.updateOne({ $unset: { tle: 1 } })
     return res.status(200).json({ message: 'Two-Line Element Set Deleted' })
