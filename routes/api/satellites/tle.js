@@ -35,4 +35,13 @@ router.post('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'
   }
 })
 
+router.delete('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), getSatellite, async (req, res) => {
+  try {
+    await res.satellite.updateOne({ $unset: { tle: 1 } })
+    return res.status(200).json({ message: 'Two-Line Element Set Deleted' })
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
+})
+
 module.exports = router
