@@ -29,7 +29,7 @@ module.exports.getSatellite = async (req, res, next) => {
 }
 
 module.exports.getTLE = async (req, res, next) => {
-  if (!res.satellite.tle) return res.status(404).json({ message: 'Not Found' })
+  if (!res.satellite.tle || res.satellite.tle.length === 0) return res.status(404).json({ message: 'Not Found' })
   res.tle = res.satellite.tle
   next()
 }
