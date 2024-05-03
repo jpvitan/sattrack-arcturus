@@ -19,9 +19,9 @@ const satellite = require('satellite.js')
 const router = express.Router()
 
 const { verifyKey } = require('../../../middlewares/auth')
-const { getSatellite } = require('../../../middlewares/satellites')
+const { getSatellite, getTLE } = require('../../../middlewares/satellites')
 
-router.get('/', async (req, res) => {
+router.get('/', verifyKey({ transact: true, cost: 1 }), getSatellite, getTLE, async (req, res) => {
 
 })
 
