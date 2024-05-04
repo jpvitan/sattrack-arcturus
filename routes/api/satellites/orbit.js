@@ -16,7 +16,7 @@ Developer's Website: https://jpvitan.com/
 const express = require('express')
 const satellite = require('satellite.js')
 
-const router = express.Router()
+const router = express.Router({ mergeParams: true })
 
 const { verifyKey } = require('../../../middlewares/auth')
 const { getSatellite, getTLE } = require('../../../middlewares/satellites')
