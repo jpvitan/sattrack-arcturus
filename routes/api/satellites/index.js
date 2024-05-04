@@ -14,24 +14,15 @@ Developer's Website: https://jpvitan.com/
 */
 
 const express = require('express')
-const Satellite = require('../../models/satellite')
+const Satellite = require('../../../models/satellite')
+
+const tleRouter = require('./tle')
+const orbitRouter = require('./orbit')
 
 const router = express.Router()
 
-const { verifyKey } = require('../../middlewares/auth')
-
-const getSatellite = async (req, res, next) => {
-  const { norad } = req.params
-  let satellite
-  try {
-    satellite = await Satellite.findOne({ norad })
-    if (!satellite) return res.status(404).json({ message: 'Not Found' })
-  } catch (error) {
-    return res.status(500).json({ message: 'Internal Server Error' })
-  }
-  res.satellite = satellite
-  next()
-}
+const { verifyAuthentication, verifyAuthorization, verifyKey } = require('../../../middlewares/auth')
+const { getSatellite } = require('../../../middlewares/satellites')
 
 router.get('/', verifyKey({ transact: true, cost: 1 }), async (req, res) => {
   let { name, country, purpose, limit, skip } = req.query
@@ -66,7 +57,7 @@ router.get('/', verifyKey({ transact: true, cost: 1 }), async (req, res) => {
   }
 })
 
-router.post('/', async (req, res) => {
+router.post('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), async (req, res) => {
   const { name, norad, country, purpose } = req.body
 
   try {
@@ -81,8 +72,37 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.get('/:norad', verifyKey(), getSatellite, async (req, res) => {
+router.get('/:norad', verifyKey({ transact: true, cost: 1 }), getSatellite, async (req, res) => {
   return res.status(200).json(res.satellite)
 })
+
+router.patch('/:norad', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), getSatellite, async (req, res) => {
+  const { ...update } = req.body
+
+  try {
+    await res.satellite.updateOne(update)
+    return res.status(200).json({ message: 'Satellite Updated' })
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
+})
+
+router.delete('/:norad', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), async (req, res) => {
+  const { norad } = req.params
+
+  const filter = {
+    norad
+  }
+
+  try {
+    await Satellite.findOneAndDelete(filter)
+    return res.status(200).json({ message: 'Satellite Deleted' })
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
+})
+
+router.use('/:norad/tle', tleRouter)
+router.use('/:norad/orbit', orbitRouter)
 
 module.exports = router

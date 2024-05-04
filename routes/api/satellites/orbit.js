@@ -13,26 +13,16 @@ Developer's Website: https://jpvitan.com/
 
 */
 
-const mongoose = require('mongoose')
+const express = require('express')
+const satellite = require('satellite.js')
 
-const satelliteSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  norad: {
-    type: Number,
-    required: true
-  },
-  country: {
-    type: String,
-    required: true
-  },
-  purpose: {
-    type: String,
-    required: true
-  },
-  tle: [String]
+const router = express.Router()
+
+const { verifyKey } = require('../../../middlewares/auth')
+const { getSatellite, getTLE } = require('../../../middlewares/satellites')
+
+router.get('/', verifyKey({ transact: true, cost: 1 }), getSatellite, getTLE, async (req, res) => {
+
 })
 
-module.exports = mongoose.model('Satellite', satelliteSchema)
+module.exports = router
