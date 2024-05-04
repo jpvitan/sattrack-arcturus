@@ -22,7 +22,8 @@ const { verifyKey } = require('../../../middlewares/auth')
 const { getSatellite, getTLE } = require('../../../middlewares/satellites')
 
 router.get('/', verifyKey({ transact: true, cost: 1 }), getSatellite, getTLE, async (req, res) => {
-
+  const [line1, line2] = res.tle
+  const record = satellite.twoline2satrec(line1, line2)
 })
 
 module.exports = router
