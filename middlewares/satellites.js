@@ -20,7 +20,7 @@ module.exports.getSatellite = async (req, res, next) => {
   let satellite
   try {
     satellite = await Satellite.findOne({ norad })
-    if (!satellite) return res.status(404).json({ message: 'Not Found' })
+    if (!satellite) return res.status(404).json({ message: 'Satellite Not Found' })
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' })
   }
@@ -29,7 +29,7 @@ module.exports.getSatellite = async (req, res, next) => {
 }
 
 module.exports.getTLE = async (req, res, next) => {
-  if (!res.satellite.tle || res.satellite.tle.length === 0) return res.status(404).json({ message: 'Not Found' })
+  if (!res.satellite.tle || res.satellite.tle.length === 0) return res.status(404).json({ message: 'Two-Line Element Not Found' })
   res.tle = res.satellite.tle
   next()
 }
