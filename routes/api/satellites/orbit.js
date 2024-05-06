@@ -14,16 +14,14 @@ Developer's Website: https://jpvitan.com/
 */
 
 const express = require('express')
-const satellite = require('satellite.js')
 
 const router = express.Router({ mergeParams: true })
 
 const { verifyKey } = require('../../../middlewares/auth')
-const { getSatellite, getTLE } = require('../../../middlewares/satellites')
+const { getSatellite, getTLE, propagate } = require('../../../middlewares/satellites')
 
-router.get('/', verifyKey({ transact: true, cost: 1 }), getSatellite, getTLE, async (req, res) => {
-  const [line1, line2] = res.tle
-  const record = satellite.twoline2satrec(line1, line2)
+router.get('/', verifyKey({ transact: true, cost: 1 }), getSatellite, getTLE, propagate(), async (req, res) => {
+  return res.status(200).json({ message: 'Success' })
 })
 
 module.exports = router
