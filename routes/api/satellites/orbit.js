@@ -13,14 +13,33 @@ Developer's Website: https://jpvitan.com/
 
 */
 
+const satellite = require('satellite.js')
 const express = require('express')
 
 const router = express.Router({ mergeParams: true })
 
 const { verifyKey } = require('../../../middlewares/auth')
-const { getSatellite, getTLE, propagate } = require('../../../middlewares/satellites')
+const { getSatellite, getTLE } = require('../../../middlewares/satellites')
 
-router.get('/', verifyKey({ transact: true, cost: 1 }), getSatellite, getTLE, propagate(), async (req, res) => {
+router.get('/', verifyKey({ transact: true, cost: 1 }), getSatellite, getTLE, async (req, res) => {
+  const defaults = {
+    latitude: 0,
+    longitude: 0,
+    altitude: 0,
+    seconds: 10
+  }
+  const options = { ...defaults, ...req.query }
+  const { seconds } = options
+
+  const [line1, line2] = res.tle
+  const record = satellite.twoline2satrec(line1, line2)
+  const date = new Date()
+
+  for (let i = 0; i < seconds; i++) {
+    const { position, velocity } = satellite.propagate(record, date)
+    date.setSeconds(date.getSeconds() + 1)
+  }
+
   return res.status(200).json({ message: 'Success' })
 })
 
