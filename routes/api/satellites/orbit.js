@@ -36,7 +36,10 @@ router.get('/', verifyKey({ transact: true, cost: 1 }), getSatellite, getTLE, as
   const date = new Date()
 
   for (let i = 0; i < seconds; i++) {
-    const { position, velocity } = satellite.propagate(record, date)
+    const gmst = satellite.gstime(date)
+    const { position: eci, velocity } = satellite.propagate(record, date)
+    const geodetic = satellite.eciToGeodetic(eci, gmst)
+
     date.setSeconds(date.getSeconds() + 1)
   }
 
