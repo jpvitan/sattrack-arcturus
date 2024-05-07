@@ -14,7 +14,6 @@ Developer's Website: https://jpvitan.com/
 */
 
 const Satellite = require('../models/satellite')
-const satellite = require('satellite.js')
 
 module.exports.getSatellite = async (req, res, next) => {
   const { norad } = req.params
@@ -33,19 +32,4 @@ module.exports.getTLE = async (req, res, next) => {
   if (!res.satellite.tle || res.satellite.tle.length === 0) return res.status(404).json({ message: 'Two-Line Element Not Found' })
   res.tle = res.satellite.tle
   next()
-}
-
-module.exports.propagate = (options) => {
-  const defaults = {
-    start: new Date(),
-    time: 10
-  }
-
-  options = { ...defaults, ...options }
-
-  return async (req, res, next) => {
-    const [line1, line2] = res.tle
-    const record = satellite.twoline2satrec(line1, line2)
-    next()
-  }
 }
