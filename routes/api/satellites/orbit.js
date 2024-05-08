@@ -35,15 +35,20 @@ router.get('/', verifyKey({ transact: true, cost: 1 }), getSatellite, getTLE, as
   const record = satellite.twoline2satrec(line1, line2)
   const date = new Date()
 
+  const orbit = []
+
   for (let i = 0; i < seconds; i++) {
     const gmst = satellite.gstime(date)
     const { position: eci, velocity } = satellite.propagate(record, date)
     const geodetic = satellite.eciToGeodetic(eci, gmst)
 
+    const { latitude, longitude, height: altitude } = geodetic
+    orbit.push({ latitude, longitude, altitude })
+
     date.setSeconds(date.getSeconds() + 1)
   }
 
-  return res.status(200).json({ message: 'Success' })
+  return res.status(200).json(orbit)
 })
 
 module.exports = router
