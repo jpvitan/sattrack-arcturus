@@ -23,9 +23,9 @@ const { getSatellite, getTLE } = require('../../../middlewares/satellites')
 
 router.get('/', verifyKey({ transact: true, cost: 1 }), getSatellite, getTLE, async (req, res) => {
   const defaults = {
-    latitude: 0,
-    longitude: 0,
-    altitude: 0,
+    observerLatitude: 0,
+    observerLongitude: 0,
+    observerAltitude: 0,
     seconds: 10
   }
   const options = { ...defaults, ...req.query }
