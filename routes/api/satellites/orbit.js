@@ -21,7 +21,7 @@ const router = express.Router({ mergeParams: true })
 const { verifyKey } = require('../../../middlewares/auth')
 const { getSatellite, getTLE } = require('../../../middlewares/satellites')
 
-router.get('/', verifyKey({ transact: true, cost: 1 }), getSatellite, getTLE, async (req, res) => {
+router.get('/', verifyKey({ transact: true, cost: 10 }), getSatellite, getTLE, async (req, res) => {
   const defaults = {
     observerLatitude: 0,
     observerLongitude: 0,
