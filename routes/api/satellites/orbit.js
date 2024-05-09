@@ -26,10 +26,11 @@ router.get('/', verifyKey({ transact: true, cost: 1 }), getSatellite, getTLE, as
     observerLatitude: 0,
     observerLongitude: 0,
     observerAltitude: 0,
-    seconds: 10
+    seconds: 10,
+    unit: 'degree'
   }
   const options = { ...defaults, ...req.query }
-  const { seconds } = options
+  const { seconds, unit } = options
 
   const [line1, line2] = res.tle
   const record = satellite.twoline2satrec(line1, line2)
@@ -42,7 +43,13 @@ router.get('/', verifyKey({ transact: true, cost: 1 }), getSatellite, getTLE, as
     const { position: eci, velocity } = satellite.propagate(record, date)
     const geodetic = satellite.eciToGeodetic(eci, gmst)
 
-    const { latitude, longitude, height: altitude } = geodetic
+    let { latitude, longitude, height: altitude } = geodetic
+
+    if (unit === 'degree') {
+      latitude = satellite.degreesLat(latitude)
+      longitude = satellite.degreesLong(longitude)
+    }
+
     orbit.push({ latitude, longitude, altitude })
 
     date.setSeconds(date.getSeconds() + 1)
