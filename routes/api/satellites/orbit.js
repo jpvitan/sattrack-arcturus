@@ -50,7 +50,12 @@ router.get('/', verifyKey({ transact: true, cost: 10 }), getSatellite, getTLE, a
       longitude = satellite.degreesLong(longitude)
     }
 
-    orbit.push({ latitude, longitude, altitude })
+    orbit.push({
+      latitude,
+      longitude,
+      altitude,
+      timestamp: date.getTime()
+    })
 
     date.setSeconds(date.getSeconds() + 1)
   }
