@@ -1,7 +1,7 @@
 /*
 
 SatTrack-Arcturus
-A RESTful API built with Node.js and Express that lets you retrieve useful satellite information by providing identifiers assigned by the North American Aerospace Defense Command.
+A RESTful API built with Node.js and Express that lets you track and predict the orbit of artificial satellites through the use of the Simplified General Perturbations-4 (SGP4) model.
 
 This project is under the MIT license.
 Please read the terms and conditions stated within the license before attempting any modification or distribution of the software.
@@ -20,7 +20,7 @@ module.exports.getSatellite = async (req, res, next) => {
   let satellite
   try {
     satellite = await Satellite.findOne({ norad })
-    if (!satellite) return res.status(404).json({ message: 'Not Found' })
+    if (!satellite) return res.status(404).json({ message: 'Satellite Not Found' })
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' })
   }
@@ -29,7 +29,7 @@ module.exports.getSatellite = async (req, res, next) => {
 }
 
 module.exports.getTLE = async (req, res, next) => {
-  if (!res.satellite.tle || res.satellite.tle.length === 0) return res.status(404).json({ message: 'Not Found' })
+  if (!res.satellite.tle || res.satellite.tle.length === 0) return res.status(404).json({ message: 'Two-Line Element Not Found' })
   res.tle = res.satellite.tle
   next()
 }

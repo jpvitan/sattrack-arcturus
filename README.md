@@ -1,7 +1,7 @@
 ![SatTrack-Arcturus](https://github.com/jpvitan/sattrack-arcturus/blob/master/public/images/mockups/home.png)
 
 
-**SatTrack-Arcturus** is a RESTful API built with Node.js and Express that lets you retrieve useful satellite information by providing identifiers assigned by the North American Aerospace Defense Command.
+**SatTrack-Arcturus** is a RESTful API built with Node.js and Express that lets you track and predict the orbit of artificial satellites through the use of the Simplified General Perturbations-4 (SGP4) model.
 
 
 ![Badge](https://img.shields.io/github/package-json/v/jpvitan/sattrack-arcturus)
