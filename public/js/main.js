@@ -352,7 +352,14 @@ const setupSignIn = () => {
       return
     }
 
-    window.location.assign('dashboard')
+    const { type } = await output.response.json()
+
+    const page = {
+      user: 'dashboard',
+      admin: 'console'
+    }
+
+    window.location.assign(page[type])
   }
 }
 
