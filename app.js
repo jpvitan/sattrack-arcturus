@@ -58,6 +58,13 @@ app.get('/dashboard', verifyAuthentication({ type: 'redirect' }), async (req, re
     user: req.user
   })
 })
+app.get('/console', verifyAuthentication({ type: 'redirect' }), verifyAuthorization({ allowed: ['admin'] }), async (req, res) => {
+  return res.render('pages/console', {
+    title: 'Console | SatTrack-Arcturus',
+    description: 'A RESTful API built with Node.js and Express that lets you track and predict the orbit of artificial satellites through the use of the Simplified General Perturbations-4 (SGP4) model.',
+    user: req.user
+  })
+})
 
 app.use('/api', apiRouter)
 app.use('/sessions', sessionRouter)
