@@ -19,6 +19,7 @@ import Session from './services/sessions.js'
 
 document.addEventListener('DOMContentLoaded', () => {
   setupHome()
+  setupConsole()
   setupDashboard()
   setupAccount()
   setupKeys()
@@ -42,6 +43,12 @@ const setupHome = () => {
 
   signInButton.onclick = () => { signIn.classList.remove('d-none') }
   signUpButton.onclick = () => { signUp.classList.remove('d-none') }
+}
+
+const setupConsole = () => {
+  const console = document.getElementById('console')
+
+  if (!console) return
 }
 
 const setupDashboard = () => {
