@@ -24,7 +24,7 @@ const passport = require('./config/passport')
 const apiRouter = require('./routes/api')
 const sessionRouter = require('./routes/sessions')
 
-const { verifyAuthentication } = require('./middlewares/auth')
+const { verifyAuthentication, verifyAuthorization } = require('./middlewares/auth')
 
 const app = express()
 
