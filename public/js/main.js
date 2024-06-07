@@ -48,7 +48,31 @@ const setupHome = () => {
 const setupConsole = () => {
   const console = document.getElementById('console')
 
+  const page = {
+    satellite: {
+      screen: document.getElementById('satellite'),
+      button: document.getElementById('satellite-button'),
+      close: document.getElementById('satellite-close-button')
+    }
+  }
+
   if (!console) return
+
+  Object.entries(page).forEach(([key, { screen, button, close }]) => {
+    button.onclick = () => {
+      window.sessionStorage.setItem('page', key)
+      screen.classList.remove('d-none')
+    }
+    close.onclick = () => {
+      window.sessionStorage.removeItem('page')
+      screen.classList.add('d-none')
+    }
+  })
+
+  if (window.sessionStorage.getItem('page')) {
+    const { screen } = page[window.sessionStorage.getItem('page')]
+    screen.classList.remove('d-none')
+  }
 }
 
 const setupDashboard = () => {
