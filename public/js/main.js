@@ -127,6 +127,162 @@ const setupDashboard = () => {
   setupDashboardKeys()
 }
 
+const setupFiller = () => {
+  const filler = document.getElementById('filler')
+  const footer = document.getElementById('footer')
+
+  if (!filler) return
+
+  const space = window.innerHeight - filler.offsetTop - footer.offsetHeight
+
+  filler.style.height = `${space}px`
+}
+
+const setupSignIn = () => {
+  const signIn = document.getElementById('sign-in')
+  const signInCloseButton = document.getElementById('sign-in-close-button')
+  const signInNotice = document.getElementById('sign-in-notice')
+  const signInForm = document.getElementById('sign-in-form')
+  const signInUsernameForm = document.getElementById('sign-in-username-form')
+  const signInPasswordForm = document.getElementById('sign-in-password-form')
+
+  if (!signIn) return
+
+  signInCloseButton.onclick = () => { signIn.classList.add('d-none') }
+  signInForm.onsubmit = async (e) => {
+    e.preventDefault()
+
+    const username = signInUsernameForm.value
+    const password = signInPasswordForm.value
+    const output = await Session.login({ username, password })
+
+    if (!output.success) {
+      signInNotice.innerHTML = output.message
+      signInNotice.classList.add('text-color-red')
+      return
+    }
+
+    const { type } = await output.response.json()
+
+    const page = {
+      user: 'dashboard',
+      admin: 'console'
+    }
+
+    window.location.assign(page[type])
+  }
+}
+
+const setupSignUp = () => {
+  const signUp = document.getElementById('sign-up')
+  const signUpCloseButton = document.getElementById('sign-up-close-button')
+  const signUpNotice = document.getElementById('sign-up-notice')
+  const signUpForm = document.getElementById('sign-up-form')
+
+  const field = [
+    { id: 'sign-up-name-form', key: 'name' },
+    { id: 'sign-up-email-form', key: 'email' },
+    { id: 'sign-up-username-form', key: 'username' },
+    { id: 'sign-up-password-form', key: 'password' },
+    { id: 'sign-up-repeat-form', key: 'repeat' }
+  ]
+  field.forEach(field => { field.reference = document.getElementById(field.id) })
+
+  if (!signUp) return
+
+  signUpCloseButton.onclick = () => { signUp.classList.add('d-none') }
+  signUpForm.onsubmit = async (e) => {
+    e.preventDefault()
+
+    const data = {}
+    field.forEach(({ key, reference }) => { data[key] = reference.value })
+
+    const output = await Account.create(data)
+
+    if (!output.success) {
+      signUpNotice.innerHTML = output.message
+      signUpNotice.classList.add('text-color-red')
+      return
+    }
+
+    const login = await Session.login({ username: data.username, password: data.password })
+
+    if (!login.success) {
+      signUpNotice.innerHTML = login.message
+      signUpNotice.classList.add('text-color-red')
+      return
+    }
+
+    window.location.assign('dashboard')
+  }
+}
+
+const setupCapacityProgressBar = ({ capacity }) => {
+  const capacityProgressBar = document.getElementById('capacity-progress-bar')
+
+  if (!capacityProgressBar) return
+
+  capacityProgressBar.style.width = capacity + '%'
+}
+
+const setupUsageChart = ({ usage }) => {
+  const usageChart = document.getElementById('usage-chart')
+
+  if (!usageChart) return
+
+  const chart = new Chart(usageChart, {
+    type: 'bar',
+    options: {
+      backgroundColor: 'rgba(253, 121, 168, 1.0)',
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        x: {
+          border: {
+            display: false
+          },
+          grid: {
+            display: true
+          },
+          ticks: {
+            precision: 0,
+            font: {
+              weight: 'bold'
+            }
+          }
+        },
+        y: {
+          suggestedMin: 0,
+          suggestedMax: 10,
+          border: {
+            display: false
+          },
+          grid: {
+            display: true
+          },
+          ticks: {
+            precision: 0,
+            font: {
+              weight: 'bold'
+            }
+          }
+        }
+      }
+    },
+    data: {
+      labels: usage.map(({ month }) => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][month - 1]),
+      datasets: [
+        {
+          data: usage.map(({ hits }) => hits)
+        }
+      ]
+    }
+  })
+}
+
 const setupDashboardAccount = () => {
   const account = document.getElementById('account')
   const accountUsernameForm = document.getElementById('account-username-form')
@@ -358,160 +514,4 @@ const setupDashboardKeys = () => {
       }
     }
   })
-}
-
-const setupSignIn = () => {
-  const signIn = document.getElementById('sign-in')
-  const signInCloseButton = document.getElementById('sign-in-close-button')
-  const signInNotice = document.getElementById('sign-in-notice')
-  const signInForm = document.getElementById('sign-in-form')
-  const signInUsernameForm = document.getElementById('sign-in-username-form')
-  const signInPasswordForm = document.getElementById('sign-in-password-form')
-
-  if (!signIn) return
-
-  signInCloseButton.onclick = () => { signIn.classList.add('d-none') }
-  signInForm.onsubmit = async (e) => {
-    e.preventDefault()
-
-    const username = signInUsernameForm.value
-    const password = signInPasswordForm.value
-    const output = await Session.login({ username, password })
-
-    if (!output.success) {
-      signInNotice.innerHTML = output.message
-      signInNotice.classList.add('text-color-red')
-      return
-    }
-
-    const { type } = await output.response.json()
-
-    const page = {
-      user: 'dashboard',
-      admin: 'console'
-    }
-
-    window.location.assign(page[type])
-  }
-}
-
-const setupSignUp = () => {
-  const signUp = document.getElementById('sign-up')
-  const signUpCloseButton = document.getElementById('sign-up-close-button')
-  const signUpNotice = document.getElementById('sign-up-notice')
-  const signUpForm = document.getElementById('sign-up-form')
-
-  const field = [
-    { id: 'sign-up-name-form', key: 'name' },
-    { id: 'sign-up-email-form', key: 'email' },
-    { id: 'sign-up-username-form', key: 'username' },
-    { id: 'sign-up-password-form', key: 'password' },
-    { id: 'sign-up-repeat-form', key: 'repeat' }
-  ]
-  field.forEach(field => { field.reference = document.getElementById(field.id) })
-
-  if (!signUp) return
-
-  signUpCloseButton.onclick = () => { signUp.classList.add('d-none') }
-  signUpForm.onsubmit = async (e) => {
-    e.preventDefault()
-
-    const data = {}
-    field.forEach(({ key, reference }) => { data[key] = reference.value })
-
-    const output = await Account.create(data)
-
-    if (!output.success) {
-      signUpNotice.innerHTML = output.message
-      signUpNotice.classList.add('text-color-red')
-      return
-    }
-
-    const login = await Session.login({ username: data.username, password: data.password })
-
-    if (!login.success) {
-      signUpNotice.innerHTML = login.message
-      signUpNotice.classList.add('text-color-red')
-      return
-    }
-
-    window.location.assign('dashboard')
-  }
-}
-
-const setupCapacityProgressBar = ({ capacity }) => {
-  const capacityProgressBar = document.getElementById('capacity-progress-bar')
-
-  if (!capacityProgressBar) return
-
-  capacityProgressBar.style.width = capacity + '%'
-}
-
-const setupUsageChart = ({ usage }) => {
-  const usageChart = document.getElementById('usage-chart')
-
-  if (!usageChart) return
-
-  const chart = new Chart(usageChart, {
-    type: 'bar',
-    options: {
-      backgroundColor: 'rgba(253, 121, 168, 1.0)',
-      plugins: {
-        legend: {
-          display: false
-        }
-      },
-      scales: {
-        x: {
-          border: {
-            display: false
-          },
-          grid: {
-            display: true
-          },
-          ticks: {
-            precision: 0,
-            font: {
-              weight: 'bold'
-            }
-          }
-        },
-        y: {
-          suggestedMin: 0,
-          suggestedMax: 10,
-          border: {
-            display: false
-          },
-          grid: {
-            display: true
-          },
-          ticks: {
-            precision: 0,
-            font: {
-              weight: 'bold'
-            }
-          }
-        }
-      }
-    },
-    data: {
-      labels: usage.map(({ month }) => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][month - 1]),
-      datasets: [
-        {
-          data: usage.map(({ hits }) => hits)
-        }
-      ]
-    }
-  })
-}
-
-const setupFiller = () => {
-  const filler = document.getElementById('filler')
-  const footer = document.getElementById('footer')
-
-  if (!filler) return
-
-  const space = window.innerHeight - filler.offsetTop - footer.offsetHeight
-
-  filler.style.height = `${space}px`
 }
