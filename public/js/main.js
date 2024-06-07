@@ -21,8 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupHome()
   setupConsole()
   setupDashboard()
-  setupSignIn()
-  setupSignUp()
   setupFiller()
 })
 
@@ -41,6 +39,9 @@ const setupHome = () => {
 
   signInButton.onclick = () => { signIn.classList.remove('d-none') }
   signUpButton.onclick = () => { signUp.classList.remove('d-none') }
+
+  setupSignIn()
+  setupSignUp()
 }
 
 const setupConsole = () => {
