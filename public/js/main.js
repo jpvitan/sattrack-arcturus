@@ -21,8 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupHome()
   setupConsole()
   setupDashboard()
-  setupAccount()
-  setupKeys()
   setupSignIn()
   setupSignUp()
   setupFiller()
@@ -124,9 +122,11 @@ const setupDashboard = () => {
 
   setupCapacityProgressBar({ capacity })
   setupUsageChart({ usage: JSON.parse(usage) })
+  setupDashboardAccount()
+  setupDashboardKeys()
 }
 
-const setupAccount = () => {
+const setupDashboardAccount = () => {
   const account = document.getElementById('account')
   const accountUsernameForm = document.getElementById('account-username-form')
   const accountChangePasswordNotice = document.getElementById('account-change-password-notice')
@@ -265,7 +265,7 @@ const setupAccount = () => {
   }
 }
 
-const setupKeys = () => {
+const setupDashboardKeys = () => {
   const keys = document.getElementById('keys')
   const keysHiddenUsernameForm = document.getElementById('keys-hidden-username-form')
   const keysGenerateKeyNotice = document.getElementById('keys-generate-key-notice')
