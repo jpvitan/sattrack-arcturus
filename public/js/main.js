@@ -72,6 +72,8 @@ const setupConsole = () => {
     const { screen } = page[window.sessionStorage.getItem('page')]
     screen.classList.remove('d-none')
   }
+
+  setupConsoleSatellite()
 }
 
 const setupDashboard = () => {
@@ -215,6 +217,12 @@ const setupSignUp = () => {
 
     window.location.assign('dashboard')
   }
+}
+
+const setupConsoleSatellite = () => {
+  const satellite = document.getElementById('satellite')
+
+  if (!satellite) return
 }
 
 const setupCapacityProgressBar = ({ capacity }) => {
