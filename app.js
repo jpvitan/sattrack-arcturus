@@ -21,10 +21,10 @@ const cors = require('cors')
 const mongoose = require('./config/mongoose')
 const passport = require('./config/passport')
 
+const dashboardRouter = require('./routes/dashboard')
+const consoleRouter = require('./routes/console')
 const apiRouter = require('./routes/api')
 const sessionRouter = require('./routes/sessions')
-
-const { verifyAuthentication, verifyAuthorization } = require('./middlewares/auth')
 
 const app = express()
 
@@ -51,21 +51,9 @@ app.get('/', async (req, res) => {
     description: 'A RESTful API built with Node.js and Express that lets you track and predict the orbit of artificial satellites through the use of the Simplified General Perturbations-4 (SGP4) model.'
   })
 })
-app.get('/dashboard', verifyAuthentication({ type: 'redirect' }), async (req, res) => {
-  return res.render('pages/dashboard', {
-    title: 'Dashboard | SatTrack-Arcturus',
-    description: 'A RESTful API built with Node.js and Express that lets you track and predict the orbit of artificial satellites through the use of the Simplified General Perturbations-4 (SGP4) model.',
-    user: req.user
-  })
-})
-app.get('/console', verifyAuthentication({ type: 'redirect' }), verifyAuthorization({ allowed: ['admin'] }), async (req, res) => {
-  return res.render('pages/console', {
-    title: 'Console | SatTrack-Arcturus',
-    description: 'A RESTful API built with Node.js and Express that lets you track and predict the orbit of artificial satellites through the use of the Simplified General Perturbations-4 (SGP4) model.',
-    user: req.user
-  })
-})
 
+app.use('/dashboard', dashboardRouter)
+app.use('/console', consoleRouter)
 app.use('/api', apiRouter)
 app.use('/sessions', sessionRouter)
 
