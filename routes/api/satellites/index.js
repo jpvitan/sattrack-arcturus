@@ -72,6 +72,16 @@ router.post('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'
   }
 })
 
+router.patch('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), async (req, res) => {
+  const { payload } = req.body
+
+  try {
+
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
+})
+
 router.get('/:norad', verifyKey({ transact: true, cost: 1 }), getSatellite, async (req, res) => {
   return res.status(200).json(res.satellite)
 })
