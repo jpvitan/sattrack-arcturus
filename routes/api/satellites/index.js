@@ -77,7 +77,8 @@ router.patch('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin
   const { payload } = req.body
 
   try {
-
+    await Satellite.bulkWrite(operation)
+    return res.status(200).json({ message: 'Satellite Updated' })
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' })
   }
