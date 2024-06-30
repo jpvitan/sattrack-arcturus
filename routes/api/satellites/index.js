@@ -14,6 +14,7 @@ Developer's Website: https://jpvitan.com/
 */
 
 const express = require('express')
+const mongoose = require('mongoose')
 const Satellite = require('../../../models/satellite')
 
 const tleRouter = require('./tle')
