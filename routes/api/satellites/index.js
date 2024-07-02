@@ -77,6 +77,13 @@ router.patch('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin
   const { payload } = req.body
 
   try {
+    const operation = payload.map(({ id, update }) => ({
+      updateOne: {
+        filter: { _id: new mongoose.Types.ObjectId(id) },
+        update
+      }
+    }))
+
     await Satellite.bulkWrite(operation)
     return res.status(200).json({ message: 'Satellite Updated' })
   } catch (error) {
