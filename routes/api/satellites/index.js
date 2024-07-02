@@ -14,7 +14,6 @@ Developer's Website: https://jpvitan.com/
 */
 
 const express = require('express')
-const mongoose = require('mongoose')
 const Satellite = require('../../../models/satellite')
 
 const tleRouter = require('./tle')
@@ -77,9 +76,9 @@ router.patch('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin
   const { payload } = req.body
 
   try {
-    const operation = payload.map(({ id, update }) => ({
+    const operation = payload.map(({ norad, update }) => ({
       updateOne: {
-        filter: { _id: new mongoose.Types.ObjectId(id) },
+        filter: { norad },
         update
       }
     }))
