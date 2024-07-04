@@ -223,11 +223,12 @@ const setupConsoleSatellite = () => {
   const satellite = document.getElementById('satellite')
   const satelliteUpdateTLENotice = document.getElementById('satellite-update-tle-notice')
   const satelliteUpdateTLEButton = document.getElementById('satellite-update-tle-button')
+  const satelliteUpdateTLEFile = document.getElementById('satellite-update-tle-file')
 
   if (!satellite) return
 
   satelliteUpdateTLEButton.onclick = async () => {
-
+    satelliteUpdateTLEFile.click()
   }
 }
 
