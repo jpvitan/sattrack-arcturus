@@ -221,8 +221,14 @@ const setupSignUp = () => {
 
 const setupConsoleSatellite = () => {
   const satellite = document.getElementById('satellite')
+  const satelliteUpdateTLENotice = document.getElementById('satellite-update-tle-notice')
+  const satelliteUpdateTLEButton = document.getElementById('satellite-update-tle-button')
 
   if (!satellite) return
+
+  satelliteUpdateTLEButton.onclick = async () => {
+
+  }
 }
 
 const setupCapacityProgressBar = ({ capacity }) => {
