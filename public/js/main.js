@@ -230,6 +230,9 @@ const setupConsoleSatellite = () => {
   satelliteUpdateTLEButton.onclick = async () => {
     satelliteUpdateTLEFile.click()
   }
+  satelliteUpdateTLEFile.onchange = async () => {
+    satelliteUpdateTLEButton.classList.add('d-none')
+  }
 }
 
 const setupCapacityProgressBar = ({ capacity }) => {
