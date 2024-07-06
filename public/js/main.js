@@ -237,11 +237,15 @@ const setupConsoleSatellite = () => {
 
     fileReader.onload = (e) => {
       const content = e.target.result
+      const lines = content.split('\n')
+
+      for (let i = 0; i < lines.length; i += 2) {
+        const line1 = lines[i]
+        const line2 = lines[i + 1]
+      }
     }
 
     fileReader.readAsText(file)
-
-    satelliteUpdateTLEButton.classList.add('d-none')
   }
 }
 
