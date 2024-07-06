@@ -233,6 +233,13 @@ const setupConsoleSatellite = () => {
   }
   satelliteUpdateTLEFile.onchange = async () => {
     const file = satelliteUpdateTLEFile.files[0]
+    const fileReader = new FileReader()
+
+    fileReader.onload = (e) => {
+      const content = e.target.result
+    }
+
+    fileReader.readAsText(file)
 
     satelliteUpdateTLEButton.classList.add('d-none')
   }
