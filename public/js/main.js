@@ -15,6 +15,7 @@ Developer's Website: https://jpvitan.com/
 
 import Account from './services/accounts.js'
 import Keys from './services/keys.js'
+import Satellite from './services/satellites.js'
 import Session from './services/sessions.js'
 
 document.addEventListener('DOMContentLoaded', () => {
