@@ -85,4 +85,38 @@ export default class Satellite {
 
     return output
   }
+
+  static async updateMany({ payload }) {
+    const output = { response: null, message: null, success: false }
+
+    if (!payload) {
+      output.message = 'Please enter a valid payload!'
+      return output
+    }
+
+    try {
+      output.response = await fetch(
+        `/api/accounts`,
+        {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ payload })
+        }
+      )
+    } catch (error) {
+      output.message = 'The system encountered some unexpected errors. Please try again later.'
+      return output
+    }
+
+    switch (output.response.status) {
+      case 200:
+        output.message = 'The system successfully updated the satellite.'
+        output.success = true
+        break
+      default:
+        output.message = 'The system encountered some unexpected errors. Please try again later.'
+    }
+
+    return output
+  }
 }
