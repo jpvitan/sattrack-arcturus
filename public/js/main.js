@@ -232,6 +232,8 @@ const setupConsoleSatellite = () => {
     satelliteUpdateTLEFile.click()
   }
   satelliteUpdateTLEFile.onchange = async () => {
+    const file = satelliteUpdateTLEFile.files[0]
+
     satelliteUpdateTLEButton.classList.add('d-none')
   }
 }
