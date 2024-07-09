@@ -244,6 +244,11 @@ const setupConsoleSatellite = () => {
       for (let i = 0; i < lines.length; i += 2) {
         const line1 = lines[i]
         const line2 = lines[i + 1]
+
+        const norad = line2.split(' ')[1]
+        const update = { tle: [line1, line2] }
+
+        payload.push({ norad, update })
       }
     }
 
