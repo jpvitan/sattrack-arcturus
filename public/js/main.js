@@ -15,6 +15,7 @@ Developer's Website: https://jpvitan.com/
 
 import Account from './services/accounts.js'
 import Keys from './services/keys.js'
+import Satellite from './services/satellites.js'
 import Session from './services/sessions.js'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -221,8 +222,54 @@ const setupSignUp = () => {
 
 const setupConsoleSatellite = () => {
   const satellite = document.getElementById('satellite')
+  const satelliteUpdateTLENotice = document.getElementById('satellite-update-tle-notice')
+  const satelliteUpdateTLEButton = document.getElementById('satellite-update-tle-button')
+  const satelliteUpdateTLEFile = document.getElementById('satellite-update-tle-file')
 
   if (!satellite) return
+
+  satelliteUpdateTLEButton.onclick = async () => {
+    satelliteUpdateTLEFile.click()
+  }
+  satelliteUpdateTLEFile.onchange = async () => {
+    const file = satelliteUpdateTLEFile.files[0]
+    const fileReader = new FileReader()
+
+    fileReader.onload = async (e) => {
+      const content = e.target.result
+      const lines = content.split('\n')
+
+      const payload = []
+
+      for (let i = 0; i < lines.length; i += 2) {
+        const line1 = lines[i]
+        const line2 = lines[i + 1]
+
+        const norad = line2.split(' ')[1]
+        const update = { tle: [line1, line2] }
+
+        payload.push({ norad, update })
+      }
+
+      const output = await Satellite.updateMany({ payload })
+
+      if (output.success) {
+        await swal({
+          title: 'Success',
+          text: output.message,
+          icon: 'success'
+        })
+      } else {
+        await swal({
+          title: 'Error',
+          text: output.message,
+          icon: 'error'
+        })
+      }
+    }
+
+    fileReader.readAsText(file)
+  }
 }
 
 const setupCapacityProgressBar = ({ capacity }) => {

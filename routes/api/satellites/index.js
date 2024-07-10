@@ -72,6 +72,24 @@ router.post('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'
   }
 })
 
+router.patch('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), async (req, res) => {
+  const { payload } = req.body
+
+  try {
+    const operation = payload.map(({ norad, update }) => ({
+      updateOne: {
+        filter: { norad },
+        update
+      }
+    }))
+
+    await Satellite.bulkWrite(operation)
+    return res.status(200).json({ message: 'Satellite Updated' })
+  } catch (error) {
+    return res.status(500).json({ message: 'Internal Server Error' })
+  }
+})
+
 router.get('/:norad', verifyKey({ transact: true, cost: 1 }), getSatellite, async (req, res) => {
   return res.status(200).json(res.satellite)
 })
