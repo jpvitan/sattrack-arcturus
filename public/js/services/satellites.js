@@ -62,7 +62,7 @@ export default class Satellite {
 
     try {
       output.response = await fetch(
-        `/api/accounts/${norad}`,
+        `/api/satellites/${norad}`,
         {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
@@ -96,7 +96,7 @@ export default class Satellite {
 
     try {
       output.response = await fetch(
-        `/api/accounts`,
+        `/api/satellites`,
         {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
