@@ -235,7 +235,7 @@ const setupConsoleSatellite = () => {
     const file = satelliteUpdateTLEFile.files[0]
     const fileReader = new FileReader()
 
-    fileReader.onload = (e) => {
+    fileReader.onload = async (e) => {
       const content = e.target.result
       const lines = content.split('\n')
 
@@ -251,7 +251,21 @@ const setupConsoleSatellite = () => {
         payload.push({ norad, update })
       }
 
-      Satellite.updateMany({ payload })
+      const output = await Satellite.updateMany({ payload })
+
+      if (output.success) {
+        await swal({
+          title: 'Success',
+          text: output.message,
+          icon: 'success'
+        })
+      } else {
+        await swal({
+          title: 'Error',
+          text: output.message,
+          icon: 'error'
+        })
+      }
     }
 
     fileReader.readAsText(file)
