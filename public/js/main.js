@@ -250,6 +250,8 @@ const setupConsoleSatellite = () => {
 
         payload.push({ norad, update })
       }
+
+      Satellite.updateMany({ payload })
     }
 
     fileReader.readAsText(file)
