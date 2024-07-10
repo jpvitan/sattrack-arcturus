@@ -49,6 +49,11 @@ const setupConsole = () => {
   const console = document.getElementById('console')
 
   const page = {
+    account: {
+      screen: document.getElementById('account'),
+      button: document.getElementById('account-button'),
+      close: document.getElementById('account-close-button')
+    },
     satellite: {
       screen: document.getElementById('satellite'),
       button: document.getElementById('satellite-button'),
