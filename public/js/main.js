@@ -79,6 +79,7 @@ const setupConsole = () => {
     screen.classList.remove('d-none')
   }
 
+  setupConsoleAccount()
   setupConsoleSatellite()
 }
 
@@ -222,6 +223,33 @@ const setupSignUp = () => {
     }
 
     window.location.assign('dashboard')
+  }
+}
+
+const setupConsoleAccount = () => {
+  const account = document.getElementById('account')
+  const accountSignOutButton = document.getElementById('account-sign-out-button')
+
+  if (!account) return
+
+  accountSignOutButton.onclick = async () => {
+    const output = await Session.logout()
+
+    if (output.success) {
+      await swal({
+        title: 'Success',
+        text: output.message,
+        icon: 'success'
+      })
+
+      window.location.assign('/')
+    } else {
+      await swal({
+        title: 'Error',
+        text: output.message,
+        icon: 'error'
+      })
+    }
   }
 }
 
