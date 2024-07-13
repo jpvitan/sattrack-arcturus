@@ -14,7 +14,7 @@ Developer's Website: https://jpvitan.com/
 */
 
 export default class Satellite {
-  static async create({ name, norad, country, purpose }) {
+  static async create ({ name, norad, country, purpose }) {
     const output = { response: null, message: null, success: false }
 
     if (!name || !norad || !country || !purpose) {
@@ -48,7 +48,7 @@ export default class Satellite {
     return output
   }
 
-  static async update({ norad, update }) {
+  static async update ({ norad, update }) {
     const output = { response: null, message: null, success: false }
 
     if (!norad) {
@@ -86,7 +86,7 @@ export default class Satellite {
     return output
   }
 
-  static async updateMany({ payload }) {
+  static async updateMany ({ payload }) {
     const output = { response: null, message: null, success: false }
 
     if (!payload) {
@@ -96,7 +96,7 @@ export default class Satellite {
 
     try {
       output.response = await fetch(
-        `/api/satellites`,
+        '/api/satellites',
         {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
