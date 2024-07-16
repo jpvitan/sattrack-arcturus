@@ -21,6 +21,7 @@ const cors = require('cors')
 const mongoose = require('./config/mongoose')
 const passport = require('./config/passport')
 
+const startRouter = require('./routes/start')
 const dashboardRouter = require('./routes/dashboard')
 const consoleRouter = require('./routes/console')
 const apiRouter = require('./routes/api')
@@ -52,6 +53,7 @@ app.get('/', async (req, res) => {
   })
 })
 
+app.use('/start', startRouter)
 app.use('/dashboard', dashboardRouter)
 app.use('/console', consoleRouter)
 app.use('/api', apiRouter)
