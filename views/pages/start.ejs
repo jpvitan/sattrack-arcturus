@@ -40,6 +40,7 @@
                         <p class="text-size-sm">Be sure to <strong class="text-color-red">copy and securely store your API key</strong>. This key is used to authenticate your API requests and will not be displayed again for security reasons.</p>
                         <h2 class="text-size-md mt-5 mb-2">Send a Request</h2>
                         <p class="text-size-sm">Now that you have successfully generated your API key, you can start making requests to our APIs. As an example, let's track the <strong>International Space Station (ISS)</strong> using its <strong class="text-color-violet">NORAD ID (25544).</strong></p>
+                        <pre><code class="language-bash">curl -X GET "http://localhost:8080/api/satellites/25544/orbit" -H "x-key: 65f4b4ac7ed8b0ee4708762d-82127ab2-5f7d-43ab-8bdb-1b5f6e7495c0"</code></pre>
                     </div>
                 </div>
             </div>
