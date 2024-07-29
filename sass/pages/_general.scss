@@ -53,3 +53,8 @@ p {
 a {
     text-decoration: none;
 }
+
+code[class*=language-],
+pre[class*=language-] {
+    font-family: 'Source Code Pro', monospace;
+}
