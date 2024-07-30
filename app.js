@@ -21,6 +21,7 @@ const cors = require('cors')
 const mongoose = require('./config/mongoose')
 const passport = require('./config/passport')
 
+const privacyRouter = require('./routes/privacy')
 const startRouter = require('./routes/start')
 const dashboardRouter = require('./routes/dashboard')
 const consoleRouter = require('./routes/console')
@@ -53,6 +54,7 @@ app.get('/', async (req, res) => {
   })
 })
 
+app.use('/privacy', privacyRouter)
 app.use('/start', startRouter)
 app.use('/dashboard', dashboardRouter)
 app.use('/console', consoleRouter)
