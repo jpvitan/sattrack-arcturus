@@ -21,6 +21,7 @@ const cors = require('cors')
 const mongoose = require('./config/mongoose')
 const passport = require('./config/passport')
 
+const tosRouter = require('./routes/tos')
 const privacyRouter = require('./routes/privacy')
 const startRouter = require('./routes/start')
 const dashboardRouter = require('./routes/dashboard')
@@ -54,6 +55,7 @@ app.get('/', async (req, res) => {
   })
 })
 
+app.use('/tos', tosRouter)
 app.use('/privacy', privacyRouter)
 app.use('/start', startRouter)
 app.use('/dashboard', dashboardRouter)
