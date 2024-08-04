@@ -10,7 +10,9 @@ h6,
 p,
 a,
 button,
-input {
+input,
+ol,
+ul {
     font-family: var(--font-family);
 }
 
@@ -44,7 +46,9 @@ h4 {
     font-size: 1.2rem;
 }
 
-p {
+p,
+ol,
+ul {
     font-size: var(--font-size);
     font-weight: var(--font-weight);
     color: var(--font-color);
