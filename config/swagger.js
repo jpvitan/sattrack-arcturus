@@ -26,3 +26,5 @@ const options = {
     }
   }
 }
+
+const specification = swaggerJSDoc(options)
