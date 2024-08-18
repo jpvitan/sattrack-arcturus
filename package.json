@@ -17,7 +17,8 @@
     "mongoose": "^8.5.2",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "satellite.js": "^5.0.0"
+    "satellite.js": "^5.0.0",
+    "swagger-jsdoc": "^6.2.8"
   },
   "devDependencies": {
     "dotenv": "^16.4.5",
