@@ -24,7 +24,13 @@ const options = {
       version: '0.1.0',
       description: 'A RESTful API built with Node.js and Express that lets you track and predict the orbit of artificial satellites through the use of the Simplified General Perturbations-4 (SGP4) model.'
     }
-  }
+  },
+  apis: ['../routes/api/**/*.js']
 }
 
 const specification = swaggerJSDoc(options)
+
+module.exports = {
+  specification,
+  swaggerUIExpress
+}
