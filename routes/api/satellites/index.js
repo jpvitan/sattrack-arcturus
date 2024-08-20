@@ -24,6 +24,32 @@ const router = express.Router()
 const { verifyAuthentication, verifyAuthorization, verifyKey } = require('../../../middlewares/auth')
 const { getSatellite } = require('../../../middlewares/satellites')
 
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Satellite:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           example: International Space Station
+ *         norad:
+ *           type: integer
+ *           example: 25544
+ *         country:
+ *           type: string
+ *           example: Multinational
+ *         purpose:
+ *           type: string
+ *           example: Space Science
+ *       required:
+ *         - name
+ *         - norad
+ *         - country
+ *         - purpose
+ */
+
 router.get('/', verifyKey({ transact: true, cost: 1 }), async (req, res) => {
   let { name, country, purpose, limit, skip } = req.query
 
