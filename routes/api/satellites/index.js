@@ -26,42 +26,6 @@ const { getSatellite } = require('../../../middlewares/satellites')
 
 /**
  * @openapi
- * components:
- *   securitySchemes:
- *     Key:
- *       type: apiKey
- *       in: header
- *       name: x-key
- *   schemas:
- *     Satellite:
- *       type: object
- *       properties:
- *         name:
- *           type: string
- *           example: International Space Station
- *         norad:
- *           type: integer
- *           example: 25544
- *         country:
- *           type: string
- *           example: Multinational
- *         purpose:
- *           type: string
- *           example: Space Science
- *         tle:
- *           type: array
- *           items:
- *             type: string
- *           example: [1 25544U 98067A   24188.50795102  .00013368  00000+0  24465-3 0  9996, 2 25544  51.6394 219.6033 0010258  37.0957 113.5575 15.49623297461546]
- *       required:
- *         - name
- *         - norad
- *         - country
- *         - purpose
- */
-
-/**
- * @swagger
  * /satellites:
  *   get:
  *     summary: List satellites
@@ -84,7 +48,7 @@ const { getSatellite } = require('../../../middlewares/satellites')
  *             schema:
  *               $ref: '#/components/schemas/Satellite'
  *       500:
- *         description: Internal Server Error
+ *         description: Internal server error
  */
 router.get('/', verifyKey({ transact: true, cost: 1 }), async (req, res) => {
   let { name, country, purpose, limit, skip } = req.query
