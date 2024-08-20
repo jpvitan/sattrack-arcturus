@@ -43,6 +43,10 @@ const { getSatellite } = require('../../../middlewares/satellites')
  *         purpose:
  *           type: string
  *           example: Space Science
+ *         tle:
+ *           type: array
+ *           items:
+ *             type: string
  *       required:
  *         - name
  *         - norad
