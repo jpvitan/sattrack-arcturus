@@ -46,7 +46,9 @@ const { getSatellite } = require('../../../middlewares/satellites')
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Satellite'
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Satellite'
  *       500:
  *         description: Internal server error
  */
