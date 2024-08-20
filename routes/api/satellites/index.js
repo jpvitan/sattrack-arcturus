@@ -55,6 +55,30 @@ const { getSatellite } = require('../../../middlewares/satellites')
  *         - purpose
  */
 
+/**
+ * @swagger
+ * /satellites:
+ *   get:
+ *     summary: List satellites
+ *     description: Retrieves a list of satellites. You can filter the results using query parameters.
+ *     parameters:
+ *       - name: limit
+ *         in: query
+ *         description: The number of satellites to return.
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           example: 10
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved list of satellites
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Satellite'
+ *       500:
+ *         description: Internal Server Error
+ */
 router.get('/', verifyKey({ transact: true, cost: 1 }), async (req, res) => {
   let { name, country, purpose, limit, skip } = req.query
 
