@@ -27,6 +27,11 @@ const { getSatellite } = require('../../../middlewares/satellites')
 /**
  * @openapi
  * components:
+ *   securitySchemes:
+ *     Key:
+ *       type: apiKey
+ *       in: header
+ *       name: x-key
  *   schemas:
  *     Satellite:
  *       type: object
@@ -69,6 +74,8 @@ const { getSatellite } = require('../../../middlewares/satellites')
  *         schema:
  *           type: integer
  *           example: 10
+ *     security:
+ *       - Key: []
  *     responses:
  *       200:
  *         description: Successfully retrieved list of satellites
