@@ -22,6 +22,9 @@ const router = express.Router()
 
 /**
  * @openapi
+ * tags:
+ *   - name: Satellites
+ *     description: The `Satellites` API provides comprehensive access to satellite data and tracking functionalities. This includes detailed information about satellites such as their names, types, and Two-Line Element (TLE) data. Additionally, the API offers advanced tracking capabilities based on the SGP4 model, which allows users to predict satellite positions and trajectories with high accuracy.
  * components:
  *   securitySchemes:
  *     Key:
