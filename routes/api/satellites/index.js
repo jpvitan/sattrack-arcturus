@@ -43,6 +43,12 @@ const { getSatellite } = require('../../../middlewares/satellites')
  *         required: false
  *         schema:
  *           type: string
+ *       - name: purpose
+ *         in: query
+ *         description: The purpose of the satellite.
+ *         required: false
+ *         schema:
+ *           type: string
  *       - name: limit
  *         in: query
  *         description: The number of satellites to return.
