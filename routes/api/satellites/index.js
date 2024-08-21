@@ -37,7 +37,12 @@ const { getSatellite } = require('../../../middlewares/satellites')
  *         required: false
  *         schema:
  *           type: integer
- *           example: 10
+ *       - name: country
+ *         in: query
+ *         description: The origin country of the satellite.
+ *         required: false
+ *         schema:
+ *           type: string
  *     security:
  *       - Key: []
  *     responses:
