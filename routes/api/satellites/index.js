@@ -145,6 +145,35 @@ router.patch('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin
   }
 })
 
+/**
+ * @openapi
+ * /satellites/{norad}:
+ *   get:
+ *     summary: Retrieve a specific satellite by its NORAD ID
+ *     description: Returns detailed information about a single satellite specified by its unique identifier.
+ *     tags:
+ *       - Satellites
+ *     parameters:
+ *       - name: norad
+ *         in: path
+ *         description: The unique identifier of the satellite.
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     security:
+ *       - Key: []
+ *     responses:
+ *       200:
+ *         description: Detailed information about the satellite
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Satellite'
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Internal server error
+ */
 router.get('/:norad', verifyKey({ transact: true, cost: 1 }), getSatellite, async (req, res) => {
   return res.status(200).json(res.satellite)
 })
