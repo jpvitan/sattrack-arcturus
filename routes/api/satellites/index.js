@@ -30,6 +30,8 @@ const { getSatellite } = require('../../../middlewares/satellites')
  *   get:
  *     summary: List satellites
  *     description: Retrieves a list of satellites. You can filter the results using query parameters.
+ *     tags:
+ *       - Satellites
  *     parameters:
  *       - name: name
  *         in: query
