@@ -55,6 +55,12 @@ const { getSatellite } = require('../../../middlewares/satellites')
  *         required: false
  *         schema:
  *           type: integer
+ *       - name: skip
+ *         in: query
+ *         description: The number of satellites to skip.
+ *         required: false
+ *         schema:
+ *           type: integer
  *     security:
  *       - Key: []
  *     responses:
