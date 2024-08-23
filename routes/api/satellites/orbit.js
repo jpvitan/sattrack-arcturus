@@ -21,6 +21,58 @@ const router = express.Router({ mergeParams: true })
 const { verifyKey } = require('../../../middlewares/auth')
 const { getSatellite, getTLE } = require('../../../middlewares/satellites')
 
+/**
+ * @openapi
+ * /satellites/{norad}/orbit:
+ *   get:
+ *     summary: Retrieve predicted orbit of a satellite
+ *     description: Returns an array of predicted orbit data points for the satellite specified by the NORAD ID, using the SGP4 model.
+ *     tags:
+ *       - Satellites
+ *     parameters:
+ *       - name: norad
+ *         in: path
+ *         description: The unique identifier of the satellite.
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     security:
+ *       - Key: []
+ *     responses:
+ *       200:
+ *         description: Successful response with predicted orbit data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   latitude:
+ *                     type: number
+ *                     format: float
+ *                     description: The latitude of the satellite at this data point.
+ *                     example: -29.83176282952035
+ *                   longitude:
+ *                     type: number
+ *                     format: float
+ *                     description: The longitude of the satellite at this data point.
+ *                     example: -17.791634597028697
+ *                   altitude:
+ *                     type: number
+ *                     format: float
+ *                     description: The altitude of the satellite at this data point.
+ *                     example: 425.47637939396554
+ *                   timestamp:
+ *                     type: integer
+ *                     format: int64
+ *                     description: The timestamp when the data point was recorded.
+ *                     example: 1722302245049
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Internal server error
+ */
 router.get('/', verifyKey({ transact: true, cost: 10 }), getSatellite, getTLE, async (req, res) => {
   const defaults = {
     observerLatitude: 0,
