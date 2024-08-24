@@ -36,6 +36,43 @@ const { getSatellite, getTLE } = require('../../../middlewares/satellites')
  *         required: true
  *         schema:
  *           type: integer
+ *       - name: observerLatitude
+ *         in: query
+ *         description: Latitude of the observer.
+ *         required: false
+ *         schema:
+ *           type: number
+ *           format: float
+ *       - name: observerLongitude
+ *         in: query
+ *         description: Longitude of the observer.
+ *         required: false
+ *         schema:
+ *           type: number
+ *           format: float
+ *       - name: observerAltitude
+ *         in: query
+ *         description: Altitude of the observer in meters.
+ *         required: false
+ *         schema:
+ *           type: number
+ *           format: float
+ *       - name: seconds
+ *         in: query
+ *         description: Number of seconds into the future to predict the satellite's orbit.
+ *         required: false
+ *         schema:
+ *           type: integer
+ *           format: int32
+ *       - name: unit
+ *         in: query
+ *         description: The unit for the orbit data. Can be either "degree" or "radians".
+ *         required: false
+ *         schema:
+ *           type: string
+ *           enum:
+ *             - degree
+ *             - radians
  *     security:
  *       - Key: []
  *     responses:
