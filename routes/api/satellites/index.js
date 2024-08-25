@@ -24,6 +24,61 @@ const router = express.Router()
 const { verifyAuthentication, verifyAuthorization, verifyKey } = require('../../../middlewares/auth')
 const { getSatellite } = require('../../../middlewares/satellites')
 
+/**
+ * @openapi
+ * /satellites:
+ *   get:
+ *     summary: List satellites
+ *     description: Retrieves a list of satellites. You can filter the results using query parameters.
+ *     tags:
+ *       - Satellites
+ *     parameters:
+ *       - name: name
+ *         in: query
+ *         description: The name of the satellite.
+ *         required: false
+ *         schema:
+ *           type: string
+ *       - name: country
+ *         in: query
+ *         description: The origin country of the satellite.
+ *         required: false
+ *         schema:
+ *           type: string
+ *       - name: purpose
+ *         in: query
+ *         description: The purpose of the satellite.
+ *         required: false
+ *         schema:
+ *           type: string
+ *       - name: limit
+ *         in: query
+ *         description: The number of satellites to return.
+ *         required: false
+ *         schema:
+ *           type: integer
+ *       - name: skip
+ *         in: query
+ *         description: The number of satellites to skip.
+ *         required: false
+ *         schema:
+ *           type: integer
+ *     security:
+ *       - Key: []
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved list of satellites
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Satellite'
+ *       400:
+ *         description: Bad request
+ *       500:
+ *         description: Internal server error
+ */
 router.get('/', verifyKey({ transact: true, cost: 1 }), async (req, res) => {
   let { name, country, purpose, limit, skip } = req.query
 
@@ -90,6 +145,35 @@ router.patch('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin
   }
 })
 
+/**
+ * @openapi
+ * /satellites/{norad}:
+ *   get:
+ *     summary: Retrieve a specific satellite by its NORAD ID
+ *     description: Returns detailed information about a single satellite specified by its unique identifier.
+ *     tags:
+ *       - Satellites
+ *     parameters:
+ *       - name: norad
+ *         in: path
+ *         description: The unique identifier of the satellite.
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     security:
+ *       - Key: []
+ *     responses:
+ *       200:
+ *         description: Detailed information about the satellite
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Satellite'
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Internal server error
+ */
 router.get('/:norad', verifyKey({ transact: true, cost: 1 }), getSatellite, async (req, res) => {
   return res.status(200).json(res.satellite)
 })

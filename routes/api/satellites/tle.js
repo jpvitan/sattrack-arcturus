@@ -20,6 +20,38 @@ const router = express.Router({ mergeParams: true })
 const { verifyAuthentication, verifyAuthorization, verifyKey } = require('../../../middlewares/auth')
 const { getSatellite, getTLE } = require('../../../middlewares/satellites')
 
+/**
+ * @openapi
+ * /satellites/{norad}/tle:
+ *   get:
+ *     summary: Retrieve TLE for a satellite
+ *     description: Returns the Two-Line Element (TLE) data for the satellite specified by the NORAD ID.
+ *     tags:
+ *       - Satellites
+ *     parameters:
+ *       - name: norad
+ *         in: path
+ *         description: The unique identifier of the satellite.
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     security:
+ *       - Key: []
+ *     responses:
+ *       200:
+ *         description: Successful response with TLE data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: string
+ *               example: [1 25544U 98067A   24188.50795102  .00013368  00000+0  24465-3 0  9996, 2 25544  51.6394 219.6033 0010258  37.0957 113.5575 15.49623297461546] 
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Internal server error
+ */
 router.get('/', verifyKey({ transact: true, cost: 1 }), getSatellite, getTLE, async (req, res) => {
   return res.status(200).json(res.tle)
 })

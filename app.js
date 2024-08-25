@@ -27,6 +27,7 @@ const dashboardRouter = require('./routes/dashboard')
 const consoleRouter = require('./routes/console')
 const apiRouter = require('./routes/api')
 const sessionRouter = require('./routes/sessions')
+const documentationRouter = require('./routes/documentation')
 
 const app = express()
 
@@ -60,6 +61,7 @@ app.use('/dashboard', dashboardRouter)
 app.use('/console', consoleRouter)
 app.use('/api', apiRouter)
 app.use('/sessions', sessionRouter)
+app.use('/documentation', documentationRouter)
 
 const PORT = process.env.PORT || 8080
 app.listen(PORT)

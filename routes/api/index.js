@@ -20,6 +20,45 @@ const satellitesRouter = require('./satellites')
 
 const router = express.Router()
 
+/**
+ * @openapi
+ * tags:
+ *   - name: Satellites
+ *     description: The `Satellites` API provides comprehensive access to satellite data and tracking functionalities. This includes detailed information about satellites such as their names, types, and Two-Line Element (TLE) data. Additionally, the API offers advanced tracking capabilities based on the SGP4 model, which allows users to predict satellite positions and trajectories with high accuracy.
+ * components:
+ *   securitySchemes:
+ *     Key:
+ *       type: apiKey
+ *       in: header
+ *       name: x-key
+ *   schemas:
+ *     Satellite:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           example: International Space Station
+ *         norad:
+ *           type: integer
+ *           example: 25544
+ *         country:
+ *           type: string
+ *           example: Multinational
+ *         purpose:
+ *           type: string
+ *           example: Space Science
+ *         tle:
+ *           type: array
+ *           items:
+ *             type: string
+ *           example: [1 25544U 98067A   24188.50795102  .00013368  00000+0  24465-3 0  9996, 2 25544  51.6394 219.6033 0010258  37.0957 113.5575 15.49623297461546]
+ *       required:
+ *         - name
+ *         - norad
+ *         - country
+ *         - purpose
+ */
+
 router.use('/accounts', accountsRouter)
 router.use('/satellites', satellitesRouter)
 
