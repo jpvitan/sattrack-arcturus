@@ -31,6 +31,8 @@ window.addEventListener('resize', () => {
 
 const setupHome = () => {
   const home = document.getElementById('home')
+  const menu = document.getElementById('menu')
+  const menuButton = document.getElementById('menu-button')
   const signIn = document.getElementById('sign-in')
   const signInButton = document.getElementById('sign-in-button')
   const signUp = document.getElementById('sign-up')
@@ -38,9 +40,11 @@ const setupHome = () => {
 
   if (!home) return
 
+  menuButton.onclick = () => { menu.classList.remove('d-none') }
   signInButton.onclick = () => { signIn.classList.remove('d-none') }
   signUpButton.onclick = () => { signUp.classList.remove('d-none') }
 
+  setupMenu()
   setupSignIn()
   setupSignUp()
 }
@@ -145,6 +149,15 @@ const setupFiller = () => {
   const space = window.innerHeight - filler.offsetTop - footer.offsetHeight
 
   filler.style.height = `${space}px`
+}
+
+const setupMenu = () => {
+  const menu = document.getElementById('menu')
+  const menuCloseButton = document.getElementById('menu-close-button')
+
+  if (!menu) return
+
+  menuCloseButton.onclick = () => { menu.classList.add('d-none') }
 }
 
 const setupSignIn = () => {
