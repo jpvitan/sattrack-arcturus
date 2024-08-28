@@ -154,10 +154,16 @@ const setupFiller = () => {
 const setupMenu = () => {
   const menu = document.getElementById('menu')
   const menuCloseButton = document.getElementById('menu-close-button')
+  const menuSignInButton = document.getElementById('menu-sign-in-button')
+  const menuSignUpButton = document.getElementById('menu-sign-up-button')
+  const signIn = document.getElementById('sign-in')
+  const signUp = document.getElementById('sign-up')
 
   if (!menu) return
 
   menuCloseButton.onclick = () => { menu.classList.add('d-none') }
+  menuSignInButton.onclick = () => { signIn.classList.remove('d-none') }
+  menuSignUpButton.onclick = () => { signUp.classList.remove('d-none') }
 }
 
 const setupSignIn = () => {
