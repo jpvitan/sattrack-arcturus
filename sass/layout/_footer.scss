@@ -1,24 +1,6 @@
 @use "../utilities/mixins";
 
 footer {
-    .icon-container {
-        svg {
-            display: block;
-            width: 18px;
-            height: 18px;
-            color: var(--navigation-icon-color);
-        }
-
-        &:hover {
-            svg {
-                display: block;
-                width: 18px;
-                height: 18px;
-                color: var(--navigation-icon-hover-color);
-            }
-        }
-    }
-
     p {
         font-size: 0.7rem;
         margin-bottom: 0;
