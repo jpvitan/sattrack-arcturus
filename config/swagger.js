@@ -30,7 +30,7 @@ const options = {
       }
     ]
   },
-  apis: [`./routes/api/**/*.js`]
+  apis: ['./routes/api/**/*.js']
 }
 
 const specification = swaggerJSDoc(options)
