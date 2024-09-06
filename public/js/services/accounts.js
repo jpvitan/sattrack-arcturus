@@ -21,6 +21,10 @@ export default class Account {
       output.message = 'Please enter valid values for all fields!'
       return output
     }
+    if (password.length < 8) {
+      output.message = 'Your password should be at least 8 characters long.'
+      return output
+    }
     if (password !== repeat) {
       output.message = 'Your passwords do not match. Please try again.'
       return output
