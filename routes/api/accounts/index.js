@@ -53,6 +53,7 @@ router.post('/', async (req, res) => {
   try {
     const entry = await Account.findOne({ username })
     if (entry) return res.status(409).json({ message: 'Account Exists' })
+    if (password.length < 8) return res.status(403).json({ message: 'Your password should be at least 8 characters long.' })
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
