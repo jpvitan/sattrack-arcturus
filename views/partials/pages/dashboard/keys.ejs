@@ -37,22 +37,22 @@
                         <div class="background-color background-color-seashell card-basic card shadow border-0 px-4 py-4 mb-4">
                             <div class="row g-0">
                                 <div class="col-auto my-auto">
-                                    <p class="text-size-sm text-color-black fw-bold mb-0"><%- key.name -%></p>
+                                    <p class="text-size-sm text-color-black fw-bold mb-0"><%= key.name %></p>
                                     <div class="row g-0">
                                         <div class="col-auto my-auto">
-                                            <div class="<%- (key.status === 'Active') ? 'background-color-green' : 'background-color-red' -%> me-1" style="width: 5px; height: 5px; border-radius: 50%;"></div>
+                                            <div class="<%= (key.status === 'Active') ? 'background-color-green' : 'background-color-red' %> me-1" style="width: 5px; height: 5px; border-radius: 50%;"></div>
                                         </div>
                                         <div class="col-auto my-auto">
-                                            <p class="text-size-xs mb-0"><%- key.status -%></p>
+                                            <p class="text-size-xs mb-0"><%= key.status %></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col"></div>
                                 <div class="col-auto my-auto">
-                                    <button class="keys-status-key-button button-pill <%- (key.status === 'Active') ? 'button-pill-orange' : 'button-pill-green' -%> text-size-xs btn me-1" data-id="<%- key.id -%>" data-status="<%- key.status -%>"><%- (key.status === 'Active') ? 'Deactivate' : 'Activate' -%> Key</button>
+                                    <button class="keys-status-key-button button-pill <%= (key.status === 'Active') ? 'button-pill-orange' : 'button-pill-green' %> text-size-xs btn me-1" data-id="<%= key.id %>" data-status="<%= key.status %>"><%= (key.status === 'Active') ? 'Deactivate' : 'Activate' %> Key</button>
                                 </div>
                                 <div class="col-auto my-auto">
-                                    <button class="keys-delete-key-button button-pill button-pill-red text-size-xs btn" data-id="<%- key.id -%>">Delete Key</button>
+                                    <button class="keys-delete-key-button button-pill button-pill-red text-size-xs btn" data-id="<%= key.id %>">Delete Key</button>
                                 </div>
                             </div>
                             <div class="row g-0 mt-4">
