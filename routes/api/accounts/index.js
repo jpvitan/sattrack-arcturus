@@ -21,7 +21,7 @@ const keysRouter = require('./keys')
 
 const router = express.Router()
 
-const { verifyAuthentication, verifyAuthorization, verifyPassword } = require('../../../middlewares/auth')
+const { verifyAuthentication, verifyAuthorization, verifyPassword, verifyToken } = require('../../../middlewares/auth')
 const { getAccount } = require('../../../middlewares/accounts')
 
 router.get('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), async (req, res) => {
@@ -47,7 +47,7 @@ router.get('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin']
   }
 })
 
-router.post('/', async (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
   const { email, username, password, name } = req.body
 
   try {
