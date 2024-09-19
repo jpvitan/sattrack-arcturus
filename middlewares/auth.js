@@ -160,3 +160,19 @@ module.exports.verifyKey = (options) => {
     return res.status(403).json({ message: options.message })
   }
 }
+
+module.exports.verifyToken = (options) => {
+  const defaults = {
+    type: 'json',
+    message: 'Invalid Token',
+    path: '/'
+  }
+
+  options = { ...defaults, ...options }
+
+  return async (req, res, next) => {
+    const { token } = req.body
+
+    return next()
+  }
+}
