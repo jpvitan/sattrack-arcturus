@@ -180,9 +180,13 @@ const setupSignIn = () => {
   signInForm.onsubmit = async (e) => {
     e.preventDefault()
 
+    const signInFormData = new FormData(signInForm)
+
     const username = signInUsernameForm.value
     const password = signInPasswordForm.value
-    const output = await Session.login({ username, password })
+    const token = signInFormData.get('cf-turnstile-response')
+
+    const output = await Session.login({ username, password, token })
 
     if (!output.success) {
       signInNotice.innerHTML = output.message
