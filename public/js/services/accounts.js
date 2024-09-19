@@ -14,7 +14,7 @@ Developer's Website: https://jpvitan.com/
 */
 
 export default class Account {
-  static async create ({ name, email, username, password, repeat }) {
+  static async create ({ name, email, username, password, repeat, token }) {
     const output = { response: null, message: null, success: false }
 
     if (!name || !email || !username || !password || !repeat) {
@@ -29,6 +29,10 @@ export default class Account {
       output.message = 'Your passwords do not match. Please try again.'
       return output
     }
+    if (!token) {
+      output.message = 'It looks like there was an issue with the verification. Please ensure you have completed the Turnstile challenge correctly.'
+      return output
+    }
 
     try {
       output.response = await fetch(
@@ -36,7 +40,7 @@ export default class Account {
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, username, password })
+          body: JSON.stringify({ name, email, username, password, token })
         }
       )
     } catch (error) {
