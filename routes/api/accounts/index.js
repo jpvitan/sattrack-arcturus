@@ -47,7 +47,7 @@ router.get('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin']
   }
 })
 
-router.post('/', verifyToken, async (req, res) => {
+router.post('/', verifyToken(), async (req, res) => {
   const { email, username, password, name } = req.body
 
   try {
