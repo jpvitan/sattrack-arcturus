@@ -173,6 +173,21 @@ module.exports.verifyToken = (options) => {
   return async (req, res, next) => {
     const { token } = req.body
 
-    return next()
+    const response = await fetch(
+      'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          secret: process.env.TURNSTILE_SECRET,
+          response: token
+        })
+      }
+    )
+
+    const { success } = await response.json()
+
+    if (success) return next()
+    return res.status(403).json({ message: options.message })
   }
 }
