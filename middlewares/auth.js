@@ -157,9 +157,7 @@ module.exports.verifyKey = (options) => {
 
 module.exports.verifyToken = (options) => {
   const defaults = {
-    type: 'json',
-    message: 'Invalid Token',
-    path: '/'
+    message: 'Invalid Token'
   }
 
   options = { ...defaults, ...options }
