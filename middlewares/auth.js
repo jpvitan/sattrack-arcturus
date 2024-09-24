@@ -95,9 +95,7 @@ module.exports.verifyPassword = (options) => {
 
 module.exports.verifyKey = (options) => {
   const defaults = {
-    type: 'json',
     message: 'Invalid Key',
-    path: '/',
     transact: false,
     cost: 0
   }
@@ -153,7 +151,6 @@ module.exports.verifyKey = (options) => {
     }
 
     if (success) return next()
-    if (options.type === 'redirect') return res.redirect(options.path)
     return res.status(403).json({ message: options.message })
   }
 }
