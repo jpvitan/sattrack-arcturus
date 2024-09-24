@@ -64,9 +64,7 @@ module.exports.verifyAuthorization = (options) => {
 
 module.exports.verifyPassword = (options) => {
   const defaults = {
-    type: 'json',
     message: 'Invalid Password',
-    path: '/',
     exception: []
   }
 
@@ -91,7 +89,6 @@ module.exports.verifyPassword = (options) => {
     }
 
     if (success) return next()
-    if (options.type === 'redirect') return res.redirect(options.path)
     return res.status(403).json({ message: options.message })
   }
 }
