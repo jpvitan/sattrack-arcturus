@@ -14,11 +14,15 @@ Developer's Website: https://jpvitan.com/
 */
 
 export default class Session {
-  static async login ({ username, password }) {
+  static async login ({ username, password, token }) {
     const output = { response: null, message: null, success: false }
 
     if (!username || !password) {
       output.message = 'Please enter a valid username and password.'
+      return output
+    }
+    if (!token) {
+      output.message = 'It looks like there was an issue with the verification. Please ensure you have completed the Turnstile challenge correctly.'
       return output
     }
 
@@ -28,7 +32,7 @@ export default class Session {
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, password })
+          body: JSON.stringify({ username, password, token })
         }
       )
     } catch (error) {
@@ -43,6 +47,9 @@ export default class Session {
         break
       case 401:
         output.message = 'The username and password you entered does not correspond to any existing account.'
+        break
+      case 403:
+        output.message = 'Your token is invalid, or you are not authorized to do this action. Please try again.'
         break
       default:
         output.message = 'The system encountered some unexpected errors. Please try again later.'

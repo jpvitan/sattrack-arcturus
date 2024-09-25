@@ -64,9 +64,7 @@ module.exports.verifyAuthorization = (options) => {
 
 module.exports.verifyPassword = (options) => {
   const defaults = {
-    type: 'json',
     message: 'Invalid Password',
-    path: '/',
     exception: []
   }
 
@@ -91,16 +89,13 @@ module.exports.verifyPassword = (options) => {
     }
 
     if (success) return next()
-    if (options.type === 'redirect') return res.redirect(options.path)
     return res.status(403).json({ message: options.message })
   }
 }
 
 module.exports.verifyKey = (options) => {
   const defaults = {
-    type: 'json',
     message: 'Invalid Key',
-    path: '/',
     transact: false,
     cost: 0
   }
@@ -156,7 +151,35 @@ module.exports.verifyKey = (options) => {
     }
 
     if (success) return next()
-    if (options.type === 'redirect') return res.redirect(options.path)
+    return res.status(403).json({ message: options.message })
+  }
+}
+
+module.exports.verifyToken = (options) => {
+  const defaults = {
+    message: 'Invalid Token'
+  }
+
+  options = { ...defaults, ...options }
+
+  return async (req, res, next) => {
+    const { token } = req.body
+
+    const response = await fetch(
+      'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          secret: process.env.TURNSTILE_SECRET,
+          response: token
+        })
+      }
+    )
+
+    const { success } = await response.json()
+
+    if (success) return next()
     return res.status(403).json({ message: options.message })
   }
 }

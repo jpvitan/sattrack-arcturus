@@ -18,7 +18,9 @@ const passport = require('passport')
 
 const router = express.Router()
 
-router.post('', passport.authenticate('local'), async (req, res) => {
+const { verifyToken } = require('../middlewares/auth')
+
+router.post('', verifyToken(), passport.authenticate('local'), async (req, res) => {
   return res.status(200).json({ message: 'Account Verified', type: req.user.type })
 })
 

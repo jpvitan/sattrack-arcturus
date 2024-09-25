@@ -19,14 +19,14 @@
                     <div class="mt-3">
                         <%- include("../forms/field", { attributes: { id: 'sign-in-password-form', type: 'password', placeholder: 'Password', required: 'required' } }) %>
                     </div>
-                    <div class="mt-4">
-                        <div class="row">
-                            <div class="col my-auto">
-                                <p class="text-size-sm mb-0">Forgot password? Click <a href="">here</a> to reset.</p>
-                            </div>
-                            <div class="col-auto my-auto">
-                                <button class="button-pill button-pill-blue text-size-sm btn px-4 py-2">Sign in</button>
-                            </div>
+                    <div class="row">
+                        <div class="col-auto my-auto">
+                            <div class="cf-turnstile mt-4" data-sitekey="<%= process.env.TURNSTILE_SITE %>" data-theme="light"></div>
+                        </div>
+                        <div class="col my-auto">
+                        </div>
+                        <div class="col-auto my-auto">
+                            <button class="button-pill button-pill-blue text-size-sm btn mt-4 px-4 py-2">Sign in</button>
                         </div>
                     </div>
                 </form>
