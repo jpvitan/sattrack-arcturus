@@ -48,6 +48,9 @@ export default class Session {
       case 401:
         output.message = 'The username and password you entered does not correspond to any existing account.'
         break
+      case 403:
+        output.message = 'Your token is invalid, or you are not authorized to do this action. Please try again.'
+        break
       default:
         output.message = 'The system encountered some unexpected errors. Please try again later.'
     }

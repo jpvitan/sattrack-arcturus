@@ -53,6 +53,9 @@ export default class Account {
         output.message = 'The system successfully created your account.'
         output.success = true
         break
+      case 403:
+        output.message = 'Your token is invalid, or you are not authorized to do this action. Please try again.'
+        break
       case 409:
         output.message = 'The username that you have provided already exists.'
         break
