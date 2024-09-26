@@ -47,6 +47,9 @@ module.exports.verifyAuthorization = (options) => {
       return req.user.type === 'admin'
     },
     user: (req) => {
+      return req.user.type === 'user'
+    },
+    parameter: (req) => {
       return req.user.username === req.params.username
     }
   }
