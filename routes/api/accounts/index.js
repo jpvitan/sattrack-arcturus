@@ -65,11 +65,11 @@ router.post('/', verifyToken(), async (req, res) => {
   }
 })
 
-router.get('/:username', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, async (req, res) => {
+router.get('/:username', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'parameter'] }), getAccount, async (req, res) => {
   return res.status(200).json(res.account)
 })
 
-router.patch('/:username', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), verifyPassword({ exception: ['admin', 'noPassword'] }), getAccount, async (req, res) => {
+router.patch('/:username', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'parameter'] }), verifyPassword({ exception: ['admin', 'noPassword'] }), getAccount, async (req, res) => {
   const { password, raw, ...update } = req.body
 
   try {
@@ -81,7 +81,7 @@ router.patch('/:username', verifyAuthentication(), verifyAuthorization({ allowed
   }
 })
 
-router.delete('/:username', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), verifyPassword({ exception: ['admin'] }), async (req, res) => {
+router.delete('/:username', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'parameter'] }), verifyPassword({ exception: ['admin'] }), async (req, res) => {
   const { username } = req.params
 
   const filter = {
