@@ -22,11 +22,11 @@ const router = express.Router({ mergeParams: true })
 const { verifyAuthentication, verifyAuthorization } = require('../../../middlewares/auth')
 const { getAccount, getKey } = require('../../../middlewares/accounts')
 
-router.get('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, async (req, res) => {
+router.get('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'parameter'] }), getAccount, async (req, res) => {
   return res.status(200).json(res.account.keys)
 })
 
-router.post('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, async (req, res) => {
+router.post('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'parameter'] }), getAccount, async (req, res) => {
   const { name } = req.body
 
   try {
@@ -44,11 +44,11 @@ router.post('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'
   }
 })
 
-router.get('/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, getKey, async (req, res) => {
+router.get('/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'parameter'] }), getAccount, getKey, async (req, res) => {
   return res.status(200).json(res.key)
 })
 
-router.patch('/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, getKey, async (req, res) => {
+router.patch('/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'parameter'] }), getAccount, getKey, async (req, res) => {
   const { ...update } = req.body
 
   try {
@@ -61,7 +61,7 @@ router.patch('/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['ad
   }
 })
 
-router.delete('/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'user'] }), getAccount, getKey, async (req, res) => {
+router.delete('/:id', verifyAuthentication(), verifyAuthorization({ allowed: ['admin', 'parameter'] }), getAccount, getKey, async (req, res) => {
   try {
     res.account.keys.pull(res.key._id)
     await res.account.save()
