@@ -226,7 +226,12 @@ const setupSignUp = () => {
   signUpForm.onsubmit = async (e) => {
     e.preventDefault()
 
+    const signUpFormData = new FormData(signUpForm)
+
+    const token = signUpFormData.get('cf-turnstile-response')
+
     const data = {}
+    data.token = token
     field.forEach(({ key, reference }) => { data[key] = reference.value })
 
     const output = await Account.create(data)
