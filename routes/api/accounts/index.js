@@ -59,7 +59,11 @@ router.post('/', verifyToken(), async (req, res) => {
 
     const account = new Account({ email, username, password: hashedPassword, name })
     await account.save()
-    return res.status(201).json({ message: 'Account Created' })
+
+    req.login({ username, password }, (error) => {
+      if (error) return res.status(500).json({ message: 'Internal Server Error' })
+      return res.status(201).json({ message: 'Account Created' })
+    })
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' })
   }
