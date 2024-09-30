@@ -14,6 +14,12 @@
 ## 📋 Quick Guide
 
 
+### Create an Account
+
+
+To start using our APIs, sign up for an account using our registration page. After filling in your details and agreeing to our terms, proceed to your account dashboard and follow the next step.
+
+
 ## 🛠️ Software
 
 
