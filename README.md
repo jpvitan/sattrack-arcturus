@@ -52,6 +52,72 @@ curl -X GET "https://sattrack-arcturus.onrender.com/api/satellites/25544/orbit" 
 Upon successful validation of your API key, the server will deliver a JSON response outlining the projected orbit of the ISS. This data includes current position coordinates, altitude, and timestamps indicating the time of calculation or validity.
 
 
+```json
+[
+    {
+        "latitude": -29.83176282952035,
+        "longitude": -17.791634597028697,
+        "altitude": 425.47637939396554,
+        "timestamp": 1722302245049
+    },
+    {
+        "latitude": -29.877054251036,
+        "longitude": -17.742749072591728,
+        "altitude": 425.50155548510884,
+        "timestamp": 1722302246049
+    },
+    {
+        "latitude": -29.92232380592562,
+        "longitude": -17.693815963397814,
+        "altitude": 425.5267315227802,
+        "timestamp": 1722302247049
+    },
+    {
+        "latitude": -29.96757325655348,
+        "longitude": -17.64483318980932,
+        "altitude": 425.5519084407706,
+        "timestamp": 1722302248049
+    },
+    {
+        "latitude": -30.012798904215092,
+        "longitude": -17.59580458571464,
+        "altitude": 425.57708413411547,
+        "timestamp": 1722302249049
+    },
+    {
+        "latitude": -30.058002511925817,
+        "longitude": -17.546728075249344,
+        "altitude": 425.6022595365748,
+        "timestamp": 1722302250049
+    },
+    {
+        "latitude": -30.10318402170901,
+        "longitude": -17.49760354885829,
+        "altitude": 425.6274345690126,
+        "timestamp": 1722302251049
+    },
+    {
+        "latitude": -30.14834337538912,
+        "longitude": -17.448430898218447,
+        "altitude": 425.6526091522146,
+        "timestamp": 1722302252049
+    },
+    {
+        "latitude": -30.19348051470075,
+        "longitude": -17.399210016526993,
+        "altitude": 425.6777832069938,
+        "timestamp": 1722302253049
+    },
+    {
+        "latitude": -30.23859538127006,
+        "longitude": -17.349940795188193,
+        "altitude": 425.7029566541378,
+        "timestamp": 1722302254049
+    }
+]
+```
+
+
 ## 🛠️ Software
 
 
