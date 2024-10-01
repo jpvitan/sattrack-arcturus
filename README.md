@@ -44,6 +44,11 @@ Be sure to **copy and securely store your API key**. This key is used to authent
 Now that you have successfully generated your API key, you can start making requests to our APIs. As an example, let's track the **International Space Station (ISS)** using its **NORAD ID (25544)**.
 
 
+```bash
+curl -X GET "https://sattrack-arcturus.onrender.com/api/satellites/25544/orbit" -H "x-key: 65f4b4ac7ed8b0ee4708762d-82127ab2-5f7d-43ab-8bdb-1b5f6e7495c0"
+```
+
+
 ## 🛠️ Software
 
 
