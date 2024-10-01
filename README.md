@@ -49,6 +49,9 @@ curl -X GET "https://sattrack-arcturus.onrender.com/api/satellites/25544/orbit" 
 ```
 
 
+Upon successful validation of your API key, the server will deliver a JSON response outlining the projected orbit of the ISS. This data includes current position coordinates, altitude, and timestamps indicating the time of calculation or validity.
+
+
 ## 🛠️ Software
 
 
