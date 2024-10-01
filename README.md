@@ -38,6 +38,12 @@ On **Keys**, click **Generate Key** to generate a new API key. Give your key a d
 Be sure to **copy and securely store your API key**. This key is used to authenticate your API requests and will not be displayed again for security reasons.  
 
 
+### Send a Request
+
+
+Now that you have successfully generated your API key, you can start making requests to our APIs. As an example, let's track the **International Space Station (ISS)** using its **NORAD ID (25544)**.
+
+
 ## 🛠️ Software
 
 
