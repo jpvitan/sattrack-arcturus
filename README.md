@@ -134,3 +134,12 @@ Built by [Justine Paul Vitan](https://jpvitan.com) as a solo project to demonstr
 
 
 This project is under the [MIT license](https://github.com/jpvitan/sattrack-arcturus/blob/master/LICENSE). Please read the terms and conditions stated within the license before attempting any modification or distribution of the software.
+
+
+## ⚠️ Issues
+
+
+### Notice on Initial Response Times
+
+
+Users may experience slower response times for the first request to the API. This is a temporary issue related to our use of Render's free plan. We appreciate your understanding as we work to improve this.
