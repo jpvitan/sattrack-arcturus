@@ -118,6 +118,9 @@ Upon successful validation of your API key, the server will deliver a JSON respo
 ```
 
 
+That's it! Should you have any questions or need further assistance while using our services, please feel free to reach out. Our team is ready and eager to help you make the most of our API. Happy tracking!
+
+
 ## 🛠️ Software
 
 
