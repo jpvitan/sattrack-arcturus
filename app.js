@@ -33,7 +33,7 @@ const app = express()
 
 app.set('view engine', 'ejs')
 app.use(express.static('./public'))
-app.use(express.json())
+app.use(express.json({ limit: '5mb' }))
 app.use(express.urlencoded({ extended: true }))
 app.use(session({
   secret: process.env.SESSION_SECRET,
