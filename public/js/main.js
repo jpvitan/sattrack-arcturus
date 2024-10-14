@@ -305,11 +305,12 @@ const setupConsoleSatellite = () => {
       }
 
       const output = await Satellite.updateMany({ payload })
+      const { result } = await output.response.json()
 
       if (output.success) {
         await swal({
           title: 'Success',
-          text: output.message,
+          text: `The system successfully updated ${result.matchedCount} satellites.`,
           icon: 'success'
         })
       } else {
