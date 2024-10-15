@@ -43,11 +43,6 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }))
-app.use(cors({
-  origin: ['http://localhost:3000'],
-  methods: ['GET', 'POST'],
-  credentials: true
-}))
 app.use(passport.initialize())
 app.use(passport.session())
 
