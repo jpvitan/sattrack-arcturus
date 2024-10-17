@@ -22,12 +22,10 @@ const mongoose = require('./config/mongoose')
 const passport = require('./config/passport')
 
 const legalRouter = require('./routes/legal')
-const startRouter = require('./routes/start')
 const dashboardRouter = require('./routes/dashboard')
 const consoleRouter = require('./routes/console')
 const apiRouter = require('./routes/api')
 const sessionRouter = require('./routes/sessions')
-const documentationRouter = require('./routes/documentation')
 
 const app = express()
 
