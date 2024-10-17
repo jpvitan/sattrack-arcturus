@@ -21,6 +21,7 @@ const cors = require('cors')
 const mongoose = require('./config/mongoose')
 const passport = require('./config/passport')
 
+const helpRouter = require('./routes/help')
 const legalRouter = require('./routes/legal')
 const dashboardRouter = require('./routes/dashboard')
 const consoleRouter = require('./routes/console')
@@ -51,13 +52,12 @@ app.get('/', async (req, res) => {
   })
 })
 
+app.use('/help', helpRouter)
 app.use('/legal', legalRouter)
-app.use('/start', startRouter)
 app.use('/dashboard', dashboardRouter)
 app.use('/console', consoleRouter)
 app.use('/api', apiRouter)
 app.use('/sessions', sessionRouter)
-app.use('/documentation', documentationRouter)
 
 const PORT = process.env.PORT || 8080
 app.listen(PORT)
