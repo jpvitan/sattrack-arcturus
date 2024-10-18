@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/layout/head") %>
+</head>
+
+<body id="dashboard" class="dashboard theme-light">
+    <%- include("../partials/pages/dashboard/account") %>
+    <%- include("../partials/pages/dashboard/keys") %>
+    <%- include("../partials/pages/dashboard/credits") %>
+    <%- include("../partials/pages/dashboard/updates") %>
+    <main>
+        <div id="dashboard-data" data-capacity="<%= user.keys.length / user.capacity * 100 %>" data-usage="<%= JSON.stringify(user.usage.slice(-12)) %>"></div>
+        <section>
+            <div class="container-fluid px-3 px-md-4 py-3">
+                <div class="row justify-content-center">
+                    <div class="content-lg col">
+                        <div class="row">
+                            <div class="col-auto my-auto">
+                                <img id="account-button" class="cursor-pointer" alt="Picture" src="https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1697194211/sattrack-arcturus/icons/profile_v0kdmy.png" width="30" height="30">
+                            </div>
+                            <div class="col-auto my-auto">
+                                <p class="text-size-sm text-color-black mb-0"><%= user.name %></p>
+                                <p class="text-size-xs mb-0"><%= user.username %></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="mt-3">
+            <div class="container-fluid px-3 px-md-4 py-3">
+                <div class="row justify-content-center">
+                    <div class="content-lg col">
+                        <div class="row justify-content-center">
+                            <%- include("../partials/forms/item", { id: 'keys-button', title: 'Keys', icon: 'https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1697194118/sattrack-arcturus/icons/keys_voi7mt.png' }) %>
+                            <%- include("../partials/forms/item", { id: 'credits-button', title: 'Credits', icon: 'https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1709565027/sattrack-arcturus/icons/coins_wodviv.png' }) %>
+                            <%- include("../partials/forms/item", { id: 'updates-button', title: 'Updates', icon: 'https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1710508829/sattrack-arcturus/icons/up_mva1p8.png' }) %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div id="filler"></div>
+    </main>
+    <%- include("../partials/layout/footer") %>
+</body>
+
+</html>
