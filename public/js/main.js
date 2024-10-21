@@ -197,8 +197,8 @@ const setupSignIn = () => {
     const { type } = await output.response.json()
 
     const page = {
-      user: 'dashboard',
-      admin: 'console'
+      user: 'accounts/dashboard',
+      admin: 'accounts/console'
     }
 
     window.location.assign(page[type])

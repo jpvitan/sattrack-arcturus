@@ -17,8 +17,15 @@ const express = require('express')
 
 const router = express.Router()
 
-const { specification, swaggerUIExpress } = require('../config/swagger')
+const { specification, swaggerUIExpress } = require('../../config/swagger')
 
-router.use('/', swaggerUIExpress.serve, swaggerUIExpress.setup(specification))
+router.use('/documentation', swaggerUIExpress.serve, swaggerUIExpress.setup(specification))
+
+router.get('/start', async (req, res) => {
+  return res.render('pages/help/start', {
+    title: 'Getting Started | SatTrack-Arcturus',
+    description: 'A RESTful API built with Node.js and Express that lets you track and predict the orbit of artificial satellites through the use of the Simplified General Perturbations-4 (SGP4) model.'
+  })
+})
 
 module.exports = router

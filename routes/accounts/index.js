@@ -17,10 +17,18 @@ const express = require('express')
 
 const router = express.Router()
 
-const { verifyAuthentication, verifyAuthorization } = require('../middlewares/auth')
+const { verifyAuthentication, verifyAuthorization } = require('../../middlewares/auth')
 
-router.get('/', verifyAuthentication({ type: 'redirect' }), verifyAuthorization({ type: 'redirect', allowed: ['user'] }), async (req, res) => {
-  return res.render('pages/dashboard', {
+router.get('/console', verifyAuthentication({ type: 'redirect' }), verifyAuthorization({ type: 'redirect', allowed: ['admin'] }), async (req, res) => {
+  return res.render('pages/accounts/console', {
+    title: 'Console | SatTrack-Arcturus',
+    description: 'A RESTful API built with Node.js and Express that lets you track and predict the orbit of artificial satellites through the use of the Simplified General Perturbations-4 (SGP4) model.',
+    user: req.user
+  })
+})
+
+router.get('/dashboard', verifyAuthentication({ type: 'redirect' }), verifyAuthorization({ type: 'redirect', allowed: ['user'] }), async (req, res) => {
+  return res.render('pages/accounts/dashboard', {
     title: 'Dashboard | SatTrack-Arcturus',
     description: 'A RESTful API built with Node.js and Express that lets you track and predict the orbit of artificial satellites through the use of the Simplified General Perturbations-4 (SGP4) model.',
     user: req.user
