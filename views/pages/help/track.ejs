@@ -33,7 +33,7 @@
                         <div class="mt-5">
                             <%- include("../../partials/forms/field", { attributes: { id: 'track-search-form', type: 'text', placeholder: 'Search' } }) %>
                         </div>
-                        <div class="mt-3">
+                        <div class="table-responsive mt-3">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -43,6 +43,16 @@
                                         <th class="text-size-sm" scope="col">Purpose</th>
                                     </tr>
                                 </thead>
+                                <tbody>
+                                    <% satellite.forEach(({ norad, name, country, purpose }) => { %>
+                                    <tr>
+                                        <td class="text-size-xs-plus"><%= norad %></td>
+                                        <td class="text-size-xs-plus"><%= name %></td>
+                                        <td class="text-size-xs-plus"><%= country %></td>
+                                        <td class="text-size-xs-plus"><%= purpose %></td>
+                                    </tr>
+                                    <% }) %>
+                                </tbody>
                             </table>
                         </div>
                     </div>
