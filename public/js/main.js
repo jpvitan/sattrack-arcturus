@@ -20,6 +20,7 @@ import Session from './services/sessions.js'
 
 document.addEventListener('DOMContentLoaded', () => {
   setupHome()
+  setupTrack()
   setupConsole()
   setupDashboard()
   setupFiller()
@@ -47,6 +48,13 @@ const setupHome = () => {
   setupMenu()
   setupSignIn()
   setupSignUp()
+}
+
+const setupTrack = () => {
+  const track = document.getElementById('track')
+  const trackSearchForm = document.getElementById('track-search-form')
+
+  if (!track) return
 }
 
 const setupConsole = () => {
