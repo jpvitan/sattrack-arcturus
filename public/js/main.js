@@ -55,6 +55,10 @@ const setupTrack = () => {
   const trackSearchForm = document.getElementById('track-search-form')
 
   if (!track) return
+
+  trackSearchForm.oninput = () => {
+
+  }
 }
 
 const setupConsole = () => {
