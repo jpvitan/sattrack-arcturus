@@ -53,11 +53,17 @@ const setupHome = () => {
 const setupTrack = () => {
   const track = document.getElementById('track')
   const trackSearchForm = document.getElementById('track-search-form')
+  const trackSatelliteRow = Array.from(document.getElementsByClassName('track-satellite-row'))
 
   if (!track) return
 
   trackSearchForm.oninput = () => {
+    trackSatelliteRow.forEach((row) => {
+      const name = row.dataset.name.toUpperCase()
+      const search = trackSearchForm.value.toUpperCase()
 
+      name.startsWith(search) ? row.classList.remove('d-none') : row.classList.add('d-none')
+    })
   }
 }
 
