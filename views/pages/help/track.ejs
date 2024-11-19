@@ -45,7 +45,7 @@
                                 </thead>
                                 <tbody>
                                     <% satellite.forEach(({ norad, name, country, purpose }) => { %>
-                                    <tr class="track-satellite-row">
+                                    <tr class="track-satellite-row" data-name="<%= name %>">
                                         <td class="text-size-xs-plus"><%= norad %></td>
                                         <td class="text-size-xs-plus"><%= name %></td>
                                         <td class="text-size-xs-plus"><%= country %></td>
