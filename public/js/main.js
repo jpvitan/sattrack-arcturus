@@ -63,6 +63,8 @@ const setupTrack = () => {
       const search = trackSearchForm.value.toUpperCase()
 
       name.startsWith(search) ? row.classList.remove('d-none') : row.classList.add('d-none')
+
+      setupFiller()
     })
   }
 }
