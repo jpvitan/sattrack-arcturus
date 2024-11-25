@@ -145,6 +145,9 @@ This project is under the [MIT license](https://github.com/jpvitan/sattrack-arct
 Tracking is supported only for satellites with a valid TLE (Two-Line Element). Satellites without a TLE cannot be tracked. You can explore a list of trackable satellites [here](https://sattrack-arcturus.onrender.com/help/track).
 
 
+![Track](https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1732561782/sattrack-arcturus/screenshots/track_o4tvqy.png)
+
+
 ### Notice on Initial Response Times
 
 
