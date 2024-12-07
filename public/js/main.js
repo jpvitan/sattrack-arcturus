@@ -262,7 +262,7 @@ const setupSignUp = () => {
       return
     }
 
-    window.location.assign('dashboard')
+    window.location.assign('accounts/dashboard')
   }
 }
 
