@@ -19,22 +19,12 @@ const Satellite = require('../../models/satellite')
 const router = express.Router()
 
 const { specification, swaggerUIExpress } = require('../../config/swagger')
+const { getPage } = require('../../middlewares/pages')
 
 router.use('/documentation', swaggerUIExpress.serve, swaggerUIExpress.setup(specification))
 
-router.get('/start', async (req, res) => {
-  return res.render('pages/help/start', {
-    title: 'Getting Started | SatTrack-Arcturus',
-    description: 'A RESTful API built with Node.js and Express that lets you track and predict the orbit of artificial satellites through the use of the Simplified General Perturbations-4 (SGP4) model.'
-  })
-})
+router.get('/start', getPage())
 
-router.get('/track', async (req, res) => {
-  return res.render('pages/help/track', {
-    title: 'Trackable Satellites | SatTrack-Arcturus',
-    description: 'A RESTful API built with Node.js and Express that lets you track and predict the orbit of artificial satellites through the use of the Simplified General Perturbations-4 (SGP4) model.',
-    satellite: await Satellite.find({ tle: { $exists: true } })
-  })
-})
+router.get('/track', getPage(async (req, res, next, locals) => { locals.satellite = await Satellite.find({ tle: { $exists: true } }) }))
 
 module.exports = router
