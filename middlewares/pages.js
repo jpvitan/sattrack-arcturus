@@ -12,3 +12,16 @@ License Information: https://github.com/jpvitan/sattrack-arcturus/blob/master/LI
 Developer's Website: https://jpvitan.com/
 
 */
+
+const page = require('../config/pages')
+
+module.exports.getPage = (callback = null) => {
+  return async (req, res, next) => {
+    const { view, title, description } = page[req.originalUrl]
+    const locals = { title, description }
+
+    if (callback) await callback(req, res, next, locals)
+
+    return res.render(view, locals)
+  }
+}
