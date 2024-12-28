@@ -17,18 +17,10 @@ const express = require('express')
 
 const router = express.Router()
 
-router.get('/tos', async (req, res) => {
-  return res.render('pages/legal/tos', {
-    title: 'Terms of Service | SatTrack-Arcturus',
-    description: 'A RESTful API built with Node.js and Express that lets you track and predict the orbit of artificial satellites through the use of the Simplified General Perturbations-4 (SGP4) model.'
-  })
-})
+const { getPage } = require('../../middlewares/pages')
 
-router.get('/privacy', async (req, res) => {
-  return res.render('pages/legal/privacy', {
-    title: 'Privacy Policy | SatTrack-Arcturus',
-    description: 'A RESTful API built with Node.js and Express that lets you track and predict the orbit of artificial satellites through the use of the Simplified General Perturbations-4 (SGP4) model.'
-  })
-})
+router.get('/tos', getPage())
+
+router.get('/privacy', getPage())
 
 module.exports = router
