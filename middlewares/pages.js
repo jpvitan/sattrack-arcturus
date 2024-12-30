@@ -13,14 +13,15 @@ Developer's Website: https://jpvitan.com/
 
 */
 
-const express = require('express')
+const page = require('../config/pages')
 
-const router = express.Router()
+module.exports.getPage = (callback = null) => {
+  return async (req, res, next) => {
+    const { view, title, description } = page[req.originalUrl]
+    const locals = { title, description }
 
-const { getPage } = require('../../middlewares/pages')
+    if (callback) await callback(req, res, next, locals)
 
-router.get('/tos', getPage())
-
-router.get('/privacy', getPage())
-
-module.exports = router
+    return res.render(view, locals)
+  }
+}
