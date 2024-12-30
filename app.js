@@ -27,6 +27,8 @@ const helpRouter = require('./routes/help')
 const legalRouter = require('./routes/legal')
 const sessionRouter = require('./routes/sessions')
 
+const { getPage } = require('./middlewares/pages')
+
 const app = express()
 
 app.set('view engine', 'ejs')
@@ -44,12 +46,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.get('/', async (req, res) => {
-  return res.render('pages/index', {
-    title: 'SatTrack-Arcturus',
-    description: 'A RESTful API built with Node.js and Express that lets you track and predict the orbit of artificial satellites through the use of the Simplified General Perturbations-4 (SGP4) model.'
-  })
-})
+app.get('/', getPage())
 
 app.use('/accounts', accountsRouter)
 app.use('/api', apiRouter)
