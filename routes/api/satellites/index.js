@@ -131,12 +131,16 @@ router.patch('/', verifyAuthentication(), verifyAuthorization({ allowed: ['admin
   const { payload } = req.body
 
   try {
-    const operation = payload.map(({ norad, update }) => ({
-      updateOne: {
-        filter: { norad },
-        update
-      }
-    }))
+    const operation = payload.map(({ norad, update }) => {
+      update.modified = new Date()
+
+      return ({
+        updateOne: {
+          filter: { norad },
+          update
+        }
+      })
+    })
 
     const result = await Satellite.bulkWrite(operation)
 
@@ -181,6 +185,8 @@ router.get('/:norad', verifyKey({ transact: true, cost: 1 }), getSatellite, asyn
 
 router.patch('/:norad', verifyAuthentication(), verifyAuthorization({ allowed: ['admin'] }), getSatellite, async (req, res) => {
   const { ...update } = req.body
+
+  update.modified = new Date()
 
   try {
     await res.satellite.updateOne(update)

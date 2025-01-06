@@ -32,6 +32,9 @@ const satelliteSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  modified: {
+    type: Date
+  },
   tle: [String]
 })
 
