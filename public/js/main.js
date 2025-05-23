@@ -19,6 +19,7 @@ import Satellite from './services/satellites.js'
 import Session from './services/sessions.js'
 
 document.addEventListener('DOMContentLoaded', () => {
+  setupAOS()
   setupHome()
   setupTrack()
   setupConsole()
@@ -29,6 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('resize', () => {
   setupFiller()
 })
+
+const setupAOS = () => {
+  AOS.init()
+}
 
 const setupHome = () => {
   const home = document.getElementById('home')
