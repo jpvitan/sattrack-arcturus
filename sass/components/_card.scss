@@ -11,6 +11,16 @@
     height: 100%;
 }
 
+.card-template {
+    border-radius: 25px;
+
+    .card-header {
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+        border-bottom: none;
+    }
+}
+
 .card-side {
     border-radius: 0;
     border-left-width: 5px;
