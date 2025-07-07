@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
     <%- include("../../partials/layout/head") %>
 </head>
 
-<body id="dashboard" class="dashboard theme-light">
+<body id="dashboard" class="background-image background-image-space background-attachment-fixed dashboard theme-light h-100">
     <%- include("../../partials/pages/dashboard/account") %>
     <%- include("../../partials/pages/dashboard/keys") %>
     <%- include("../../partials/pages/dashboard/credits") %>
@@ -21,8 +21,12 @@
                                 <img id="account-button" class="cursor-pointer" alt="Picture" src="https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1697194211/sattrack-arcturus/icons/profile_v0kdmy.png" width="30" height="30">
                             </div>
                             <div class="col-auto my-auto">
-                                <p class="text-size-sm text-color-black mb-0"><%= user.name %></p>
-                                <p class="text-size-xs mb-0"><%= user.username %></p>
+                                <p class="text-size-sm text-color-white mb-0"><%= user.name %></p>
+                                <p class="text-size-xs text-color-orange mb-0"><%= user.username %></p>
+                            </div>
+                            <div class="col my-auto"></div>
+                            <div class="col-auto my-auto">
+                                <img class="shadow-lg" alt="SatTrack-Arcturus" src="/images/apple-touch-icon.png" width="30" height="30">
                             </div>
                         </div>
                     </div>
@@ -34,9 +38,9 @@
                 <div class="row justify-content-center">
                     <div class="content-lg col">
                         <div class="row justify-content-center">
-                            <%- include("../../partials/forms/item", { id: 'keys-button', title: 'Keys', icon: 'https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1697194118/sattrack-arcturus/icons/keys_voi7mt.png' }) %>
-                            <%- include("../../partials/forms/item", { id: 'credits-button', title: 'Credits', icon: 'https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1709565027/sattrack-arcturus/icons/coins_wodviv.png' }) %>
-                            <%- include("../../partials/forms/item", { id: 'updates-button', title: 'Updates', icon: 'https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1710508829/sattrack-arcturus/icons/up_mva1p8.png' }) %>
+                            <%- include("../../partials/forms/items/midnight", { id: 'keys-button', title: 'Keys', icon: 'https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1697194118/sattrack-arcturus/icons/keys_voi7mt.png' }) %>
+                            <%- include("../../partials/forms/items/midnight", { id: 'credits-button', title: 'Credits', icon: 'https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1709565027/sattrack-arcturus/icons/coins_wodviv.png' }) %>
+                            <%- include("../../partials/forms/items/midnight", { id: 'updates-button', title: 'Updates', icon: 'https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1710508829/sattrack-arcturus/icons/up_mva1p8.png' }) %>
                         </div>
                     </div>
                 </div>
