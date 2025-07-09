@@ -36,7 +36,23 @@
         <section class="mt-3">
             <div class="container-fluid px-3 px-md-4 py-3">
                 <div class="row justify-content-center">
-                    <div class="content-lg col">
+                    <div class="content-xs col">
+                        <div class="card card-basic background-color background-color-midnight border-0 shadow-lg px-4 py-4">
+                            <div class="row g-0 mb-1">
+                                <div class="col-auto my-auto">
+                                    <p class="text-size-sm text-color-white fw-bold mb-0">System Status</p>
+                                </div>
+                                <div class="col-auto my-auto">
+                                    <div class="background-color background-color-green rounded-circle mx-2" style="width: 6px; height: 6px;"></div>
+                                </div>
+                            </div>
+                            <p class="text-size-sm text-color-white">All systems are operational. If you encounter any issues, please file a report by clicking the button below.</p>
+                            <div class="row g-0">
+                                <div class="col-auto my-auto">
+                                    <a href="https://github.com/jpvitan/sattrack-arcturus/issues" class="button-pill button-pill-orange text-size-xs btn">Report Issue</a>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row justify-content-center">
                             <%- include("../../partials/forms/items/midnight", { id: 'dashboard-start-button', title: 'Start', icon: 'https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1751969756/sattrack-arcturus/icons/rocket_nnz6xr.png' }) %>
                             <%- include("../../partials/forms/items/midnight", { id: 'dashboard-guide-button', title: 'Guide', icon: 'https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1697194772/sattrack-arcturus/icons/book_b5xag6.png' }) %>
