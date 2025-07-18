@@ -13,7 +13,7 @@
 }
 
 .background-color-blue {
-    background-color: colors.$blue;
+    background-color: rgba(colors.$blue, var(--background-alpha));
 }
 
 .background-color-white {
