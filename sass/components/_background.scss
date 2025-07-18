@@ -9,7 +9,7 @@
 }
 
 .background-color-green {
-    background-color: colors.$green;
+    background-color: rgba(colors.$green, var(--background-alpha));
 }
 
 .background-color-blue {
