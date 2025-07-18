@@ -21,7 +21,7 @@
 }
 
 .background-color-pink {
-    background-color: colors.$pink;
+    background-color: rgba(colors.$pink, var(--background-alpha));
 }
 
 .background-color-seashell {
