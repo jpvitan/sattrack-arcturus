@@ -1,5 +1,9 @@
 @use "../utilities/colors";
 
+.background-color {
+    --background-alpha: 1;
+}
+
 .background-color-red {
     background-color: colors.$red;
 }
