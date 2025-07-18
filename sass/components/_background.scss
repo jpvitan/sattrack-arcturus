@@ -32,6 +32,11 @@
     background-color: rgba(colors.$midnight, var(--background-alpha));
 }
 
+.background-color-frosted {
+    --background-alpha: 0.8;
+    backdrop-filter: blur(25px);
+}
+
 .background-image {
     background-repeat: no-repeat;
     background-size: cover;
