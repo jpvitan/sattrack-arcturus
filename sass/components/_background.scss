@@ -29,7 +29,7 @@
 }
 
 .background-color-midnight {
-    background-color: colors.$midnight;
+    background-color: rgba(colors.$midnight, var(--background-alpha));
 }
 
 .background-image {
