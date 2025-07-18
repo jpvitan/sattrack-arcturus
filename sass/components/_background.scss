@@ -17,7 +17,7 @@
 }
 
 .background-color-white {
-    background-color: colors.$white;
+    background-color: rgba(colors.$white, var(--background-alpha));
 }
 
 .background-color-pink {
