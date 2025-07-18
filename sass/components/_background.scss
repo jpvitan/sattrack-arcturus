@@ -5,7 +5,7 @@
 }
 
 .background-color-red {
-    background-color: colors.$red;
+    background-color: rgba(colors.$red, var(--background-alpha));
 }
 
 .background-color-green {
