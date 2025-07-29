@@ -1,4 +1,4 @@
-<div class="keys screen background-color background-color-white d-none" id="keys">
+<div class="keys screen background-color background-color-white background-color-frosted d-none" id="keys">
     <div class="container-fluid px-4 py-4">
         <div class="row">
             <div class="col-auto">
@@ -10,7 +10,7 @@
         <div class="row justify-content-center mt-5">
             <div class="content-xs col">
                 <p class="text-size-lg text-color-black fw-bold mb-1">Keys</p>
-                <p class="text-size-sm">Effortlessly manage and secure your keys with our intuitive platform. Customize permissions, monitor usage, and ensure streamlined control in just a few clicks.</p>
+                <p class="text-size-sm">Manage and secure your keys here, such as checking your key capacity or deleting and deactivating keys.</p>
                 <%- include("../../forms/field", { attributes: { id: 'keys-hidden-username-form', type: 'hidden', value: user.username } }) %>
                 <div class="py-4">
                     <p class="text-size-md text-color-black fw-bold mb-1">Key Management</p>
@@ -32,7 +32,7 @@
                     </div>
                     <div class="py-3">
                         <p class="text-size-sm mb-1">Manage Keys</p>
-                        <p class="text-size-sm text-color-black" id="keys-generate-key-notice">This section allows you to monitor, delete, and seamlessly manage your keys.</p>
+                        <p class="text-size-sm text-color-black" id="keys-generate-key-notice">This section allows you to monitor, delete, or deactivate your keys.</p>
                         <% user.keys.forEach((key) => { %>
                         <div class="background-color background-color-seashell card-basic card shadow border-0 px-4 py-4 mb-4">
                             <div class="row g-0">
@@ -40,7 +40,7 @@
                                     <p class="text-size-sm text-color-black fw-bold mb-0"><%= key.name %></p>
                                     <div class="row g-0">
                                         <div class="col-auto my-auto">
-                                            <div class="<%= (key.status === 'Active') ? 'background-color-green' : 'background-color-red' %> me-1" style="width: 5px; height: 5px; border-radius: 50%;"></div>
+                                            <div class="<%= (key.status === 'Active') ? 'background-color-green' : 'background-color-red' %> background-color me-1" style="width: 5px; height: 5px; border-radius: 50%;"></div>
                                         </div>
                                         <div class="col-auto my-auto">
                                             <p class="text-size-xs mb-0"><%= key.status %></p>

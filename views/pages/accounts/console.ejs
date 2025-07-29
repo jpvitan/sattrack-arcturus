@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
     <%- include("../../partials/layout/head") %>
 </head>
 
-<body id="console" class="console theme-light">
+<body id="console" class="background-image background-image-space background-image-fixed console theme-light h-100">
     <%- include("../../partials/pages/console/account") %>
     <%- include("../../partials/pages/console/satellite") %>
     <main>
@@ -18,8 +18,12 @@
                                 <img id="account-button" class="cursor-pointer" alt="Picture" src="https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1697194211/sattrack-arcturus/icons/profile_v0kdmy.png" width="30" height="30">
                             </div>
                             <div class="col-auto my-auto">
-                                <p class="text-size-sm text-color-black mb-0"><%= user.name %></p>
+                                <p class="text-size-sm text-color-white mb-0"><%= user.name %></p>
                                 <p class="text-size-xs text-color-orange mb-0">Administrator</p>
+                            </div>
+                            <div class="col my-auto"></div>
+                            <div class="col-auto my-auto">
+                                <img class="shadow-lg" alt="SatTrack-Arcturus" src="/images/apple-touch-icon.png" width="30" height="30">
                             </div>
                         </div>
                     </div>
@@ -29,9 +33,9 @@
         <section class="mt-3">
             <div class="container-fluid px-3 px-md-4 py-3">
                 <div class="row justify-content-center">
-                    <div class="content-lg col">
+                    <div class="content-xs col">
                         <div class="row justify-content-center">
-                            <%- include("../../partials/forms/item", { id: 'satellite-button', title: 'Satellite', icon: 'https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1698167217/sattrack-arcturus/icons/antenna_kqnsu1.png' }) %>
+                            <%- include("../../partials/forms/items/midnight", { id: 'satellite-button', title: 'Satellite', icon: 'https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1698167217/sattrack-arcturus/icons/antenna_kqnsu1.png' }) %>
                         </div>
                     </div>
                 </div>

@@ -1,31 +1,56 @@
 @use "../utilities/colors";
 
+.background-color {
+    --background-alpha: 1;
+}
+
 .background-color-red {
-    background-color: colors.$red;
+    background-color: rgba(colors.$red, var(--background-alpha));
 }
 
 .background-color-green {
-    background-color: colors.$green;
+    background-color: rgba(colors.$green, var(--background-alpha));
 }
 
 .background-color-blue {
-    background-color: colors.$blue;
+    background-color: rgba(colors.$blue, var(--background-alpha));
 }
 
 .background-color-white {
-    background-color: colors.$white;
+    background-color: rgba(colors.$white, var(--background-alpha));
 }
 
 .background-color-pink {
-    background-color: colors.$pink;
+    background-color: rgba(colors.$pink, var(--background-alpha));
 }
 
 .background-color-seashell {
-    background-color: colors.$seashell;
+    background-color: rgba(colors.$seashell, var(--background-alpha));
+}
+
+.background-color-midnight {
+    background-color: rgba(colors.$midnight, var(--background-alpha));
+}
+
+.background-color-frosted {
+    --background-alpha: 0.8;
+    backdrop-filter: blur(25px);
 }
 
 .background-image {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+}
+
+.background-image-space {
+    background-image: url("https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1750961905/sattrack-arcturus/backgrounds/space_vp4auu.jpg");
+}
+
+.background-image-fixed {
+    background-attachment: fixed;
+}
+
+.background-image-scroll {
+    background-attachment: scroll;
 }

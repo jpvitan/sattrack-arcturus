@@ -1,4 +1,4 @@
-<div class="credits screen background-color background-color-white d-none" id="credits">
+<div class="credits screen background-color background-color-white background-color-frosted d-none" id="credits">
     <div class="container-fluid px-4 py-4">
         <div class="row">
             <div class="col-auto">
@@ -10,7 +10,7 @@
         <div class="row justify-content-center mt-5">
             <div class="content-xs col">
                 <p class="text-size-lg text-color-black fw-bold mb-1">Credits</p>
-                <p class="text-size-sm">Each API request deducts a specific amount of credits, dependent on the computational complexity involved.</p>
+                <p class="text-size-sm">Manage your balance and usage here, such as checking your remaining credits and reviewing your usage.</p>
                 <%- include("../../forms/field", { attributes: { id: 'credits-hidden-username-form', type: 'hidden', value: user.username } }) %>
                 <div class="py-4">
                     <p class="text-size-md text-color-black fw-bold mb-1">Credit Management</p>
@@ -21,7 +21,7 @@
                     </div>
                     <div class="py-3">
                         <p class="text-size-sm mb-1">Usage</p>
-                        <p class="text-size-sm text-color-black">You can easily track your monthly credit usage through the provided chart. It offers a clear breakdown of your usage over time for your convenience.</p>
+                        <p class="text-size-sm text-color-black">You can easily track your monthly credit usage through the provided chart. It offers a clear breakdown of your usage over time.</p>
                         <canvas id="usage-chart"></canvas>
                     </div>
                 </div>
