@@ -1,4 +1,4 @@
-![SatTrack-Arcturus](https://github.com/jpvitan/sattrack-arcturus/blob/master/public/images/mockups/home.png)
+![SatTrack-Arcturus]()
 
 
 **SatTrack-Arcturus** is a RESTful API built with Node.js and Express that lets you track and predict the orbit of artificial satellites through the use of the Simplified General Perturbations-4 (SGP4) model.
@@ -26,13 +26,13 @@ To start using our APIs, sign up for an account using our registration page. Aft
 From your account dashboard, locate and click **Keys**. This will take you to a page where you can create and manage your API keys.
 
 
-![Dashboard](https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1732561758/sattrack-arcturus/screenshots/dashboard_zap3yu.png)
+![Dashboard]()
 
 
 On **Keys**, click **Generate Key** to generate a new API key. Give your key a descriptive name to help you remember the purpose of this key.
 
 
-![Keys](https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1732561780/sattrack-arcturus/screenshots/keys_odsjci.png)
+![Keys]()
 
 
 Be sure to **copy and securely store your API key**. This key is used to authenticate your API requests and will not be displayed again for security reasons.  
@@ -145,7 +145,7 @@ This project is under the [MIT license](https://github.com/jpvitan/sattrack-arct
 Tracking is supported only for satellites with a valid TLE (Two-Line Element). Satellites without a TLE cannot be tracked. You can explore a list of trackable satellites [here](https://sattrack-arcturus.onrender.com/help/track).
 
 
-![Track](https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1732561782/sattrack-arcturus/screenshots/track_o4tvqy.png)
+![Track]()
 
 
 ### Notice on Initial Response Times

@@ -29,6 +29,8 @@ const sessionRouter = require('./routes/sessions')
 
 const { getPage } = require('./middlewares/pages')
 
+const images = require('./public/images/links.json')
+
 const app = express()
 
 app.set('view engine', 'ejs')
@@ -53,6 +55,8 @@ app.use('/api', apiRouter)
 app.use('/help', helpRouter)
 app.use('/legal', legalRouter)
 app.use('/sessions', sessionRouter)
+
+app.locals.images = images
 
 const PORT = process.env.PORT || 8080
 app.listen(PORT)
