@@ -26,7 +26,7 @@ To start using our APIs, sign up for an account using our registration page. Aft
 From your account dashboard, locate and click **Keys**. This will take you to a page where you can create and manage your API keys.
 
 
-![Dashboard]()
+![Dashboard](https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1754678594/sattrack-arcturus/screenshots/dashboard_fxehwi.png)
 
 
 On **Keys**, click **Generate Key** to generate a new API key. Give your key a descriptive name to help you remember the purpose of this key.
