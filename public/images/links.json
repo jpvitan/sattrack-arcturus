@@ -1,9 +1,9 @@
 {
-    "icon": "/images/icon.png",
+    "icon": "https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1754679709/sattrack-arcturus/icons/icon_vp6k4m.png",
     "profile": "https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1697194211/sattrack-arcturus/icons/profile_v0kdmy.png",
     "phone": "https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1676133708/jpvitan-website/sattrack-x/samsung_kpuoje.png",
-    "dashboard": "https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1732561758/sattrack-arcturus/screenshots/dashboard_zap3yu.png",
-    "track": "https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1732561782/sattrack-arcturus/screenshots/track_o4tvqy.png",
-    "keys": "https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1732561780/sattrack-arcturus/screenshots/keys_odsjci.png",
+    "dashboard": "https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1754678594/sattrack-arcturus/screenshots/dashboard_fxehwi.png",
+    "track": "https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1754678593/sattrack-arcturus/screenshots/track_ezf0jj.png",
+    "keys": "https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1754678593/sattrack-arcturus/screenshots/keys_esfbig.png",
     "plans": ""
 }
