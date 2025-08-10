@@ -32,7 +32,7 @@ From your account dashboard, locate and click **Keys**. This will take you to a 
 On **Keys**, click **Generate Key** to generate a new API key. Give your key a descriptive name to help you remember the purpose of this key.
 
 
-![Keys]()
+![Keys](https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1754678593/sattrack-arcturus/screenshots/keys_esfbig.png)
 
 
 Be sure to **copy and securely store your API key**. This key is used to authenticate your API requests and will not be displayed again for security reasons.  
