@@ -18,6 +18,12 @@
     }
 }
 
+.button-icon-white {
+    svg {
+        color: colors.$white;
+    }
+}
+
 .button-pill,
 .button-capsule,
 .button-plain {
