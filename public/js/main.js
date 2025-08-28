@@ -115,8 +115,8 @@ const setupConsole = () => {
 const setupDashboard = () => {
   const dashboard = document.getElementById('dashboard')
   const dashboardData = document.getElementById('dashboard-data')
-  const dashboardStartButton = document.getElementById('dashboard-start-button')
-  const dashboardGuideButton = document.getElementById('dashboard-guide-button')
+  const dashboardDocumentationButton = document.getElementById('dashboard-documentation-button')
+  const dashboardSupportButton = document.getElementById('dashboard-support-button')
 
   const page = {
     account: {
