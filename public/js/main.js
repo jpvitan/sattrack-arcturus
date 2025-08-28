@@ -143,8 +143,8 @@ const setupDashboard = () => {
 
   if (!dashboard) return
 
-  dashboardStartButton.onclick = () => { window.open('/help/start') }
-  dashboardGuideButton.onclick = () => { window.open('/help/documentation') }
+  dashboardDocumentationButton.onclick = () => { window.open('/help/documentation/') }
+  dashboardSupportButton.onclick = () => { window.open('/help/support') }
 
   Object.entries(page).forEach(([key, { screen, button, close }]) => {
     button.onclick = () => {
