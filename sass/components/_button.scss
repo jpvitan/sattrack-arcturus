@@ -32,6 +32,13 @@
     height: 8px;
 }
 
+.button-dot-silver {
+    background-color: colors.$silver;
+
+    &:hover {
+        background-color: colors.$midnight;
+    }
+}
 
 .button-pill,
 .button-capsule,
