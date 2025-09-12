@@ -10,7 +10,7 @@
     <%- include("../partials/pages/sign-in") %>
     <%- include("../partials/pages/sign-up") %>
     <main>
-        <section>
+        <section class="background-image background-image-space background-image-blur">
             <div class="container-fluid px-3 px-md-4 py-3">
                 <div class="row justify-content-center">
                     <div class="content-lg col">
@@ -19,19 +19,21 @@
                                 <img class="shadow-lg" alt="SatTrack-Arcturus" src="<%= images.icon %>" width="30" height="30">
                             </div>
                             <div class="col-auto my-auto">
-                                <p class="text-size-sm text-color-black mb-0">SatTrack</p>
-                                <p class="text-size-xs mb-0">Arcturus</p>
+                                <p class="text-size-sm text-color-white mb-0">SatTrack</p>
+                                <p class="text-size-xs text-color-orange mb-0">Arcturus</p>
                             </div>
                             <div class="col my-auto">
 
                             </div>
                             <div class="d-block d-lg-none col-auto my-auto">
-                                <button class="button-icon button-icon-black btn" id="menu-button">
+                                <button class="button-icon button-icon-white btn" id="menu-button">
                                     <%- include("../partials/icons/menu") %>
                                 </button>
                             </div>
                             <div class="d-none d-lg-block col-auto my-auto">
                                 <a class="button-plain button-plain-blue text-size-xs btn" href="/help/documentation">Documentation</a>
+                                <a class="button-plain button-plain-blue text-size-xs btn" href="/help/plans">Plans</a>
+                                <a class="button-plain button-plain-blue text-size-xs btn" href="/help/support">Support</a>
                                 <button class="button-pill button-pill-seashell text-size-xs btn" id="sign-in-button">Sign in</button>
                                 <button class="button-plain button-plain-blue text-size-xs btn" id="sign-up-button">Sign up</button>
                             </div>
@@ -39,69 +41,36 @@
                     </div>
                 </div>
             </div>
-        </section>
-        <section>
-            <div class="container-fluid px-4 py-4">
+            <div class="container-fluid px-4 pt-4">
                 <div class="row justify-content-center">
                     <div class="content-sm col text-center">
-                        <h2>Track with ease.</h2>
-                        <p class="text-size-sm">SatTrack-Arcturus is a RESTful API built with Node.js and Express that lets you track and predict the orbit of artificial satellites through the use of the Simplified General Perturbations-4 (SGP4) model.</p>
+                        <h2 class="text-color-white">Track with ease.</h2>
+                        <p class="text-size-sm text-color-white">SatTrack-Arcturus is a RESTful API built with Node.js and Express that lets you track and predict the orbit of artificial satellites through the use of the Simplified General Perturbations-4 (SGP4) model.</p>
                         <a href="/help/start" class="button-pill button-pill-orange text-size-xs btn">Get Started</a>
-                        <div class="card card-basic background-color background-color-seashell border-0 shadow-lg px-5 my-5">
-                            <img class="img-fluid mt-5" alt="SatTrack-X" src="<%= images.phone %>" width="1527" height="2273">
-                        </div>
+                        <img class="img-fluid mt-5" alt="SatTrack-X" src="<%= images.phone %>" width="1527" height="2273">
                     </div>
                 </div>
             </div>
         </section>
         <section class="background-color background-color-seashell py-5">
-            <div class="container-fluid px-4 py-4">
-                <div class="row justify-content-center">
-                    <div class="content-sm col text-center">
-                        <dotlottie-player class="animation-size-md mx-auto" src="https://lottie.host/13041109-5fd8-4e2c-928b-0f4cb603a706/NXauOROHUd.lottie" background="transparent" speed="1" loop autoplay></dotlottie-player>
-                        <h2>Simple and Powerful.</h2>
-                        <p class="text-size-sm">A lightweight, developer-friendly API that makes it easy to access, predict, and integrate satellite orbit data into your applications without sacrificing accuracy, performance, or scalability.</p>
-                        <a href="/help/documentation" class="button-pill button-pill-blue text-size-xs btn">Explore Documentation</a>
-                        <img class="img-fluid my-5" alt="Dashboard" src="<%= images.dashboard %>" width="3287" height="1884">
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="background-color background-color-white py-5">
             <div class="container-fluid px-4 py-4">
                 <div class="row justify-content-center">
                     <div class="content-sm col text-center">
                         <dotlottie-player class="animation-size-md mx-auto" src="https://lottie.host/915c359b-adf4-4319-a2a9-209a481b75d2/Mmr85NNK3M.lottie" background="transparent" speed="1" loop autoplay></dotlottie-player>
                         <h2>Massive and Precise.</h2>
                         <p class="text-size-sm">Track thousands of artificial satellites with precision using the SGP4 model, trusted by aerospace engineers for accurate orbit prediction and real-time tracking capabilities.</p>
-                        <a href="/help/track" class="button-pill button-pill-orange text-size-xs btn">Browse Satellites</a>
-                        <img class="img-fluid my-5" alt="Track" src="<%= images.track %>" width="3287" height="1884">
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="background-color background-color-seashell py-5">
-            <div class="container-fluid px-4 py-4">
-                <div class="row justify-content-center">
-                    <div class="content-sm col text-center">
-                        <dotlottie-player class="animation-size-md mx-auto" src="https://lottie.host/33695209-111a-4705-962c-6401b3b5d7ce/JBasW3moGR.lottie" background="transparent" speed="1" loop autoplay></dotlottie-player>
-                        <h2>Safe and Secure.</h2>
-                        <p class="text-size-sm">Designed with security at its core, safeguard your data, keys, and infrastructure using encrypted channels, advanced encryption standards, and proven protocols backed by rigorous validation.</p>
-                        <a href="/legal/privacy" class="button-pill button-pill-blue text-size-xs btn">View Policy</a>
-                        <img class="img-fluid my-5" alt="Keys" src="<%= images.keys %>" width="3287" height="1884">
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="background-color background-color-white py-5">
-            <div class="container-fluid px-4 py-4">
-                <div class="row justify-content-center">
-                    <div class="content-sm col text-center">
-                        <dotlottie-player class="animation-size-md mx-auto" src="https://lottie.host/9a5efa66-5d9c-48bd-a20b-d102598a57b1/PdhCcvONVm.lottie" background="transparent" speed="1" loop autoplay></dotlottie-player>
-                        <h2>Flexible and Affordable.</h2>
-                        <p class="text-size-sm">Choose a plan that fits your requirements: no hidden fees, flexible billing options, and the freedom to scale up or down as your needs evolve.</p>
-                        <a href="" class="button-pill button-pill-orange text-size-xs btn">Compare Plans</a>
-                        <img class="img-fluid my-5" alt="Plans" src="<%= images.plans %>" width="3287" height="1884">
+                        <a href="/help/track" class="button-pill button-pill-blue text-size-xs btn">Browse Satellites</a>
+                        <img class="img-fluid mt-5 mb-4" alt="Track" src="<%= images.track %>" width="3287" height="1884">
+                        <div class="row justify-content-center">
+                            <div class="content-xs col text-center">
+                                <p class="text-size-xs-plus">SatTrack-Arcturus provides a comprehensive, regularly updated list of all satellites trackable via the SGP4 model, including their countries of origin and mission objectives.</p>
+                            </div>
+                        </div>
+                        <div class="row g-0 justify-content-center mt-2">
+                            <div class="col-auto mx-2 my-auto">
+                                <button class="button-dot button-dot-silver" aria-label="Massive and Precise"></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

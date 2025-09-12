@@ -54,3 +54,16 @@
 .background-image-scroll {
     background-attachment: scroll;
 }
+
+.background-image-blur {
+    position: relative;
+    z-index: 0;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        backdrop-filter: blur(25px);
+        z-index: -1;
+    }
+}

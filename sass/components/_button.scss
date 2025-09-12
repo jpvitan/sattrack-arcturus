@@ -18,6 +18,28 @@
     }
 }
 
+.button-icon-white {
+    svg {
+        color: colors.$white;
+    }
+}
+
+.button-dot {
+    all: unset;
+    display: block;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+}
+
+.button-dot-silver {
+    background-color: colors.$silver;
+
+    &:hover {
+        background-color: colors.$midnight;
+    }
+}
+
 .button-pill,
 .button-capsule,
 .button-plain {
@@ -101,7 +123,7 @@
     color: colors.$blue;
 
     &:hover {
-        color: colors.$black
+        color: colors.$blue
     }
 }
 

@@ -115,8 +115,8 @@ const setupConsole = () => {
 const setupDashboard = () => {
   const dashboard = document.getElementById('dashboard')
   const dashboardData = document.getElementById('dashboard-data')
-  const dashboardStartButton = document.getElementById('dashboard-start-button')
-  const dashboardGuideButton = document.getElementById('dashboard-guide-button')
+  const dashboardDocumentationButton = document.getElementById('dashboard-documentation-button')
+  const dashboardSupportButton = document.getElementById('dashboard-support-button')
 
   const page = {
     account: {
@@ -143,8 +143,8 @@ const setupDashboard = () => {
 
   if (!dashboard) return
 
-  dashboardStartButton.onclick = () => { window.open('/help/start') }
-  dashboardGuideButton.onclick = () => { window.open('/help/documentation') }
+  dashboardDocumentationButton.onclick = () => { window.open('/help/documentation/') }
+  dashboardSupportButton.onclick = () => { window.open('/help/support') }
 
   Object.entries(page).forEach(([key, { screen, button, close }]) => {
     button.onclick = () => {
