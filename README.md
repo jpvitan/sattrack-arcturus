@@ -1,4 +1,4 @@
-![SatTrack-Arcturus]()
+![SatTrack-Arcturus](https://res.cloudinary.com/dhv9gcew6/image/upload/q_auto/v1757695061/sattrack-arcturus/screenshots/home_ibtvp9.png)
 
 
 **SatTrack-Arcturus** is a RESTful API built with Node.js and Express that lets you track and predict the orbit of artificial satellites through the use of the Simplified General Perturbations-4 (SGP4) model.
