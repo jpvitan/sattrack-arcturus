@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../../partials/layout/head") %>
+</head>
+
+<body id="start" class="start theme-light">
+    <main>
+        <section>
+            <div class="container-fluid px-3 px-md-4 py-3">
+                <div class="row justify-content-center">
+                    <div class="content-lg col">
+                        <div class="row">
+                            <div class="col-auto my-auto">
+                                <img class="shadow-lg" alt="SatTrack-Arcturus" src="<%= images.icon %>" width="30" height="30">
+                            </div>
+                            <div class="col-auto my-auto">
+                                <p class="text-size-sm text-color-black mb-0">SatTrack</p>
+                                <p class="text-size-xs mb-0">Arcturus</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container-fluid px-4 py-4">
+                <div class="row justify-content-center">
+                    <div class="content-xs col">
+                        <h1 class="text-size-lg mb-2">Plans</h1>
+                        <p class="text-size-sm">SatTrack-Arcturus offers a variety of affordable plans, making it easy to scale up or down based on your needs.</p>                        
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div id="filler"></div>
+    </main>
+    <%- include("../../partials/layout/footer") %>
+</body>
+
+</html>
