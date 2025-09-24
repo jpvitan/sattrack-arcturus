@@ -23,6 +23,8 @@ const { getPage } = require('../../middlewares/pages')
 
 router.use('/documentation', swaggerUIExpress.serve, swaggerUIExpress.setup(specification))
 
+router.get('/plans', getPage())
+
 router.get('/start', getPage())
 
 router.get('/track', getPage(async (req, res, next, locals) => { locals.satellite = await Satellite.find({ tle: { $exists: true } }) }))
