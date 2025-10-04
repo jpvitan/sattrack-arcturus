@@ -1,0 +1,10 @@
+<div class="accordion-item">
+    <h3 class="accordion-header" id="<%= parent %>-heading-<%= id %>">
+        <button class="button-plain button-plain-blue text-size-sm btn accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#<%= parent %>-collapse-<%= id %>" aria-expanded="false" aria-controls="<%= parent %>-collapse-<%= id %>"><%= title %></button>
+    </h3>
+    <div id="<%= parent %>-collapse-<%= id %>" class="accordion-collapse collapse" aria-labelledby="<%= parent %>-heading-<%= id %>" data-bs-parent="#<%= parent %>">
+        <div class="accordion-body">
+            <%- body %>
+        </div>
+    </div>
+</div>
