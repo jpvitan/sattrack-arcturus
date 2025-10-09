@@ -38,6 +38,12 @@
                             <%- include("../../partials/forms/accordion", { parent: 'general-information-accordion', id: 'two', title: 'What is the SGP4 model?', body: '<p class="text-size-sm">The SGP4 (Simplified General Perturbations 4) model is a standard algorithm used to predict satellite positions and velocities from TLE (Two-Line Element) data. It accounts for Earth’s shape, gravitational perturbations, and atmospheric drag to provide accurate orbit propagation.</p>' }) %>
                             <%- include("../../partials/forms/accordion", { parent: 'general-information-accordion', id: 'three', title: 'What kind of satellites can I track using SatTrack-Arcturus?', body: '<p class="text-size-sm">You can track any Earth-orbiting artificial satellite with valid TLE data, including communication, navigation, and observation satellites, as well as the International Space Station (ISS).</p>' }) %>
                         </div>
+                        <h3 class="text-size-sm mt-5 mb-2">Usage and Integration</h3>
+                        <div class="accordion accordion-flush" id="usage-integration-accordion">
+                            <%- include("../../partials/forms/accordion", { parent: 'usage-integration-accordion', id: 'one', title: '', body: '<p class="text-size-sm"></p>' }) %>
+                            <%- include("../../partials/forms/accordion", { parent: 'usage-integration-accordion', id: 'two', title: '', body: '<p class="text-size-sm"></p>' }) %>
+                            <%- include("../../partials/forms/accordion", { parent: 'usage-integration-accordion', id: 'three', title: '', body: '<p class="text-size-sm"></p>' }) %>
+                        </div>
                     </div>
                 </div>
             </div>
