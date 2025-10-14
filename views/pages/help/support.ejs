@@ -40,7 +40,7 @@
                         </div>
                         <h3 class="text-size-sm mt-5 mb-2">Usage and Integration</h3>
                         <div class="accordion accordion-flush" id="usage-integration-accordion">
-                            <%- include("../../partials/forms/accordion", { parent: 'usage-integration-accordion', id: 'one', title: 'How do I access the SatTrack-Arcturus API?', body: '<p class="text-size-sm"></p>' }) %>
+                            <%- include("../../partials/forms/accordion", { parent: 'usage-integration-accordion', id: 'one', title: 'How do I access the SatTrack-Arcturus API?', body: '<p class="text-size-sm">To access the API, users must first create an account and generate an API key from their dashboard. Each new account is given a certain number of usage credits, which are consumed with every API call and can be reloaded at any time. Once you have your key, you can make authenticated HTTP requests to the REST endpoints by including it in the Authorization header.</p>' }) %>
                             <%- include("../../partials/forms/accordion", { parent: 'usage-integration-accordion', id: 'two', title: 'What input formats does the API accept?', body: '<p class="text-size-sm"></p>' }) %>
                             <%- include("../../partials/forms/accordion", { parent: 'usage-integration-accordion', id: 'three', title: 'What output data does SatTrack-Arcturus provide?', body: '<p class="text-size-sm"></p>' }) %>
                         </div>
