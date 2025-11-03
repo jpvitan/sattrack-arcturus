@@ -168,6 +168,7 @@ const setupDashboard = () => {
   setupUsageChart({ usage: JSON.parse(usage) })
   setupDashboardAccount()
   setupDashboardKeys()
+  setupDashboardCredits()
 }
 
 const setupFiller = () => {
@@ -653,4 +654,15 @@ const setupDashboardKeys = () => {
       }
     }
   })
+}
+
+const setupDashboardCredits = () => {
+  const credits = document.getElementById('credits')
+  const creditsPurchaseCreditsButton = document.getElementById('credits-purchase-credits-button')
+
+  if (!credits) return
+
+  creditsPurchaseCreditsButton.onclick = async () => {
+
+  }
 }
