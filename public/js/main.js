@@ -663,6 +663,10 @@ const setupDashboardCredits = () => {
   if (!credits) return
 
   creditsPurchaseCreditsButton.onclick = async () => {
-
+    await swal({
+      title: 'Information',
+      text: 'Credit purchases are not available during the beta phase of SatTrack-Arcturus. Purchases may be available once the beta phase ends.',
+      icon: 'info'
+    })
   }
 }
