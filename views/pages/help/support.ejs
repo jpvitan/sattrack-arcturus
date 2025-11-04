@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../../partials/layout/head") %>
+</head>
+
+<body id="start" class="start theme-light">
+    <main>
+        <section>
+            <div class="container-fluid px-3 px-md-4 py-3">
+                <div class="row justify-content-center">
+                    <div class="content-lg col">
+                        <div class="row">
+                            <div class="col-auto my-auto">
+                                <img class="shadow-lg" alt="SatTrack-Arcturus" src="<%= images.icon %>" width="30" height="30">
+                            </div>
+                            <div class="col-auto my-auto">
+                                <p class="text-size-sm text-color-black mb-0">SatTrack</p>
+                                <p class="text-size-xs mb-0">Arcturus</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container-fluid px-4 py-4">
+                <div class="row justify-content-center">
+                    <div class="content-xs col">
+                        <h1 class="text-size-lg mb-2">Support</h1>
+                        <p class="text-size-sm">SatTrack-Arcturus is committed to providing reliable service and dependable assistance. This page will help you find the resources you need to resolve issues and access support.</p>
+                        <h2 class="text-size-md mt-5 mb-2">Frequently Asked Questions</h2>
+                        <p class="text-size-sm">Before contacting support, please review the list of commonly asked questions below. Many frequently encountered issues are covered here, and you may find the solution you need without having to reach out.</p>
+                        <h3 class="text-size-sm mt-5 mb-2">General Information</h3>
+                        <div class="accordion accordion-flush" id="general-information-accordion">
+                            <%- include("../../partials/forms/accordion", { parent: 'general-information-accordion', id: 'one', title: 'What is SatTrack-Arcturus?', body: '<p class="text-size-sm">SatTrack-Arcturus is a RESTful API built with Node.js and Express that lets you track and predict the orbit of artificial satellites through the use of the Simplified General Perturbations-4 (SGP4) model.</p>' }) %>
+                            <%- include("../../partials/forms/accordion", { parent: 'general-information-accordion', id: 'two', title: 'What is the SGP4 model?', body: '<p class="text-size-sm">The SGP4 (Simplified General Perturbations 4) model is a standard algorithm used to predict satellite positions and velocities from TLE (Two-Line Element) data. It accounts for Earth’s shape, gravitational perturbations, and atmospheric drag to provide accurate orbit propagation.</p>' }) %>
+                            <%- include("../../partials/forms/accordion", { parent: 'general-information-accordion', id: 'three', title: 'What kind of satellites can I track using SatTrack-Arcturus?', body: '<p class="text-size-sm">You can track any Earth-orbiting artificial satellite with valid TLE data, including communication, navigation, and observation satellites, as well as the International Space Station (ISS).</p>' }) %>
+                            <%- include("../../partials/forms/accordion", { parent: 'general-information-accordion', id: 'four', title: 'How accurate are the satellite predictions from SatTrack-Arcturus?', body: '<p class="text-size-sm">SatTrack-Arcturus uses the SGP4 orbital model and the latest TLE data to compute satellite positions. Under normal conditions, position predictions are typically accurate to within a few kilometers for most low-Earth-orbit satellites, depending on how recent the TLE data is. Since SatTrack-Arcturus automatically updates TLE information frequently, users can rely on consistently accurate results without needing to manage data updates manually.</p>' }) %>
+                        </div>
+                        <h3 class="text-size-sm mt-5 mb-2">Usage and Integration</h3>
+                        <div class="accordion accordion-flush" id="usage-integration-accordion">
+                            <%- include("../../partials/forms/accordion", { parent: 'usage-integration-accordion', id: 'one', title: 'How do I access the SatTrack-Arcturus API?', body: '<p class="text-size-sm">To access the API, users must first create an account and generate an API key from their dashboard. Each new account is given a certain number of usage credits, which are consumed with every API call and can be reloaded at any time. Once you have your key, you can make authenticated HTTP requests to the REST endpoints by including it in the Authorization header.</p>' }) %>
+                            <%- include("../../partials/forms/accordion", { parent: 'usage-integration-accordion', id: 'two', title: 'What input formats does the API accept?', body: '<p class="text-size-sm">The API requires the satellite’s NORAD ID as the main path parameter. It also accepts optional query parameters such as the observer’s latitude, longitude, and altitude, the number of seconds into the future for prediction, and the preferred unit for angular values, which can be either degrees or radians. All inputs must follow standard numeric or string formats as defined in the endpoint schema.</p>' }) %>
+                            <%- include("../../partials/forms/accordion", { parent: 'usage-integration-accordion', id: 'three', title: 'What output data does SatTrack-Arcturus provide?', body: '<p class="text-size-sm">The endpoint returns an array of predicted orbit data points generated using the SGP4 model. Each data point includes the satellite’s latitude, longitude, altitude, and the corresponding timestamp. This information allows users to obtain a time-based representation of a satellite’s position and altitude relative to Earth, enabling precise orbit tracking and prediction.</p>' }) %>
+                            <%- include("../../partials/forms/accordion", { parent: 'usage-integration-accordion', id: 'four', title: 'Where can I find the API documentation?', body: '<p class="text-size-sm">SatTrack-Arcturus uses Swagger for its API documentation. You can view it through this <a href="/help/documentation">link</a>.</p>' }) %>
+                        </div>
+                        <h2 class="text-size-md mt-5 mb-2">Contact Support</h2>
+                        <p class="text-size-sm">If you need assistance or have questions that require personal support, our team is always happy to help. Please reach out to us at <a href="mailto:support@jpvitan.com">support@jpvitan.com</a>, and we'll get back to you as soon as possible.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div id="filler"></div>
+    </main>
+    <%- include("../../partials/layout/footer") %>
+</body>
+
+</html>

@@ -27,6 +27,8 @@ router.get('/plans', getPage())
 
 router.get('/start', getPage())
 
+router.get('/support', getPage())
+
 router.get('/track', getPage(async (req, res, next, locals) => { locals.satellite = await Satellite.find({ tle: { $exists: true } }) }))
 
 module.exports = router

@@ -168,6 +168,7 @@ const setupDashboard = () => {
   setupUsageChart({ usage: JSON.parse(usage) })
   setupDashboardAccount()
   setupDashboardKeys()
+  setupDashboardCredits()
 }
 
 const setupFiller = () => {
@@ -653,4 +654,19 @@ const setupDashboardKeys = () => {
       }
     }
   })
+}
+
+const setupDashboardCredits = () => {
+  const credits = document.getElementById('credits')
+  const creditsPurchaseCreditsButton = document.getElementById('credits-purchase-credits-button')
+
+  if (!credits) return
+
+  creditsPurchaseCreditsButton.onclick = async () => {
+    await swal({
+      title: 'Information',
+      text: 'Credit purchases are not available during the beta phase of SatTrack-Arcturus. Purchases may be available once the beta phase ends.',
+      icon: 'info'
+    })
+  }
 }
