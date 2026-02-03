@@ -6,5 +6,6 @@
             "savePath": "/public/css",
             "savePathReplacementPairs": null
         }
-    ]
+    ],
+    "liveSassCompile.settings.generateMap": false
 }
